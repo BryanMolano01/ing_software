@@ -44,4 +44,8 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+    public function __construct()
+    {
+        $this->middleware('role.redirect')->only('store');
+    }
 }

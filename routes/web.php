@@ -19,12 +19,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:administrador'])->group(function(){
     Route::get('/dashboard-administrador', function(){
-        return view('dashboard-administrador');
+        return view('dashboard');
     })->name('administrador.dashboard');
 });
 Route::middleware(['auth', 'role:panadero'])->group(function(){
     Route::get('/dashboard.panadero', function(){
-        return view('dashboard-panadero');
+        return view('dashboard');
     })->name('panadero.dashboard');
 });
     
