@@ -25,12 +25,7 @@ Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::cl
     ->name('administrador.usuarios.cambiarEstado');
 
 
-
-
-
-Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
-    
-    
+Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
     ->name('administrador.editar.usuario');
