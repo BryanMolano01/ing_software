@@ -12,7 +12,7 @@ use App\Models\Registro;
 
 use App\Models\EstadoUsuario;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller
 {
     /**
@@ -22,10 +22,10 @@ class UsuarioController extends Controller
     {
         $usuarios= Usuario::with(['rol', 'estadoUsuario'])->get();
         $estados=EstadoUsuario::all();
-
+        $usuarioSesion = Auth::user();
         $primerosregistros=Registro::with('usuario')->latest('fecha_hora_registro')->take(10)->get();
 
-        return view('dashboard_administrador', compact('usuarios', 'estados'));
+        return view('dashboard_administrador', compact('usuarios', 'estados', $usuarioSesion));
     }
 
     /**
