@@ -21,14 +21,6 @@
     padding: 0.5rem 0.5rem; 
     margin-left: 1rem;
 }
-
-.btn-logout-img {
-    background: none;
-    border: none;
-    padding: 0.5rem 0.5rem;
-    margin-left: 1rem;
-}
-
 .btn-menu{
     background: none;
     border: none;
@@ -42,7 +34,6 @@
 .btn-logout-img:active:focus,
 .btn-menu:focus, 
 .btn-menu:active:focus {
-    /* Esto elimina el halo de foco de Bootstrap/Navegador */
     outline: none !important;
     box-shadow: none !important;
 }

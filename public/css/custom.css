@@ -1,5 +1,9 @@
 /* En public/css/custom.css */
-
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 /* Estilo para las tarjetas del Dashboard (similar al login) */
 .custom-card-style {
     background-color: #FFF4E3 !important; /* Fondo claro similar al login-card */
@@ -81,4 +85,136 @@
     padding: 0.8rem 1.5rem;
     font-size: 1.1rem;
     background-color: #f5a85a;
+}
+
+.btn-modificar-perfil {
+    /* Color de fondo: Naranja pálido del mockup */
+    background-color: #FFD6B9 !important; 
+    color: #622D16 !important; /* Color de texto café */
+    border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
+    border-radius: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-modificar-perfil:hover {
+    background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
+    color: white !important;
+}
+
+/* --- Ajuste para el Perfil de Mi Usuario --- */
+
+/* Ajustamos el contenedor del perfil para que la línea del borde sea marrón como en el mockup. */
+.profile-picture-container {
+    /* Mantenemos el tamaño y forma circular del paso anterior */
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%;
+    /* Aseguramos el borde en color marrón */
+    border: 2px solid transparent !important; 
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+/* public/css/custom.css */
+
+/* --- Estilos para la Lista de Usuarios --- */
+
+/* Contenedor de la lista para permitir el scroll si hay muchos usuarios */
+.user-list-container {
+    padding-right: 15px; /* Espacio para que la barra de scroll no se pegue */
+    overflow-y: auto;
+    max-height: 100%; /* Asegura que no se salga de la tarjeta */
+}
+
+/* Tarjeta individual del usuario */
+.user-card {
+    background-color: #FFF4E3; /* Fondo de la tarjeta principal */
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #FFB266; /* Barra lateral naranja */
+    transition: all 0.2s;
+}
+
+.user-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user-name {
+    color: #622D16;
+    font-size: 1.1em;
+}
+
+.user-role {
+    color: #a0522d;
+}
+
+/* Estilo para los botones de acción dentro de la tarjeta */
+.btn-action {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 5px; /* Espacio entre botones */
+    cursor: pointer;
+    line-height: 1; /* Para alinear bien el icono */
+}
+
+.action-icon {
+    width: 28px; /* Tamaño de los iconos de acción */
+    height: 28px;
+    vertical-align: middle;
+}
+
+/* Asegura que los botones no tengan el halo de foco de Bootstrap */
+.btn-action:focus, .btn-action:active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* La tarjeta principal debe ser flexible para que el botón 'Crear Usuario' baje */
+.custom-card-style {
+    /* Mantenemos: */
+    display: flex;
+    flex-direction: column; 
+    /* ... otros estilos ... */
+}
+
+/* public/css/custom.css */
+
+/* --- Estilos para la Lista de Registro de Accesos --- */
+
+/* Contenedor de la lista para permitir el scroll */
+.access-list-container {
+    padding-right: 15px; /* Espacio para que la barra de scroll no se pegue */
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+/* Tarjeta individual del registro de acceso */
+.access-card {
+    background-color: #FFF4E3; /* Fondo de la tarjeta principal */
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* El mismo borde lateral que en la lista de usuarios */
+    border-left: 5px solid #FFB266; 
+    transition: all 0.2s;
+}
+
+.access-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.log-username {
+    color: #A0522D; /* Color terracota para el nombre de usuario */
+    font-size: 1.1em;
+    display: block; /* Ocupa su propia línea */
+    margin-bottom: 0.25rem;
+}
+
+.log-details {
+    color: #6c757d; /* Gris para la hora y fecha */
 }
