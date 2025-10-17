@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Rol;
+use App\Models\Registro;
+
 use App\Models\EstadoUsuario;
 use Illuminate\Validation\Rule;
 
@@ -20,6 +22,8 @@ class UsuarioController extends Controller
     {
         $usuarios= Usuario::with(['rol', 'estadoUsuario'])->get();
         $estados=EstadoUsuario::all();
+
+        $primerosregistros=Registro::with('usuario')->latest('fecha_hora_registro')->take(10)->get();
 
         return view('dashboard_administrador', compact('usuarios', 'estados'));
     }

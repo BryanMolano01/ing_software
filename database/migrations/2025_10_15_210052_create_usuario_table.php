@@ -13,7 +13,7 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('usuario', function (Blueprint $table) {
-        $table->integer('id_usuario')->primary();
+        $table->bigIncrements('id_usuario');
         $table->string('nombre'); // Campo 'name' que Breeze puede usar
         $table->string('email', 100)->unique();
         $table->string('password');
