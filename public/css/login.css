@@ -1,0 +1,93 @@
+body {
+    /* Color de fondo: El color salmón/durazno muy claro de tu mockup */
+    background-color: #FFD6B9 !important; 
+}
+
+.login-card {
+    width: 25rem; 
+    max-width: 90%; 
+    background-color: #FFF4E3 !important; 
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 2.5rem; 
+}
+/* ... (El estilo del botón btn-login está correcto) ... */
+/* Estilo del Botón (Forzar el color naranja con !important) */
+.btn-login {
+    background-color: #FFB266 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    /* Para centrar el texto si no lo está: */
+    text-align: center !important; 
+}
+
+/* En public/css/custom.css */
+
+/* --- ESTILOS PARA LOS INPUTS DE LOGIN --- */
+
+/* Contenedor del ícono y el input */
+.login-input-group {
+    border-bottom: 2px solid #a0522d; /* Línea inferior color café/beige */
+    padding-bottom: 5px; /* Espacio para que la línea no toque el campo */
+}
+
+/* Estilo para las etiquetas (Usuario/Contraseña) */
+.login-card .input-label {
+    font-size: 0.9rem;
+    color: #a0522d; /* Color café para el texto de la etiqueta */
+    margin-bottom: 0;
+}
+
+/* Imagen del ícono */
+.login-card .input-icon {
+    width: 30px; /* Tamaño fijo para el ícono */
+    height: 30px;
+    margin-right: 15px; /* Espacio entre el ícono y el texto */
+}
+
+/* El campo de texto real (email y password) */
+.login-input {
+    /* 1. Hacemos el fondo transparente */
+    background-color: transparent !important;
+    /* 2. Eliminamos los bordes predeterminados de Bootstrap/Tailwind */
+    border: none !important;
+    box-shadow: none !important;
+    padding-left: 0; /* Lo acercamos al label */
+    padding-top: 0;
+}
+
+/* Quitar el borde al hacer foco (click) */
+.login-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+/* En public/css/custom.css */
+
+/* Estilo para el botón del ojo */
+.login-card .btn-eye {
+    /* Quita el color de fondo y el borde de Bootstrap */
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin-left: 10px; /* Separación con el input */
+}
+
+/* Estilo para la imagen del ojo dentro del botón */
+.login-card .eye-icon {
+    width: 20px; /* Tamaño del icono del ojo */
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Ajuste para el input dentro del input-group (para que la línea inferior aplique al grupo) */
+.login-input-group .input-group {
+    /* Esto asegura que el input y el ojo estén en la misma línea debajo del label */
+    border-bottom: none !important; /* Movemos el borde al contenedor principal si es necesario */
+}
+
+/* --- FIN ESTILOS PARA LOS INPUTS DE LOGIN --- */

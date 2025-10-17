@@ -1,0 +1,84 @@
+/* En public/css/custom.css */
+
+/* Estilo para las tarjetas del Dashboard (similar al login) */
+.custom-card-style {
+    background-color: #FFF4E3 !important; /* Fondo claro similar al login-card */
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    min-height: 450px; /* Altura mínima para que se vean bien al inicio */
+}
+
+/* Estilo para el botón de "Crear Usuario" */
+.btn-create-user {
+    background-color: #FFB266 !important; /* Mismo color naranja suave que el login */
+    color: white !important;
+    border: none !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-create-user:hover {
+    background-color: #f5a85a !important; /* Un poco más oscuro al pasar el ratón */
+}
+
+/* Es importante asegurar que las tarjetas tienen flexibilidad para que el botón baje */
+.custom-card-style {
+    /* ... estilos existentes ... */
+    min-height: 450px; 
+    /* Agrega esto para que el contenido se reparta y el botón baje */
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Ajuste para que el texto de lista también se acomode */
+.custom-card-style .card-title {
+    margin-bottom: 1rem;
+}
+.custom-card-style p.text-muted {
+    flex-grow: 1; /* Permite que el contenido tome el espacio restante */
+}
+
+/* En public/css/custom.css */
+
+/* Estilo para el botón de "Crear Usuario" */
+.btn-create-user {
+    background-color: #FFB266 !important; /* Mismo color naranja suave que el login */
+    color: white !important;
+    border: none !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-create-user:hover {
+    background-color: #f5a85a !important; /* Un poco más oscuro al pasar el ratón */
+}
+
+/* Es importante asegurar que las tarjetas tienen flexibilidad para que el botón baje */
+.custom-card-style {
+    /* ... estilos existentes ... */
+    min-height: 450px; 
+    /* Agrega esto para que el contenido se reparta y el botón baje */
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Ajuste para que el texto de lista también se acomode */
+.custom-card-style .card-title {
+    margin-bottom: 1rem;
+}
+.custom-card-style p.text-muted {
+    flex-grow: 1; /* Permite que el contenido tome el espacio restante */
+}
+
+.btn-create-user-form {
+    width: 100%; /* Ocupa todo el ancho disponible en su columna */
+    max-width: 200px; /* Limita su ancho máximo */
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    background-color: #f5a85a;
+}

@@ -1,47 +1,54 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    
+    <div class="login-card"> 
+        
+        <form method="POST" action="{{ route('login') }}" class="w-100">
+            @csrf
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+            <div class="mb-4 d-flex align-items-center login-input-group">
+                
+                {{-- Imagen del Logo de Usuario --}}
+                <img src="{{ asset('images/Usuario Logo.png') }}" alt="Usuario Icono" class="input-icon">
+                
+                <div class="w-100">
+                    <label for="email" class="form-label input-label">Usuario</label>
+                    <input id="email" class="form-control login-input" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                </div>
+            </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+            <div class="mb-4 d-flex align-items-center login-input-group">
+                
+                {{-- Imagen del Logo de Contraseña --}}
+                <img src="{{ asset('images/Constraseña Logo.png') }}" alt="Contraseña Icono" class="input-icon">
+                
+                <div class="w-100">
+                    <label for="password" class="form-label input-label">Contraseña</label>
+                    
+                    {{-- Contenedor del Input y el Ojo --}}
+                    <div class="input-group">
+                        <input id="password" class="form-control login-input" type="password" name="password" required autocomplete="current-password" />
+                        
+                        {{-- Botón/Icono del Ojo --}}
+                        <button class="btn btn-sm btn-eye" type="button" id="togglePassword">
+                            <img src="{{ asset('images/Ver Constraseña.png') }}" alt="Ver Contraseña" class="eye-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            @error('email')
+                <div class="text-danger mt-2">{{ $message }}</div>
+            @enderror
+            @error('password')
+                <div class="text-danger mt-2">{{ $message }}</div>
+            @enderror
+            
+            <div class="d-grid mt-5">
+                <button type="submit" class="btn btn-login">
+                    Iniciar Sesión
+                </button>
+            </div>
+            
+        </form>
+    </div>
 </x-guest-layout>
