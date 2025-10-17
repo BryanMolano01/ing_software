@@ -9,20 +9,18 @@
     <x-app-navbar :links="$adminLinks" />
 
     <div class="container mt-4">
-        {{-- Mensaje de éxito si existe (se asume que se redirige a esta vista después de un error, o al dashboard después del éxito) --}}
         @if (session('success'))
             <div class="alert alert-success text-center">
                 {{ session('success') }}
             </div>
         @endif
         
-        {{-- Asegúrate que $usuario esté disponible --}}
         <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Usuario: {{ $usuario->nombre }}</h2> 
         
         <div class="card p-4 custom-card-style mx-auto" style="max-width: 800px;"> 
             
-            {{-- FORMULARIO: Apunta a la ruta 'update' con el ID del usuario --}}
-            <form action="{{ route('administrador.usuarios.update', $usuario->id_usuario) }}" method="POST"> 
+            {{-- 1. ASIGNAR ID AL FORMULARIO --}}
+            <form id="editUserForm" action="{{ route('administrador.usuarios.update', $usuario->id_usuario) }}" method="POST"> 
                 @csrf
                 @method('PATCH')
                 
@@ -51,7 +49,6 @@
                         <div class="mb-2 form-group-with-icon">
                             <label for="password" class="form-label input-label">Nueva Contraseña:</label>
                             <div class="input-group">
-                                {{-- Quitamos el icono para evitar problemas visuales si no lo necesitas --}}
                                 <input id="password" class="form-control login-input transparent-input-bottom-border" type="password" 
                                     name="password" placeholder="Dejar vacío para no cambiar" />
                                 <button class="btn btn-sm btn-eye" type="button" id="togglePassword">
@@ -80,7 +77,6 @@
                             <select id="rol_id_rol" name="rol_id_rol" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 @foreach ($roles as $rol)
                                     <option value="{{ $rol->id_rol }}" 
-                                        {{-- Selecciona el rol actual del usuario --}}
                                         @if (old('rol_id_rol', $usuario->rol_id_rol) == $rol->id_rol) selected @endif>
                                         {{ $rol-> rol }}
                                     </option>
@@ -97,7 +93,8 @@
                             <img src="{{ asset('images/Foto PerfilCU.png') }}" alt="Foto de Perfil" class="img-fluid profile-picture-placeholder">
                         </div>
                         
-                        <button type="submit" class="btn btn-login btn-create-user-form">
+                        {{-- 2. CAMBIAR TIPO DE BOTÓN para que abra el modal --}}
+                        <button type="button" class="btn btn-login btn-create-user-form" id="openConfirmationModal">
                             Guardar Cambios
                         </button>
                     </div> 
@@ -106,9 +103,32 @@
         </div>
     </div>
     
-    {{-- Script JavaScript (Asegúrate de que este script esté después de los elementos del formulario) --}}
+    {{---}}
+
+    ## Modal de Confirmación
+
+    {{-- 3. AÑADIR EL MODAL DE CONFIRMACIÓN --}}
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom1-card-style">
+            <div class="modal-body text-center p-4">
+                <img src="{{ asset('images/Alerta Triangulo.png') }}" alt="Advertencia" class="mb-2" style="width: 55px;">
+                <h5 class="mb-3 fw-semibold" style="color: #622D16;">
+                ¿Está seguro que quiere guardar los cambios de este usuario?
+                </h5>
+                <div class="d-flex justify-content-center gap-3 mt-3 mb-2">
+                <button type="button" class="btn btn-custom-action" id="confirmEditUser">Guardar Cambios</button>
+                <button type="button" class="btn btn-custom-cancel" data-bs-dismiss="modal">Volver</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Lógica de toggle de contraseña (se mantiene igual)
             function setupPasswordToggle(toggleBtnId, passwordInputId) {
                 const toggleBtn = document.getElementById(toggleBtnId);
                 const passwordInput = document.getElementById(passwordInputId);
@@ -123,6 +143,75 @@
             }
             setupPasswordToggle('togglePassword', 'password');
             setupPasswordToggle('togglePasswordConfirmation', 'password_confirmation');
+
+            // 4. LÓGICA DEL MODAL DE EDICIÓN
+            const openConfirmationModalBtn = document.getElementById('openConfirmationModal');
+            const confirmEditUserBtn = document.getElementById('confirmEditUser'); // ID del botón dentro del modal
+            const editUserForm = document.getElementById('editUserForm'); // ID del formulario principal
+
+            if (openConfirmationModalBtn && confirmEditUserBtn && editUserForm) {
+                // Al hacer clic en el botón principal, se abre el modal
+                openConfirmationModalBtn.addEventListener('click', function() {
+                    // Solo abrir si los campos requeridos están llenos (opcional, el backend validará)
+                    var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                    myModal.show();
+                });
+
+                // Al hacer clic en el botón de confirmación del modal
+                confirmEditUserBtn.addEventListener('click', function() {
+                    // Oculta el modal (opcional)
+                    var myModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+                    if (myModal) {
+                        myModal.hide();
+                    }
+                    // Envía el formulario principal
+                    editUserForm.submit();
+                });
+            }
         });
     </script>
+    
+    <style>
+        .custom1-card-style {
+        background-color: #FFF6EB; /* un tono más suave */
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        max-width: 420px;
+        margin: auto;
+        }
+
+        /* Reducimos espacio interno del modal */
+        .modal-body {
+        padding: 1.5rem 1rem !important;
+        }
+
+        /* Botón de acción */
+        .btn-custom-action {
+        background-color: #FB9F40;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 22px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        }
+        .btn-custom-action:hover {
+        background-color: #e58d35;
+        }
+
+        /* Botón cancelar */
+        .btn-custom-cancel {
+        background-color: #f0f0f0;
+        color: #622D16;
+        border: 1px solid #d0d0d0;
+        border-radius: 20px;
+        padding: 8px 22px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        }
+        .btn-custom-cancel:hover {
+        background-color: #e0e0e0;
+        }
+    </style>
 </x-app-layout>
