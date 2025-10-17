@@ -115,7 +115,12 @@ class UsuarioController extends Controller
         $request->validate([
             'estado_id' => 'required|integer|exists:estado_usuario,id_estado_usuario',
         ]);
-        $usuario->update(['estado_usuario_id_estado_usuario' => $request->estado_id]);
-        return response()->json(['success' => true, 'message' => 'Estado actualizado.']);
+
+        $usuario->update([
+            'estado_usuario_id_estado_usuario' => $request->estado_id,
+        ]);
+
+        return redirect()->back()->with('success', 'Estado actualizado correctamente.');
     }
+
 }

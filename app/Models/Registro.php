@@ -13,6 +13,9 @@ class Registro extends Model
     protected $primaryKey = 'id_registro';
     public $timestamps = false;
 
+    protected $casts = [
+        'fecha_hora_registro' => 'datetime', 
+    ];
     protected $fillable = [
         
         'usuario_id_usuario',

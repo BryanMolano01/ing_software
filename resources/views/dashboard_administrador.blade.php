@@ -54,53 +54,66 @@
                                 {{-- Botones de Acción (Debe detener la propagación del clic) --}}
                                 <div class="d-flex action-buttons-group" 
                                     data-user-id="{{ $usuario->id_usuario }}"
-                                    onclick="event.stopPropagation();"> {{-- ESTO ES CRUCIAL --}}
-                                    
-                                    {{-- Aquí va toda la lógica de los botones de estado (Disponible, Inactivo, Despedido) --}}
-                                    {{-- ... (Tu código existente para Botón 2, Botón 3 y Botón 4) ... --}}
+                                    onclick="event.stopPropagation();"> 
 
                                     @php
-                                        $currentStatus = $usuario->estadoUsuario->nombre; // Ej: 'Disponible', 'Inactivo', 'Despedido'
-                                    @endphp
+                                        // 1. Obtener el estado actual del usuario (Ej: 'Disponible', 'Inactivo', 'Despedido')
+                                        $currentStatus = $usuario->estadoUsuario->estado; 
 
-                                    {{-- Botón 2: Estado Disponible --}}
-                                    @php
-                                        $isDisponible = ($currentStatus == 'Disponible');
+                                        // 🌟 NUEVO CÓDIGO: Asume que tienes una colección llamada $estados (de App\Models\EstadoUsuario)
+                                        
+                                        // 2. Definir una función de búsqueda sencilla (más robusta)
+                                        $getEstadoId = function ($estadoNombre) use ($estados) {
+                                            // Busca el ID por nombre, sin importar mayúsculas/minúsculas
+                                            $estado = $estados->first(fn ($e) => strtolower($e->estado) === strtolower($estadoNombre));
+                                            return $estado ? $estado->id_estado_usuario : null;
+                                        };
+                                        
+                                        // 3. Definir las variables de ID para cada estado
+                                        $disponibleId = $getEstadoId('disponible');
+                                        $inactivoId = $getEstadoId('inactivo');
+                                        $despedidoId = $getEstadoId('despedido');
+
+                                        // 4. Lógica del Botón Disponible
+                                        $isDisponible = (strtolower($currentStatus) == 'disponible');
                                         $imgDisponible = $isDisponible ? 'Usuario Disponible AC.png' : 'Usuario Disponible DS.png';
                                     @endphp
-                                    <button type="button" 
-                                            class="btn-action status-button" 
-                                            data-user-id="{{ $usuario->id_usuario }}" 
-                                            data-status="Disponible"
-                                            data-current-status="{{ $currentStatus }}">
-                                        <img src="{{ asset('images/' . $imgDisponible) }}" alt="Disponible" class="action-icon status-icon">
-                                    </button>
+                                    <form action="{{ route('administrador.usuarios.cambiarEstado', $usuario->id_usuario) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="estado_id" value="{{ $disponibleId }}">
+                                        <button type="submit" class="btn-action status-button">
+                                            <img src="{{ asset('images/' . $imgDisponible) }}" alt="Disponible" class="action-icon status-icon">
+                                        </button>
+                                    </form>
+                                    
 
                                     {{-- Botón 3: Estado Inactivo --}}
                                     @php
-                                        $isInactivo = ($currentStatus == 'Inactivo');
+                                        $isInactivo = (strtolower($currentStatus) == 'inactivo');
                                         $imgInactivo = $isInactivo ? 'Usuario Inactivo AC.png' : 'Usuario Inactivo DS.png';
                                     @endphp
-                                    <button type="button" 
-                                            class="btn-action status-button" 
-                                            data-user-id="{{ $usuario->id_usuario }}" 
-                                            data-status="Inactivo"
-                                            data-current-status="{{ $currentStatus }}">
-                                        <img src="{{ asset('images/' . $imgInactivo) }}" alt="Inactivo" class="action-icon status-icon">
-                                    </button>
-
+                                    <form action="{{ route('administrador.usuarios.cambiarEstado', $usuario->id_usuario) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="estado_id" value="{{ $inactivoId }}">
+                                        <button type="submit" class="btn-action status-button">
+                                            <img src="{{ asset('images/' . $imgInactivo) }}" alt="Inactivo" class="action-icon status-icon">
+                                        </button>
+                                    </form>       
                                     {{-- Botón 4: Estado Despedido --}}
                                     @php
-                                        $isDespedido = ($currentStatus == 'Despedido');
+                                        $isDespedido = (strtolower($currentStatus) == 'despedido');
                                         $imgDespedido = $isDespedido ? 'Usuario Despedido AC.png' : 'Usuario Despedido DS.png';
                                     @endphp
-                                    <button type="button" 
-                                            class="btn-action status-button" 
-                                            data-user-id="{{ $usuario->id_usuario }}" 
-                                            data-status="Despedido"
-                                            data-current-status="{{ $currentStatus }}">
-                                        <img src="{{ asset('images/' . $imgDespedido) }}" alt="Despedido" class="action-icon status-icon">
-                                    </button>
+                                    <form action="{{ route('administrador.usuarios.cambiarEstado', $usuario->id_usuario) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="estado_id" value="{{ $despedidoId }}">
+                                        <button type="submit" class="btn-action status-button">
+                                            <img src="{{ asset('images/' . $imgDespedido) }}" alt="Despedido" class="action-icon status-icon">
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                             @endforeach
@@ -128,16 +141,25 @@
                     {{-- Contenedor de la lista de accesos con scroll --}}
                     <div class="access-list-container flex-grow-1 overflow-auto">
                         
-                        @if(isset($accessLogs) && count($accessLogs) > 0)
-                            @foreach ($accessLogs as $log)
-                            {{-- Tarjeta Individual del Acceso --}}
-                            <div class="access-card mb-2 p-3">
-                                <strong class="log-username">{{ $log->username }}</strong>
-                                <div class="log-details small">
-                                    Acceso: {{ $log->timestamp }} 
-                                    <span style="color: #622D16;">Rol: {{ $log->role }}</span>
+                        @if(isset($primerosRegistros) && count($primerosRegistros) > 0)
+                            {{-- Itera sobre la colección de los 10 últimos registros (Registro::class) --}}
+                            @foreach ($primerosRegistros as $registro)
+                                {{-- Tarjeta Individual del Acceso --}}
+                                <div class="access-card mb-2 p-3">
+                                    
+                                    {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
+                                    <strong class="log-username">{{ $registro->usuario->nombre }}</strong>
+                                    
+                                    <div class="log-details small">
+                                        
+                                        {{-- Muestra la fecha/hora del registro de acceso --}}
+                                        Acceso: 
+                                        {{ $registro -> fecha_hora_registro->format('d/m/Y H:i') ?? 'N/A' }} 
+                                        
+                                        <span style="color: #622D16;">Rol: {{ $registro->usuario->rol-> rol ?? 'N/A' }}</span>
+                                        
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         @else
                             <p class="text-center text-muted mt-5">No hay registros de acceso.</p>
@@ -232,3 +254,4 @@
     </div>
 
 </x-app-layout>
+
