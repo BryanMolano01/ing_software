@@ -21,9 +21,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
 Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::class, 'cambiarEstado'])
     ->name('administrador.usuarios.cambiarEstado');
-
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
    
@@ -38,6 +38,8 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
     // Mantenemos una sola línea para el resource y la ruta de AJAX
     Route::resource('usuarios', UsuarioController::class)->except(['show']); // Excluimos 'show' que no usaremos
+
+    
 });
 
 
