@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+// Correcto, hereda de Authenticatable
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
@@ -14,6 +15,7 @@ class Usuario extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
+        'nombre', 
         'email',
         'password',
         'fecha_registro',
@@ -21,7 +23,26 @@ class Usuario extends Authenticatable
         'estado_usuario_id_estado_usuario',
     ];
 
-    protected $hidden = ['password',];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
+
     public function rol()
     {
         return $this->belongsTo(Rol::class, 'rol_id_rol');

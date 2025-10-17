@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Administrador;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Usuario;
+use App\Models\Rol;
+use App\Models\EstadoUsuario;
+use Illuminate\Validation\Rule;
+
 class UsuarioController extends Controller
 {
     /**
@@ -12,7 +17,10 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios= Usuario::with(['rol', 'estadoUsuario'])->get();
+        $estados=EstadoUsuario::all();
+
+        return view('dashboard', compact('usuarios', 'estados'));
     }
 
     /**
@@ -20,7 +28,10 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $roles= Rol::all();
+        $estados = EstadoUsuario::all();
+        
+        return view('crear-usuario', compact('roles','estados'));
     }
 
     /**
@@ -28,7 +39,24 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'nombre'=>'required|string|max:45',
+            'email'=>'required|string|email|max:45|unique:usuario,email',
+            'password'=>'required|string|min:3',
+            'rol_id_rol'=>'required|integer|exists:rol,id_rol',
+        ]);
+
+        Usuario::create([
+            'nombre'=> $request->nombre,
+            'email'=> $request->email,
+            'password'=>$request->password,
+            'rol_id_rol'=>$request->rol_id_rol,
+            'estado_usuario_id_estado_usuario'=> '1',//no sé si funciona
+            'fecha_registro'=>now(),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Usuario creado');
     }
 
     /**

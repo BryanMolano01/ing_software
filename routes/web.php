@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
     Route::get('/dashboard-administrador', function(){
         return view('dashboard_administrador');
-    })->name('administrador.dashboard');
+    })->name('dashboard');
 
     Route::resource('usuarios', UsuarioController::class);
     Route::post('usuarios/{usuario}/cambiar-estado', [UsuarioController::class, 'cambiarEstado'])->name('usuarios.cambiarEstado');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){
-    Route::get('/dashboard.panadero', function(){
+    Route::get('/dashboard_panadero', function(){
         return view('dashboard_panadero');
     })->name('panadero.dashboard');
 });
