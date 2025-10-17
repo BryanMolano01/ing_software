@@ -29,7 +29,7 @@
                     {{-- PASO CRUCIAL: Botón CREAR USUARIO --}}
                     {{-- Se usará d-grid para que ocupe el ancho completo --}}
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="{{ route('crear.usuario') }}" class="btn btn-create-user">
+                        <a href="{{ route('administrador.usuarios.create') }}" class="btn btn-create-user">
                             Crear Usuario
                         </a>
                     </div>

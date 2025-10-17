@@ -10,9 +10,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard_administrador');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [UsuarioController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,17 +28,16 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
-    Route::get('/dashboard-administrador', function(){
-        return view('dashboard_administrador');
-    })->name('dashboard');
+    
 
-    Route::resource('usuarios', UsuarioController::class);
+   
+
+
+    Route::get('/dashboard', [UsuarioController::class, 'index'])->name('dashboard');
+
+    // Mantenemos una sola línea para el resource y la ruta de AJAX
+    Route::resource('usuarios', UsuarioController::class)->except(['show']); // Excluimos 'show' que no usaremos
     Route::post('usuarios/{usuario}/cambiar-estado', [UsuarioController::class, 'cambiarEstado'])->name('usuarios.cambiarEstado');
-
-    Route::get('/administracion/usuarios/crear', function () {
-    return view('crear_usuario');
-    })->name('crear.usuario');
-
 });
 
 
@@ -49,7 +48,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){
     Route::get('/dashboard_panadero', function(){
-        return view('dashboard_panadero');
+        return view('dashboard-panadero');
     })->name('panadero.dashboard');
 });
     
