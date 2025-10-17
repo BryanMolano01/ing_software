@@ -6,5 +6,10 @@
         "psr-4": {
             "App\\": "app/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
