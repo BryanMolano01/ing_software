@@ -29,6 +29,6 @@ Route::middleware(['auth', 'role:panadero'])->group(function(){
 });
     
 
-
+ 
 
 require __DIR__.'/auth.php';
