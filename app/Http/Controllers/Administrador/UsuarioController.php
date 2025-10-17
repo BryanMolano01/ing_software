@@ -76,7 +76,7 @@ class UsuarioController extends Controller
         $roles = Rol::all();
         $estados = EstadoUsuario::all();
         // Debes crear esta vista: resources/views/admin/editar_usuario.blade.php
-        return view('admin.editar_usuario', compact('usuario','roles','estados'));
+        return view('editar_usuario', compact('usuario','roles','estados'));
     }
 
     /**

@@ -31,7 +31,9 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     
 
    
-
+    Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
+    ->name('administrador.editar.usuario');
+    //
     Route::get('/administracion/usuarios/editar/{user?}', function () { // Agregamos {user?} para que la URL se vea profesional
         return view('editar_usuario');
     })->name('editar.usuario');
