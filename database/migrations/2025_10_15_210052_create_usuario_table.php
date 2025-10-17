@@ -13,18 +13,17 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('usuario', function (Blueprint $table) {
-        $table->integer('id_usuario')->primary()->autoIncrement();
+        $table->id('id_usuario');
         $table->string('nombre'); // Campo 'name' que Breeze puede usar
         $table->string('email', 100)->unique();
         $table->string('password');
         $table->date('fecha_registro');
-        $table->integer('rol_id_rol');
-        $table->integer('estado_usuario_id_estado_usuario');
+       // $table->integer('rol_id_rol');
+       // $table->integer('estado_usuario_id_estado_usuario');
         $table->rememberToken(); // Columna para "Recordarme"
         
-
-        $table->foreign('rol_id_rol')->references('id_rol')->on('rol');
-        $table->foreign('estado_usuario_id_estado_usuario')->references('id_estado_usuario')->on('estado_usuario');
+        $table->foreignId('rol_id_rol')->constrained('rol', 'id_rol');
+        $table->foreignId('estado_usuario_id_estado_usuario')->constrained('estado_usuario','id_estado_usuario');
     });
 }
 

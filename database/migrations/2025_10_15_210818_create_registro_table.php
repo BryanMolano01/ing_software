@@ -13,9 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registro', function (Blueprint $table) {
-            $table->bigIncrements('id_registro');
+            $table->id('id_registro');
             $table->dateTime('fecha_hora_registro');
-            $table->unsignedBigInteger('usuario_id_usuario');        $table->foreign('usuario_id_usuario')->references('id_usuario')->on('usuario');
+            $table->foreignId('usuario_id_usuario')->constrained('usuario', 'id_usuario');
     });
 }
     /**

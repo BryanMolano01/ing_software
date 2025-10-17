@@ -13,15 +13,15 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('item', function (Blueprint $table) {
-        $table->integer('id_item')->primary();
-        $table->integer('proveedor_id_proveedor');
-        $table->integer('tipo_item_id_tipo_item');
-        $table->integer('ubicacion_id_ubicacion');
+        $table->id('id_item');
+        //$table->integer('proveedor_id_proveedor');
+        //$table->integer('tipo_item_id_tipo_item');
+        //$table->integer('ubicacion_id_ubicacion');
         $table->integer('cantidad');
 
-        $table->foreign('proveedor_id_proveedor')->references('id_proveedor')->on('proveedor');
-        $table->foreign('tipo_item_id_tipo_item')->references('id_tipo_item')->on('tipo_item');
-        $table->foreign('ubicacion_id_ubicacion')->references('id_ubicacion')->on('ubicacion');
+        $table->foreignId('proveedor_id_proveedor')->constrained('proveedor', 'id_proveedor');
+        $table->foreignId('tipo_item_id_tipo_item')->constrained('tipo_item','id_tipo_item');
+        $table->foreignId('ubicacion_id_ubicacion')->constrained('ubicacion','id_ubicacion');
     });
 }
 

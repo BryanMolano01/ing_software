@@ -13,7 +13,7 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('estado_producto', function (Blueprint $table) {
-        $table->integer('id_estado_producto')->primary();
+        $table->id('id_estado_producto');
         $table->string('estado', 45);
     });
 }

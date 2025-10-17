@@ -13,15 +13,15 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('venta_producto', function (Blueprint $table) {
-        $table->integer('id_venta_producto')->primary();
-        $table->integer('producto_id_producto');
+        $table->id('id_venta_producto');
+        //$table->integer('producto_id_producto');
         $table->integer('cantidad');
         $table->integer('precio_unitario');
         $table->integer('subtotal');
-        $table->integer('venta_id_venta');
+        //$table->integer('venta_id_venta');
 
-        $table->foreign('producto_id_producto')->references('id_producto')->on('producto');
-        $table->foreign('venta_id_venta')->references('id_venta')->on('venta');
+        $table->foreignId('producto_id_producto')->constrained('producto','id_producto');
+        $table->foreignId('venta_id_venta')->constrained('venta','id_venta');
     });
 }   
 

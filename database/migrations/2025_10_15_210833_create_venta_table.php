@@ -13,12 +13,23 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('venta', function (Blueprint $table) {
-        $table->integer('id_venta')->primary();
+        /*$table->integer('id_venta')->primary();
         $table->dateTime('fecha_hora_venta');
         $table->integer('total');
         $table->integer('usuario_id_usuario');
 
         $table->foreign('usuario_id_usuario')->references('id_usuario')->on('usuario');
+*/
+
+
+        $table->id('id_venta'); // puedes mantener integer si quieres
+        $table->dateTime('fecha_hora_venta');
+        $table->integer('total');
+
+        // Cambiar a unsignedBigInteger para que coincida con id('id_usuario')
+        //$table->unsignedBigInteger('usuario_id_usuario');
+
+        $table->foreignId('usuario_id_usuario')->constrained('usuario','id_usuario');
     });
 }
 

@@ -13,12 +13,12 @@ return new class extends Migration
 public function up(): void
 {
     Schema::create('notificacion', function (Blueprint $table) {
-        $table->integer('id_notificacion')->primary();
+        $table->id('id_notificacion');
         $table->string('notificacion', 200);
-        $table->integer('producto_id_producto');
+        //$table->integer('producto_id_producto');
         $table->dateTime('fecha_hora_notificacion');
 
-        $table->foreign('producto_id_producto')->references('id_producto')->on('producto');
+        $table->foreignId('producto_id_producto')->constrained('producto','id_producto');
     });
 }
 

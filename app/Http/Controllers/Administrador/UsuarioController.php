@@ -25,7 +25,7 @@ class UsuarioController extends Controller
         $usuarioSesion = Auth::user();
         $primerosregistros=Registro::with('usuario')->latest('fecha_hora_registro')->take(10)->get();
 
-        return view('dashboard_administrador', compact('usuarios', 'estados', $usuarioSesion));
+        return view('dashboard_administrador', compact('usuarios', 'estados', 'usuarioSesion'));
     }
 
     /**
