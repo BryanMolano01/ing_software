@@ -2,11 +2,12 @@
 
 namespace App\Listeners;
 
+use Illuminate\Auth\Events\Login;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Registro;
 use App\Models\Usuario;
-use Illuminate\Auth\Events\Login;
-
-class LogSuccessfulLogin
+class LogSuccessfulLoginUsuario
 {
     /**
      * Create the event listener.
@@ -21,7 +22,10 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event): void
     {
+
         if ($event->user instanceof Usuario) {
+            \Log::info('Evento de login detectado para usuario: ' . $event->user->email);
+
             Registro::create([
                 'usuario_id_usuario' => $event->user->id_usuario,
                 'fecha_hora_registro' => now(),

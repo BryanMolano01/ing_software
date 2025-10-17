@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){
     Route::get('/dashboard_panadero', function(){
-        return view('dashboard-panadero');
+        return view('dashboard_panadero');
     })->name('panadero.dashboard');
 });
     

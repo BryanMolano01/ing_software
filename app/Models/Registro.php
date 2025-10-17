@@ -14,8 +14,9 @@ class Registro extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'fecha_hora_registro',
+        
         'usuario_id_usuario',
+        'fecha_hora_registro',
     ];
 
     public function usuario()

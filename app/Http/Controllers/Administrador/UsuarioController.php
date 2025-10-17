@@ -23,9 +23,9 @@ class UsuarioController extends Controller
         $usuarios= Usuario::with(['rol', 'estadoUsuario'])->get();
         $estados=EstadoUsuario::all();
         $usuarioSesion = Auth::user();
-        $primerosregistros=Registro::with('usuario')->latest('fecha_hora_registro')->take(10)->get();
+        $primerosRegistros=Registro::with('usuario')->latest('fecha_hora_registro')->take(10)->get();
 
-        return view('dashboard_administrador', compact('usuarios', 'estados', 'usuarioSesion'));
+        return view('dashboard_administrador', compact('usuarios', 'estados', 'usuarioSesion', 'primerosRegistros'));
     }
 
     /**
