@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
 Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::class, 'cambiarEstado'])
     ->name('administrador.usuarios.cambiarEstado');
 
+Route::get('/access-search', [UsuarioController::class, 'search'])->name('access.search');
+
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])

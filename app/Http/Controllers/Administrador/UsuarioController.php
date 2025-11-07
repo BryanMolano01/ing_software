@@ -109,6 +109,33 @@ class UsuarioController extends Controller
         $usuario->delete();
         return redirect()->route('dashboard')->with('success', 'Usuario eliminado');
     }
+    public function searchAccessLogs(Request $request)
+{
+    $searchTerm = trim(strtolower($request->input('search'))); // Limpia y convierte a minúsculas
+
+    // 1. Manejo del término de búsqueda vacío o nulo
+    if (empty($searchTerm)) {
+        // Devuelve una colección vacía para vaciar la lista en el front-end
+        $registros = collect([]); 
+    } else {
+        // 2. Ejecuta la búsqueda real: coincidencia SÓLO al inicio del nombre
+        $registros = Registro::whereHas('usuario', function ($query) use ($searchTerm) {
+            // whereRaw + LOWER() permite buscar sin distinguir mayúsculas/minúsculas y solo al inicio
+            $query->whereRaw('LOWER(nombre) LIKE ?', [$searchTerm . '%']); 
+        })
+        ->with('usuario.rol')
+        ->latest('fecha_hora_registro') 
+        ->get();
+    }
+
+    // 3. Renderizar y devolver la respuesta JSON
+    $html = view('partials.access_list', ['registros' => $registros])->render();
+
+    return response()->json([
+        'html' => $html,
+        'count' => $registros->count()
+    ]);
+}
 
     public function cambiarEstado(Request $request, Usuario $usuario)
     {

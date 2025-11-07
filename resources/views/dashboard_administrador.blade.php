@@ -138,33 +138,14 @@
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Registro de Accesos</h5>
 
+                    <div class="mb-3">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre de usuario...">
+                    </div>
+                    
                     {{-- Contenedor de la lista de accesos con scroll --}}
-                    <div class="access-list-container flex-grow-1 overflow-auto">
-                        
-                        @if(isset($primerosRegistros) && count($primerosRegistros) > 0)
-                            {{-- Itera sobre la colección de los 10 últimos registros (Registro::class) --}}
-                            @foreach ($primerosRegistros as $registro)
-                                {{-- Tarjeta Individual del Acceso --}}
-                                <div class="access-card mb-2 p-3">
-                                    
-                                    {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
-                                    <strong class="log-username">{{ $registro->usuario->nombre }}</strong>
-                                    
-                                    <div class="log-details small">
-                                        
-                                        {{-- Muestra la fecha/hora del registro de acceso --}}
-                                        Acceso: 
-                                        {{ $registro -> fecha_hora_registro->format('d/m/Y H:i') ?? 'N/A' }} 
-                                        
-                                        <span style="color: #622D16;">Rol: {{ $registro->usuario->rol-> rol ?? 'N/A' }}</span>
-                                        
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <p class="text-center text-muted mt-5">No hay registros de acceso.</p>
-                        @endif
-                        
+                    {{-- ¡AQUÍ ESTÁ LA CORRECCIÓN! Añadir el ID --}}
+                    <div class="access-list-container flex-grow-1 overflow-auto" **id="accessListContainer"**>
+                        @include('partials.access_list', ['registros' => $primerosRegistros])
                     </div>
                     
                 </div>
@@ -255,3 +236,27 @@
 
 </x-app-layout>
 
+<script>
+    $(document).ready(function() {
+        // Captura el evento 'keyup' en el input de búsqueda
+        $('#searchInput').on('keyup', function() {
+            var searchTerm = $(this).val(); // Obtiene el texto actual
+            
+            // Envía la petición AJAX
+            $.ajax({
+                url: '{{ route('access.search') }}', // **Usamos la ruta definida en web.php**
+                method: 'GET',
+                data: {
+                    search: searchTerm
+                }, // Envía el término de búsqueda
+                success: function(response) {
+                    // ¡CLAVE! Reemplaza el contenido del DIV con id="accessListContainer"
+                    $('#accessListContainer').html(response.html); 
+                },
+                error: function(error) {
+                    console.error("Error en la búsqueda:", error);
+                }
+            });
+        });
+    });
+</script>
