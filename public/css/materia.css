@@ -1,0 +1,66 @@
+/* Estilos necesarios para hacer coincidir el color naranja #ff9800 */
+
+/* 1. Estilo para los Toggles (Interruptores) de Materia/Proveedor */
+.form-check-input.custom-toggle:checked {
+    background-color: #ff9800 !important;
+    border-color: #ff9800 !important;
+}
+
+/* 2. Estilo para el Botón Desplegable (Dropdown) */
+.custom-dropdown-button {
+    background-color: #ffe0b2 !important;
+    border-color: #ff9800 !important;
+    color: #622D16 !important; /* Color del texto para contraste */
+}
+.custom-dropdown-button:hover {
+    background-color: #ff9800 !important; /* Un poco más oscuro al pasar el mouse */
+    border-color: #ff9800 !important;
+}
+
+/* 3. Estilo para el Icono de Búsqueda */
+.custom-search-icon {
+    background-color: #ff9800 !important;
+    border-color: #ff9800 !important;
+    color: #622D16 !important;
+}
+
+/* 4. Estilo para el Input de Búsqueda */
+.custom-search-input:focus {
+    border-color: #ff9800 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 152, 0, 0.25) !important; /* Sombra de enfoque naranja */
+}
+/* Estilo para el Input de Búsqueda del Historial (Caja y borde naranja) */
+.custom-search-input-historial {
+    border-color: #ff9800 !important; 
+    /* Eliminar el fondo blanco del input para que se vea como en la imagen */
+    background-color: #FFE2C4 !important; 
+    box-shadow: none !important;
+    padding-left: 0; /* Aseguramos que el texto empiece después del icono */
+    border-left: none !important; /* El borde solo debe estar en la derecha */
+}
+
+.custom-search-input-historial:focus {
+    background-color: #fff9f0 !important; /* Fondo más claro al enfocar */
+    border-color: #e68900 !important;
+    box-shadow: 0 0 0 0.25rem rgba(255, 152, 0, 0.25) !important; 
+}
+
+/* Estilo para el Ícono de búsqueda */
+.custom-search-icon-historial {
+    background-color: #ffe0b2 !important; 
+    border-color: #ff9800 !important;
+    color: #622D16 !important;
+    border-right: none !important;
+}
+
+/* Estilo para el botón de búsqueda a la derecha */
+.btn-search-historial {
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important; 
+    border: 1px solid #ff9800 !important;
+}
+.btn-search-historial:hover {
+    background-color: #ff9800 !important;
+    color: ffe0b2 !important;
+}
+

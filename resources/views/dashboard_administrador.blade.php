@@ -7,9 +7,11 @@
     <x-slot name="header">
         {{-- Slot header vacío para eliminar el texto "Dashboard" no deseado --}}
     </x-slot>
-    
     <?php
-        $adminLinks = [];
+        $adminLinks = [
+            ['title' => 'Usuarios', 'route' => 'dashboard'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+        ];
     ?>
     <x-app-navbar :links="$adminLinks" />
 
@@ -21,17 +23,7 @@
         
         {{-- FILA PRINCIPAL DE 3 COLUMNAS --}}
         <div class="row">
-            <?php
-                // ... (Tu array $simulatedUsers aquí) ...
-                // SIMULACIÓN: Datos de acceso para la segunda columna
-                $accessLogs = [
-                    (object)['username' => 'Usuario002', 'role' => 'Cajero', 'timestamp' => '14/10/2025 22:40'],
-                    (object)['username' => 'Usuario001', 'role' => 'Administrador', 'timestamp' => '15/10/2025 22:39'],
-                    (object)['username' => 'Usuario002', 'role' => 'Cajero', 'timestamp' => '18/10/2025 22:40'],
-                    (object)['username' => 'Usuario005', 'role' => 'Panadero', 'timestamp' => '24/10/2025 22:39'],
-                    (object)['username' => 'Usuario004', 'role' => 'Cajero', 'timestamp' => '24/10/2025 22:40'],
-                ];
-            ?>
+
             {{-- Columna 1: USUARIOS (col-md-4) --}}
             {{-- En dashboard_administrador.blade.php (Columna 1: USUARIOS) --}}
             <div class="col-md-4 mb-4 d-flex">
@@ -140,11 +132,14 @@
             <div class="col-md-5 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Registro de Accesos</h5>
-
                     <div class="mb-3">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre de usuario...">
+                        <div class="input-group flex-grow-1 me-2">
+                            <span class="input-group-text custom-search-icon-historial" style="background-color: #FFE2C4; border-color: #ff9800; color: #622D16;">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
+                        </div>
                     </div>
-                    
                     {{-- Contenedor de la lista de accesos con scroll --}}
                     {{-- ¡AQUÍ ESTÁ LA CORRECCIÓN! Añadir el ID --}}
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">

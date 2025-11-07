@@ -27,6 +27,18 @@ Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::cl
 
 Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])->name('access.search');
 
+
+// routes/web.php
+
+// 1. Ruta de Usuarios
+Route::get('/administracion/usuarios', [UsuarioController::class, 'showUsuarios'])
+    ->name('administrador.usuarios.index'); // ESTE es el nombre que usas
+
+// 2. Ruta de Materia Prima
+Route::get('/administracion/materia-prima', [UsuarioController::class, 'showMateriaPrima'])
+    ->name('administrador.materia_prima.index'); // ESTE es el nombre que usas
+
+
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])

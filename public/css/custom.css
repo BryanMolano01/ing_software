@@ -6,7 +6,7 @@ body {
 }
 /* Estilo para las tarjetas del Dashboard (similar al login) */
 .custom-card-style {
-    background-color: #FFF4E3 !important; /* Fondo claro similar al login-card */
+    background-color: white !important; /* Fondo claro similar al login-card */
     border: none;
     border-radius: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
@@ -49,7 +49,7 @@ body {
 
 /* Estilo para el botón de "Crear Usuario" */
 .btn-create-user {
-    background-color: #FFB266 !important; /* Mismo color naranja suave que el login */
+    background-color: #ffe0b2 !important; /* Mismo color naranja suave que el login */
     color: white !important;
     border: none !important;
     border-radius: 0.5rem;
@@ -89,7 +89,7 @@ body {
 
 .btn-modificar-perfil {
     /* Color de fondo: Naranja pálido del mockup */
-    background-color: #FFD6B9 !important; 
+    background-color: #ffe0b2 !important; 
     color: #622D16 !important; /* Color de texto café */
     border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
     border-radius: 0.5rem;
@@ -133,7 +133,7 @@ body {
 
 /* Tarjeta individual del usuario */
 .user-card {
-    background-color: #FFF4E3; /* Fondo de la tarjeta principal */
+    background-color: white; /* Fondo de la tarjeta principal */
     border-radius: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-left: 5px solid #FFB266; /* Barra lateral naranja */
@@ -196,7 +196,7 @@ body {
 
 /* Tarjeta individual del registro de acceso */
 .access-card {
-    background-color: #FFF4E3; /* Fondo de la tarjeta principal */
+    background-color: white; /* Fondo de la tarjeta principal */
     border-radius: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     /* El mismo borde lateral que en la lista de usuarios */

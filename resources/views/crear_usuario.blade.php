@@ -3,7 +3,9 @@
     
     <?php
         $adminLinks = [
-            ['name' => 'Administrar Usuarios', 'url' => route('administrador.dashboard')],
+            
+            ['title' => 'Usuarios', 'route' => 'dashboard'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
