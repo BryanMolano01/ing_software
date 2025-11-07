@@ -1,3 +1,7 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
 <x-app-layout> 
     
     <x-slot name="header">
@@ -44,7 +48,6 @@
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
                                 onclick="window.location='{{ route('administrador.editar.usuario', $usuario->id_usuario) }}'"> 
-                                
                                 {{-- Información del Usuario --}}
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
@@ -144,9 +147,10 @@
                     
                     {{-- Contenedor de la lista de accesos con scroll --}}
                     {{-- ¡AQUÍ ESTÁ LA CORRECCIÓN! Añadir el ID --}}
-                    <div class="access-list-container flex-grow-1 overflow-auto" **id="accessListContainer"**>
+                    <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
                         @include('partials.access_list', ['registros' => $primerosRegistros])
                     </div>
+
                     
                 </div>
             </div>
