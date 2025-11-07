@@ -2,12 +2,6 @@
 <nav class="navbar navbar-expand-lg" style="background-color: white; border-bottom: 2px solid #f5a85a; padding: 0.5rem 1rem;">
     <div class="container-fluid">
         
-        {{-- 1. Botón de Menú que regresa al Dashboard --}}
-        {{-- Quitamos el data-bs-toggle y lo volvemos un enlace directo --}}
-        <a href="{{ route('dashboard') }}" class="btn-menu-link p-0 border-0 bg-transparent">
-            <img src="{{ asset('images/Menu.png') }}" alt="Dashboard" class="nav-icon">
-        </a>
-
         {{-- 2. Contenedor de Enlaces: A la izquierda del logo --}}
         {{-- Usamos el prop 'links' para generar los enlaces de administración --}}
         <div class="d-flex align-items-center me-auto ms-3"> 

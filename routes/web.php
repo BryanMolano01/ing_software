@@ -20,26 +20,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
 Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::class, 'cambiarEstado'])
     ->name('administrador.usuarios.cambiarEstado');
 
 Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])->name('access.search');
 
-
-// routes/web.php
-
-// 1. Ruta de Usuarios
-Route::get('/administracion/usuarios', [UsuarioController::class, 'showUsuarios'])
-    ->name('administrador.usuarios.index'); // ESTE es el nombre que usas
-
-// 2. Ruta de Materia Prima
 Route::get('/administracion/materia-prima', [UsuarioController::class, 'showMateriaPrima'])
     ->name('administrador.materia_prima.index'); // ESTE es el nombre que usas
 
+// URL DE PRUEBAS
+Route::view('/admin/materia/crear', 'crear_materia')->name('administrador.materia.create');
+
+Route::view('/admin/proveedor/crear', 'crear_proveedor')->name('administrador.proveedor.create');
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
+
+    
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
     ->name('administrador.editar.usuario');
@@ -55,11 +51,6 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
     
 });
-
-
-
-
-
 
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){

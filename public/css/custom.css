@@ -13,6 +13,22 @@ body {
     min-height: 450px; /* Altura mínima para que se vean bien al inicio */
 }
 
+.custom-card-style-create {
+    background-color: white !important; /* Fondo claro similar al login-card */
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    min-height: 300px; /* Altura mínima para que se vean bien al inicio */
+}
+
+.custom-card-style-create-insumo {
+    background-color: white !important; /* Fondo claro similar al login-card */
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    min-height: 340px; /* Altura mínima para que se vean bien al inicio */
+}
+
 /* Estilo para el botón de "Crear Usuario" */
 .btn-create-user {
     background-color: #FFB266 !important; /* Mismo color naranja suave que el login */

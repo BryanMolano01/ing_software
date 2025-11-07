@@ -78,7 +78,7 @@
 
                     {{-- 3. Botón Registrar Nuevo Insumo (Parte inferior) --}}
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a class="btn btn-modificar-perfil">
+                        <a href="/admin/materia/crear" class="btn btn-modificar-perfil">
                             Registrar Nuevo Insumo
                         </a>
                     </div>
@@ -146,6 +146,11 @@
                             </span>
                             <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
+                    </div>
+                    <div class="d-grid gap-2 mt-auto"> 
+                        <a href="/admin/proveedor/crear" class="btn btn-modificar-perfil">
+                            Registrar Proveedor  
+                        </a>
                     </div>
                 </div>
             </div>
