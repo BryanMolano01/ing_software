@@ -22,6 +22,8 @@ public function up(): void
         $table->foreignId('proveedor_id_proveedor')->constrained('proveedor', 'id_proveedor');
         $table->foreignId('tipo_item_id_tipo_item')->constrained('tipo_item','id_tipo_item');
         $table->foreignId('ubicacion_id_ubicacion')->constrained('ubicacion','id_ubicacion');
+        $table->foreignId('unidad_materia_prima_id_unidad_materia_prima')->constrained('unidad_materia_prima','id_unidad_materia_prima');
+
     });
 }
 

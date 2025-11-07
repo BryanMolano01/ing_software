@@ -18,6 +18,7 @@ class Item extends Model
         'tipo_item_id_tipo_item',
         'ubicacion_id_ubicacion',
         'cantidad',
+        'unidad_materia_prima_id_unidad_materia_prima'
     ];
 
     public function proveedor()
@@ -33,5 +34,13 @@ class Item extends Model
     public function ubicacion()
     {
         return $this->belongsTo(Ubicacion::class, 'ubicacion_id_ubicacion');
+    }
+    public function unidad_materia_prima()
+    {
+        return $this->belongsTo(Unidad_materia_prima::class, 'unidad_materia_prima_id_unidad_materia_prima');
+    }
+    public function registro_item()
+    {
+        return $this->hasMany(Registro_item::class, 'item_id_item');
     }
 }

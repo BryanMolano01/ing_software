@@ -78,7 +78,7 @@
 
                     {{-- 3. Botón Registrar Nuevo Insumo (Parte inferior) --}}
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="/admin/materia/crear" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.materia.create') }}" class="btn btn-modificar-perfil">
                             Registrar Nuevo Insumo
                         </a>
                     </div>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="/admin/proveedor/crear" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.proveedor.create') }}" class="btn btn-modificar-perfil">
                             Registrar Proveedor  
                         </a>
                     </div>

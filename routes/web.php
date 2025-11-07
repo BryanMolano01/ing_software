@@ -29,13 +29,13 @@ Route::get('/administracion/materia-prima', [UsuarioController::class, 'showMate
     ->name('administrador.materia_prima.index'); // ESTE es el nombre que usas
 
 // URL DE PRUEBAS
-Route::view('/admin/materia/crear', 'crear_materia')->name('administrador.materia.create');
-
-Route::view('/admin/proveedor/crear', 'crear_proveedor')->name('administrador.proveedor.create');
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
 
-    
+    Route::view('materia/crear', 'crear_materia')->name('materia.create');
+
+    Route::view('proveedor/crear', 'crear_proveedor')->name('proveedor.create');
+
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
     ->name('administrador.editar.usuario');
