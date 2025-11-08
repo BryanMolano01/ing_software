@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrador\MateriaPrimaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::patch('/administracion/usuarios/{usuario}/estado', [UsuarioController::cl
 
 Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])->name('access.search');
 
-Route::get('/administracion/materia-prima', [UsuarioController::class, 'showMateriaPrima'])
+Route::get('/administracion/materia-prima', [MateriaPrimaController::class, 'index'])
     ->name('administrador.materia_prima.index'); // ESTE es el nombre que usas
 
 // URL DE PRUEBAS
@@ -35,7 +36,6 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     Route::view('materia/crear', 'crear_materia')->name('materia.create');
 
     Route::view('proveedor/crear', 'crear_proveedor')->name('proveedor.create');
-
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
     ->name('administrador.editar.usuario');

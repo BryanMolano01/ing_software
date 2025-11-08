@@ -15,8 +15,8 @@ class MateriaPrimaController extends Controller
      */
     public function index()
     {
-        $Items = Item::all();
-        $primerosRegistros= Registro_item::with('item')->latest('fecha_hora_registro')->take(10)->get();
+        $Items = Item::with(['tipoItem', 'unidad_materia_prima'])->get();
+        $primerosRegistros= Registro_item::with('Item')->latest('fecha_hora_registro')->take(10)->get();
         $proveedores = Proveedor::all();
 
                 return view('administrador_materia_prima', compact('Items', 'primerosRegistros', 'proveedores'));
