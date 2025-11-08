@@ -29,13 +29,18 @@ Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])->na
 Route::get('/administracion/materia-prima', [MateriaPrimaController::class, 'index'])
     ->name('administrador.materia_prima.index'); // ESTE es el nombre que usas
 
+
 // URL DE PRUEBAS
+
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
 
     Route::view('materia/crear', 'crear_materia')->name('materia.create');
 
     Route::view('proveedor/crear', 'crear_proveedor')->name('proveedor.create');
+
+    Route::view('materia/editar', 'editar_materia')->name('materia.editar');
+
    
     Route::get('/administracion/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
     ->name('administrador.editar.usuario');

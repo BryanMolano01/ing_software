@@ -57,12 +57,19 @@
                             <button class="btn dropdown-toggle custom-dropdown-button" type="button" id="dropdownTipo" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 Tipo
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownTipo">
-                                <li><a class="dropdown-item" href="#">Harinas</a></li>
-                                <li><a class="dropdown-item" href="#">Lacteos</a></li>
-                                <li><a class="dropdown-item" href="#">Azúcares</a></li>
-                                {{-- ... más tipos ... --}}
-                            </ul>
+                            @if(isset($Items) && count($Items) > 0)
+                                {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
+                                @foreach ($Items as $items)
+                                    {{-- Tarjeta Individual del Acceso --}}
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownTipo""> 
+                                        <li class="log-details small">
+                                            <a class="dropdown-item" href="#">{{ $items -> tipoItem -> tipo}}</a>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            @else
+                                <li><a class="dropdown-item" href="#">No hay tipos disponibles</a></li>
+                            @endif
                         </div>
                         
                         {{-- Input de Búsqueda con Icono --}}
@@ -79,7 +86,9 @@
                             {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
                             @foreach ($Items as $items)
                                 {{-- Tarjeta Individual del Acceso --}}
-                                <div class="access-card mb-2 p-3">
+                                <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
+                                    style="cursor: pointer;" 
+                                    onclick="window.location='{{ route('administrador.materia.editar') }}'"> 
                                     {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
                                     <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
                                     <div class="log-details small">
