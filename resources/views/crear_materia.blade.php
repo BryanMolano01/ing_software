@@ -37,7 +37,25 @@
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+                        <div class="mb-4 form-group-with-icon d-flex align-items-center">
+                            <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Medida:</label>
+                            <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                                
+                                <option value="" disabled selected>Seleccione una medida</option> {{-- Placeholder --}}
+                                
+                                {{-- Bucle para cargar los roles reales --}}
+                                @isset($roles)
+                                    @foreach ($roles as $rol)
+                                        <option value="{{ $rol->id_rol }}" {{ old('rol_id_rol') == $rol->id_rol ? 'selected' : '' }}>
+                                            {{ $rol->rol }}
+                                        </option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                            @error('rol_id_rol')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
                         {{-- En crear_usuario.blade.php, dentro de la columna izquierda --}}
                         {{-- Campo de Rol (Coincide con 'rol_id_rol' del controlador) --}}
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
@@ -61,7 +79,7 @@
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="item_id_item" class="form-label input-label me-2 mb-0">Tipo de insumo:</label>
+                            <label for="item_id_item" class="form-label input-label me-2 mb-0">Tipo:</label>
                             <select id="item_id_item" name="item_id_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione un tipo</option> {{-- Placeholder --}}

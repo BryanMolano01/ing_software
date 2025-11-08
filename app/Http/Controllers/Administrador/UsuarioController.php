@@ -149,9 +149,4 @@ class UsuarioController extends Controller
 
         return redirect()->back()->with('success', 'Estado actualizado correctamente.');
     }
-    // AdministracionController.php
-    public function showMateriaPrima()
-    {
-        return view('administrador_materia_prima'); 
-    }
 }

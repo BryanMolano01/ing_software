@@ -1,3 +1,7 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
 <x-app-layout> 
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/materia.css') }}">
@@ -70,13 +74,26 @@
                         </div>
                         
                     </div>
-
-                    {{-- Área de resultados (donde irían las tarjetas, similar a los accesos) --}}
-                    <div class="materia-list-container flex-grow-1 overflow-auto mb-3">
-                        {{-- Aquí irá la lista de la Materia Prima --}}
+                    <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
+                        @if(isset($Items) && count($Items) > 0)
+                            {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
+                            @foreach ($Items as $items)
+                                {{-- Tarjeta Individual del Acceso --}}
+                                <div class="access-card mb-2 p-3">
+                                    
+                                    {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
+                                    <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
+                                    <div class="log-details small">
+                                        <span style="color: #622D16;">Cantidad: {{  $items -> cantidad }}</span>
+                                        
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="text-center text-muted mt-5">No hay registros que coincidan con la búsqueda.</p>
+                        @endif
                     </div>
 
-                    {{-- 3. Botón Registrar Nuevo Insumo (Parte inferior) --}}
                     <div class="d-grid gap-2 mt-auto"> 
                         <a href="{{ route('administrador.materia.create') }}" class="btn btn-modificar-perfil">
                             Registrar Nuevo Insumo
@@ -128,9 +145,31 @@
                         
                     </div>
 
-                    {{-- Contenedor de la lista de accesos (Mantenemos tu ID para usarlo con AJAX) --}}
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        {{-- Aquí se cargarán los ítems del historial de materia prima --}}
+                        @if(isset($primerosRegistros) && count($primerosRegistros) > 0)
+                            @foreach ($primerosRegistros as $registro)
+                                <div class="access-card mb-2 p-3">
+                                    <strong class="log-username">
+                                        Tipo: {{ $registro->item->tipoItem?->tipo ?? 'N/A' }} 
+                                    </strong
+                                    <strong class="log-username d-block">
+                                        Unidad: {{ $registro->item->unidad_materia_prima?->nombre ?? 'N/A' }}
+                                    </strong>
+                                    
+                                    <div class="log-details small">
+                                        <span style="color: #622D16;">
+                                            Cantidad Registrada: {{ $registro->item->cantidad ?? 'N/A' }}
+                                        </span>
+                                        
+                                        <span class="ms-3">
+                                            Registro: {{ $registro->fecha_hora_registro?->format('d/m/Y H:i') ?? 'N/A' }} 
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="text-center text-muted mt-5">No hay registros que coincidan con la búsqueda.</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -147,6 +186,27 @@
                             <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
                     </div>
+
+                    <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
+                        @if(isset($Items) && count($Items) > 0)
+                            {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
+                            @foreach ($Items as $items)
+                                {{-- Tarjeta Individual del Acceso --}}
+                                <div class="access-card mb-2 p-3">
+                                    
+                                    {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
+                                    <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
+                                    <div class="log-details small">
+                                        <span style="color: #622D16;">Cantidad: {{  $items -> cantidad }}</span>
+                                        
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="text-center text-muted mt-5">No hay registros que coincidan con la búsqueda.</p>
+                        @endif
+                    </div>
+
                     <div class="d-grid gap-2 mt-auto"> 
                         <a href="{{ route('administrador.proveedor.create') }}" class="btn btn-modificar-perfil">
                             Registrar Proveedor  
