@@ -14,7 +14,7 @@ return new class extends Migration
 
 
         Schema::create('registro_item', function (Blueprint $table) {
-            $table->id('id_registro');
+            $table->id('id_registro_item');
             $table->dateTime('fecha_hora_registro');
             $table->foreignId('item_id_item')->constrained('item', 'id_item');
     });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('registro_items');
+        Schema::dropIfExists('registro_item');
     }
 };

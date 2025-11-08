@@ -39,7 +39,7 @@ class Item extends Model
     {
         return $this->belongsTo(Unidad_materia_prima::class, 'unidad_materia_prima_id_unidad_materia_prima');
     }
-    public function registro_item()
+    public function registro_items()
     {
         return $this->hasMany(Registro_item::class, 'item_id_item');
     }

@@ -22,7 +22,7 @@ class Registro_item extends Model
         'fecha_hora_registro',
     ];
 
-    public function usuario()
+    public function item()
     {
         return $this->belongsTo(Item::class, 'item_id_item');
     }
