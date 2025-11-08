@@ -80,7 +80,6 @@
                             @foreach ($Items as $items)
                                 {{-- Tarjeta Individual del Acceso --}}
                                 <div class="access-card mb-2 p-3">
-                                    
                                     {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
                                     <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
                                     <div class="log-details small">
@@ -103,32 +102,12 @@
             </div>
 
             {{-- Columna 2: REGISTRO DE ACCESOS (col-md-5) --}}
-            <div class="col-md-5 mb-4 d-flex">
+            <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Historial de materia prima</h5>
                     
-                    {{-- 1. Fila de Filtros/Píldoras --}}
-                    {{-- El mismo código HTML de tu sección Historial de Materia Prima --}}
-                    <div class="d-flex align-items-center mb-3">
-                        <label class="form-label mb-0 me-3" style="color: #622D16;">Seleccione</label>
-
-                        {{-- Toggle para Materia --}}
-                        <div class="form-check form-switch me-4">
-                            {{-- Asegúrate de que el input tenga un ID y la etiqueta un 'for' --}}
-                            <input class="form-check-input custom-toggle" type="checkbox" id="toggleMateria" checked style="background-color: #ffe0b2; border-color: #ff9800;">
-                            <label class="form-check-label" for="toggleMateria" style="color: #622D16;">Entrada</label>
-                        </div>
-                        
-                        {{-- Toggle para Proveedor --}}
-                        <div class="form-check form-switch">
-                            <input class="form-check-input custom-toggle" type="checkbox" id="toggleProveedor" style="background-color: #ffe0b2; border-color: #ff9800;">
-                            <label class="form-check-label" for="toggleProveedor" style="color: #622D16;">Salida</label>
-                        </div>
-                    </div>
-                    
                     {{-- 2. Barra de Búsqueda y Botón --}}
                     <div class="d-flex mb-3">
-                        
                         {{-- Input de Búsqueda (Caja ancha con icono) --}}
                         <div class="input-group flex-grow-1 me-2">
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
@@ -136,13 +115,6 @@
                             </span>
                             <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
-                        
-                        {{-- Botón de Búsqueda --}}
-                        <button class="btn btn-search-historial" type="button" 
-                                style="background-color: #ffe0b2; color: #622D16; border: 1px solid #ff9800;">
-                            Buscar
-                        </button>
-                        
                     </div>
 
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
@@ -153,12 +125,12 @@
                                         Tipo: {{ $registro->item->tipoItem?->tipo ?? 'N/A' }} 
                                     </strong
                                     <strong class="log-username d-block">
-                                        Unidad: {{ $registro->item->unidad_materia_prima?->nombre ?? 'N/A' }}
+                                        Unidad: {{ $registro->item->unidad_materia_prima?->unidad ?? 'N/A' }}
                                     </strong>
                                     
                                     <div class="log-details small">
                                         <span style="color: #622D16;">
-                                            Cantidad Registrada: {{ $registro->item->cantidad ?? 'N/A' }}
+                                            Cantidad: {{ $registro->item->cantidad ?? 'N/A' }}
                                         </span>
                                         
                                         <span class="ms-3">
@@ -174,11 +146,13 @@
                 </div>
             </div>
 
-            {{-- Columna 3: MI USUARIO (col-md-3) --}}
-            <div class="col-md-3 mb-4">
-                <div class="card p-4 custom-card-style d-flex flex-column align-items-center">
-                    <h5 class="card-title w-100" style="color: #a0522d;">Proveedores</h5>
-                    <div class="mb-3">
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
+                    <h5 class="card-title" style="color: #a0522d;">Proveedores</h5>
+                    
+                    {{-- 2. Barra de Búsqueda y Botón --}}
+                    <div class="d-flex mb-3">
+                        {{-- Input de Búsqueda (Caja ancha con icono) --}}
                         <div class="input-group flex-grow-1 me-2">
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 <i class="fas fa-search"></i>
@@ -188,18 +162,13 @@
                     </div>
 
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        @if(isset($Items) && count($Items) > 0)
-                            {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
-                            @foreach ($Items as $items)
-                                {{-- Tarjeta Individual del Acceso --}}
+                        @if(isset($proveedores) && count($proveedores) > 0)
+                            @foreach ($proveedores as $proveedor)
                                 <div class="access-card mb-2 p-3">
-                                    
-                                    {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
-                                    <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
-                                    <div class="log-details small">
-                                        <span style="color: #622D16;">Cantidad: {{  $items -> cantidad }}</span>
-                                        
-                                    </div>
+                                    <strong class="log-username">
+                                        Nombre: 
+                                        {{ $proveedor->nombre?? 'N/A' }} 
+                                    </strong>
                                 </div>
                             @endforeach
                         @else
@@ -208,10 +177,11 @@
                     </div>
 
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="{{ route('administrador.proveedor.create') }}" class="btn btn-modificar-perfil">
-                            Registrar Proveedor  
+                        <a href="{{ route('administrador.materia.create') }}" class="btn btn-modificar-perfil">
+                            Registrar Nuevo Proveedor
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>
