@@ -3,8 +3,8 @@
     
     <?php
         $adminLinks = [
-            ['title' => 'Usuarios', 'route' => 'dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+            ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -21,7 +21,7 @@
         <div class="card p-4 custom-card-style mx-auto" style="max-width: 800px;"> 
             
             {{-- 1. ASIGNAR ID AL FORMULARIO --}}
-            <form id="editUserForm" action="{{ route('administrador.materia.editar') }}" method="POST"> 
+            <form id="editUserForm" action="{{ route('administrador.items.update', $item->id_item) }}" method="POST"> 
                 @csrf
                 @method('PATCH')
                 

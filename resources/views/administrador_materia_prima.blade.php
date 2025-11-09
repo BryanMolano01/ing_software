@@ -11,8 +11,8 @@
     </x-slot>
     <?php
         $adminLinks = [
-            ['title' => 'Usuarios', 'route' => 'dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+            ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -88,7 +88,7 @@
                                 {{-- Tarjeta Individual del Acceso --}}
                                 <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                     style="cursor: pointer;" 
-                                    onclick="window.location='{{ route('administrador.materia.editar') }}'"> 
+                                    onclick="window.location='{{ route('administrador.items.edit', $items->id_item) }}'"> 
                                     {{-- Accede a la información del usuario a través de la relación 'usuario' --}}
                                     <strong class="log-username">Tipo: {{ $items -> tipoItem -> tipo}}</strong>
                                     <div class="log-details small">
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="{{ route('administrador.materia.create') }}" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.items.create') }}" class="btn btn-modificar-perfil">
                             Registrar Nuevo Insumo
                         </a>
                     </div>
@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="{{ route('administrador.materia.create') }}" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.items.create') }}" class="btn btn-modificar-perfil">
                             Registrar Nuevo Proveedor
                         </a>
                     </div>

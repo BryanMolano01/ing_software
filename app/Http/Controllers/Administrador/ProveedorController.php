@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProveedorRequest;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
@@ -12,7 +14,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -20,15 +22,19 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('crear_proveedor');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProveedorRequest $request)
     {
-        //
+        $validated=$request->validated();
+
+        $proveedor = Proveedor::create($validated);
+        return redirect()->route('administrador.items.index')->with('success', 'proveedor creado correctamente');
     }
 
     /**

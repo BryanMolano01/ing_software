@@ -10,7 +10,7 @@
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -39,7 +39,7 @@
                             {{-- Tarjeta Individual del Usuario --}}
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
-                                onclick="window.location='{{ route('administrador.editar.usuario', $usuario->id_usuario) }}'"> 
+                                onclick="window.location='{{ route('administrador.usuarios.editar', $usuario->id_usuario) }}'"> 
                                 {{-- Información del Usuario --}}
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
@@ -191,7 +191,7 @@
 
                     {{-- 3. Botón Modificar Perfil --}}
                     <div class="d-grid mt-auto w-100">
-                        <a href="{{ route('administrador.editar.usuario', Auth::user()->id_usuario) }}" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.usuarios.editar', Auth::user()->id_usuario) }}" class="btn btn-modificar-perfil">
                             Modificar Perfil
                         </a>
                     </div>
@@ -243,7 +243,7 @@
             
             // Envía la petición AJAX
             $.ajax({
-                url: '{{ route('access.search') }}', // **Usamos la ruta definida en web.php**
+                url: '{{ route('administrador.access.search') }}', // **Usamos la ruta definida en web.php**
                 method: 'GET',
                 data: {
                     search: searchTerm

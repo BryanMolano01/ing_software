@@ -61,7 +61,7 @@ class UsuarioController extends Controller
             'fecha_registro' => now(),
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Usuario creado exitosamente.');
+        return redirect()->route('administrador.dashboard')->with('success', 'Usuario creado exitosamente.');
     }
 
     /**
@@ -101,13 +101,13 @@ class UsuarioController extends Controller
         }
 
         $usuario->update($data);
-        return redirect()->route('dashboard')->with('success', 'Usuario actualizado exitosamente.');
+        return redirect()->route('administrador.dashboard')->with('success', 'Usuario actualizado exitosamente.');
     }
     
     public function destroy(Usuario $usuario)
     {
         $usuario->delete();
-        return redirect()->route('dashboard')->with('success', 'Usuario eliminado');
+        return redirect()->route('administrador.dashboard')->with('success', 'Usuario eliminado');
     }
     public function searchAccessLogs(Request $request)
     {

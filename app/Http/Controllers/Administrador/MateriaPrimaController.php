@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditMateriaPrimaRequest;
+use App\Http\Requests\StoreMateriaPrimaRequest;
 use App\Models\Item;
 use App\Models\Proveedor;
 use App\Models\Registro_item;
+use App\Models\TipoItem;
+use App\Models\Ubicacion;
+use App\Models\Unidad_materia_prima;
 use Illuminate\Http\Request;
 
 class MateriaPrimaController extends Controller
@@ -19,7 +24,7 @@ class MateriaPrimaController extends Controller
         $primerosRegistros= Registro_item::with('Item')->latest('fecha_hora_registro')->take(10)->get();
         $proveedores = Proveedor::all();
 
-                return view('administrador_materia_prima', compact('Items', 'primerosRegistros', 'proveedores'));
+        return view('administrador_materia_prima', compact('Items', 'primerosRegistros', 'proveedores'));
 
     }
 
@@ -28,15 +33,23 @@ class MateriaPrimaController extends Controller
      */
     public function create()
     {
-        
+        $medidas = Unidad_materia_prima::all();
+        $proveedores = Proveedor::all();
+        $tipo_items = TipoItem::all();
+        $ubicaciones = Ubicacion::all();
+
+        return view('crear_materia', compact('medidas','proveedores', 'tipo_items', 'ubicaciones'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMateriaPrimaRequest $request)
     {
-        //
+        $validated=$request->validated();
+
+        $item = Item::create($validated);
+        return redirect()->route('administrador.items.index')->with('success', 'Item creado correctamente');
     }
 
     /**
@@ -50,17 +63,26 @@ class MateriaPrimaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Item $item)
     {
-        //
+        $medidas = Unidad_materia_prima::all();
+        $proveedores = Proveedor::all();
+        $tipo_items = TipoItem::all();
+        $ubicaciones = Ubicacion::all();
+
+        return view('editar_materia', compact('item','medidas', 'proveedores', 'tipo_items', 'ubicaciones'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditMateriaPrimaRequest $request, Item $item)
     {
-        //
+        $validated=$request->validated();
+        $item->update($validated);
+        return redirect()->route('administrador.items.index')->with('success', 'Item actualizado correctamente');
+
     }
 
     /**

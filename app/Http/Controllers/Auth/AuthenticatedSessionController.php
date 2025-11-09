@@ -28,7 +28,24 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // If there was an intended URL (e.g. user tried to access a protected page), go there.
+        // Otherwise, redirect based on the authenticated user's role to the correct dashboard.
+        $intended = $request->session()->pull('url.intended');
+        if ($intended) {
+            return redirect()->to($intended);
+        }
+
+        $user = Auth::user();
+        $rol = $user->rol->rol ?? null;
+        if ($rol === 'administrador') {
+            return redirect()->route('administrador.dashboard');
+        }
+        if ($rol === 'panadero') {
+            return redirect()->route('panadero.dashboard');
+        }
+
+        // Default fallback
+        return redirect('/');
     }
 
     /**

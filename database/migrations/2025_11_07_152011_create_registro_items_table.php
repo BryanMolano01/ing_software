@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id_registro_item');
             $table->dateTime('fecha_hora_registro');
             $table->foreignId('item_id_item')->constrained('item', 'id_item');
+            $table->integer('cantidad_usada');
     });
     }
 

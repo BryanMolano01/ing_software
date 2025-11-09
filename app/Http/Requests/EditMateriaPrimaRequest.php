@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMateriaPrimaRequest extends FormRequest
+class EditMateriaPrimaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class StoreMateriaPrimaRequest extends FormRequest
             'tipo_item_id_tipo_item' => 'required|integer|exists:tipo_item,id_tipo_item',
             'ubicacion_id_ubicacion' => 'required|integer|exists:ubicacion,id_ubicacion',
         ];
-        
     }
+
 
     public function messages(): array
     {

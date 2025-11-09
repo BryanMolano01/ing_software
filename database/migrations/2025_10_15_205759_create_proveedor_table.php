@@ -15,6 +15,7 @@ public function up(): void
     Schema::create('proveedor', function (Blueprint $table) {
         $table->id('id_proveedor');
         $table->string('nombre', 45);
+        $table->string('telefono');
     });
 }
 

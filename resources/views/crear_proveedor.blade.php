@@ -4,7 +4,7 @@
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -22,7 +22,7 @@
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
             
             {{-- 1. ACCIÓN DEL FORMULARIO CONFIGURADA --}}
-            <form id="createUserForm" action="{{ route('administrador.usuarios.store') }}" method="POST">
+            <form id="createUserForm" action="{{ route('administrador.proveedor.store') }}" method="POST">
                 @csrf
                 
                 <div class="row">

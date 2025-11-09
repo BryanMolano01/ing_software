@@ -4,7 +4,7 @@
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.materia_prima.index'],
+            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -22,7 +22,7 @@
         <div class="card p-4 custom-card-style-create-insumo mx-auto" style="max-width: 800px;">
             
             {{-- 1. ACCIÓN DEL FORMULARIO CONFIGURADA --}}
-            <form id="createUserForm" action="{{ route('administrador.usuarios.store') }}" method="POST">
+            <form id="createUserForm" action="{{ route('administrador.items.store') }}" method="POST">
                 @csrf
                 
                 <div class="row">
@@ -38,8 +38,8 @@
                             @enderror
                         </div>
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Medida:</label>
-                            <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="medida" class="form-label input-label me-2 mb-0">Medida:</label>
+                            <select id="medida_id_medida" name="medida_id_medida" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione una medida</option> {{-- Placeholder --}}
                                 
@@ -59,7 +59,7 @@
                         {{-- En crear_usuario.blade.php, dentro de la columna izquierda --}}
                         {{-- Campo de Rol (Coincide con 'rol_id_rol' del controlador) --}}
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
+                            <label for="proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
                             <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione un proveedor</option> {{-- Placeholder --}}
@@ -79,7 +79,7 @@
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="item_id_item" class="form-label input-label me-2 mb-0">Tipo:</label>
+                            <label for="tipo" class="form-label input-label me-2 mb-0">Tipo:</label>
                             <select id="item_id_item" name="item_id_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione un tipo</option> {{-- Placeholder --}}
@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="ubicacion_id_ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
+                            <label for="ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
                             <select id="ubicacion_id_ubicacion" name="ubicacion_id_ubicacion" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione una ubicación</option> {{-- Placeholder --}}

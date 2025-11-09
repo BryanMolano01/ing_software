@@ -20,6 +20,7 @@ class Registro_item extends Model
         
         'item_id_item',
         'fecha_hora_registro',
+        'cantidad',
     ];
 
     public function item()
