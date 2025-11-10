@@ -33,7 +33,7 @@
                             {{-- Tarjeta Individual del Usuario --}}
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
-                                onclick="window.location='{{ route('administrador.usuarios.create', $usuario->id_usuario) }}'"> 
+                                onclick="window.location='{{ route('administrador.usuarios.editar', $usuario->id_usuario) }}'"> 
                                 {{-- Información del Usuario --}}
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
