@@ -56,7 +56,22 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
 
+    // RUTAS QUE HAY QUE MODIFICAR/ELIMINAR DESPUES
     Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
+
+    Route::view('/tipos/admin', 'administrar_tipos')->name('tipos.admin');
+    Route::view('/tipos/edit', 'editar_tipos')->name('tipos.edit');
+
+    Route::view('/ubicaciones/admin', 'administrar_ubicaciones')->name('ubicaciones.admin');
+    Route::view('/ubicaciones/edit', 'editar_ubicaciones')->name('ubicaciones.edit');
+
+    Route::view('/medidas/admin', 'administrar_medidas')->name('medidas.admin');
+    Route::view('/medidas/edit', 'editar_medidas')->name('medidas.edit');
+
+    Route::view('/recetas/admin', 'administrar_recetas')->name('recetas.admin');
+    Route::view('/recetas/edit', 'editar_recetas')->name('recetas.edit');
+
+    
     // store proveedor
     //Route::post('/proveedor', [ProveedorController::class, 'store'])->name('proveedor.store');
 });

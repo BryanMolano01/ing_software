@@ -30,28 +30,20 @@
                     <div class="user-list-container flex-grow-1 overflow-auto mb-3">
                         @if(isset($usuarios) && count($usuarios) > 0)
                             @foreach ($usuarios as $usuario)
-                            {{-- Tarjeta Individual del Usuario --}}
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
                                 onclick="window.location='{{ route('administrador.usuarios.editar', $usuario->id_usuario) }}'"> 
-                                {{-- Información del Usuario --}}
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
                                     <div class="user-role small">Rol: {{ $usuario -> rol -> rol}}</div>
                                 </div>
                                 
-                                {{-- Botones de Acción (Debe detener la propagación del clic) --}}
                                 <div class="d-flex action-buttons-group" 
                                     data-user-id="{{ $usuario->id_usuario }}"
                                     onclick="event.stopPropagation();"> 
 
                                     @php
-                                        // 1. Obtener el estado actual del usuario (Ej: 'Disponible', 'Inactivo', 'Despedido')
                                         $currentStatus = $usuario->estadoUsuario->estado; 
-
-                                        // 🌟 NUEVO CÓDIGO: Asume que tienes una colección llamada $estados (de App\Models\EstadoUsuario)
-                                        
-                                        // 2. Definir una función de búsqueda sencilla (más robusta)
                                         $getEstadoId = function ($estadoNombre) use ($estados) {
                                             // Busca el ID por nombre, sin importar mayúsculas/minúsculas
                                             $estado = $estados->first(fn ($e) => strtolower($e->estado) === strtolower($estadoNombre));
@@ -153,12 +145,7 @@
                     <div class="profile-picture-container mb-4" style="border: 2px solid #a0522d;">
                         <img src="{{ asset('images/Foto PerfilCU.png') }}" alt="Foto de Perfil" class="img-fluid profile-picture-placeholder">
                     </div>
-
-                    {{-- 2. Información del Usuario Autenticado --}}
-                    {{-- Usamos $usuario_autenticado o Auth::user() --}}
                     @php
-                        // Se asume que el usuario autenticado está cargado en $usuario_autenticado o se usa Auth::user()
-                        // Usaremos Auth::user() como la forma más estándar en Laravel
                         $userAuth = Auth::user(); 
                     @endphp
 
@@ -190,7 +177,7 @@
                         </a>
                     </div>
                 </div>
-</div>
+            </div>
         </div>
         
         {{-- FILA 2: ESTADOS DE USUARIO (Centrada y Abajo) --}}

@@ -97,8 +97,6 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @else
-                            <p class="text-center text-muted mt-5">No hay registros que coincidan con la búsqueda.</p>
                         @endif
                     </div>
 
@@ -155,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Proveedores</h5>
                     
@@ -175,7 +173,7 @@
                             @foreach ($proveedores as $proveedor)
                                 <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                     style="cursor: pointer;" 
-                                    onclick="window.location='{{ route('administrador.proveedor.edit', $items->id_item) }}'"> 
+                                    onclick="window.location='{{ route('administrador.proveedor.edit') }}'"> 
                                     <strong class="log-username">
                                         Nombre: 
                                         {{ $proveedor->nombre?? 'N/A' }} 
@@ -201,6 +199,10 @@
             </div>
         </div>
         
+        <div class="row justify-content-center mt-3 mb-5">
+            @include('partials.botones_materia')
+        </div>
+
     </div>
 
 </x-app-layout>

@@ -18,8 +18,7 @@
 
         <h2 class="mb-4 text-center" style="color: #622D16;">Registro de proveedor</h2> 
         
-        <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
-            
+        <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;"> 
             <form id="createUserForm" action="{{ route('administrador.proveedores.store') }}" method="POST">
                 @csrf
                 

@@ -126,6 +126,21 @@ body {
     color: white !important;
 }
 
+.btn-manejar {
+    /* Color de fondo: Naranja pálido del mockup */
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important; /* Color de texto café */
+    border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 25%;
+}
+
+.btn-manejar:hover {
+    background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
+    color: white !important;
+}
 /* --- Ajuste para el Perfil de Mi Usuario --- */
 
 /* Ajustamos el contenedor del perfil para que la línea del borde sea marrón como en el mockup. */
@@ -233,6 +248,13 @@ body {
 
 .log-username {
     color: #A0522D; /* Color terracota para el nombre de usuario */
+    font-size: 1.1em;
+    display: block; /* Ocupa su propia línea */
+    margin-bottom: 0.25rem;
+}
+
+.log-username-telefono {
+    color: #31170c; /* Color terracota para el nombre de usuario */
     font-size: 1.1em;
     display: block; /* Ocupa su propia línea */
     margin-bottom: 0.25rem;
