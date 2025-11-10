@@ -20,50 +20,70 @@
         
         <div class="card p-4 custom-card-style mx-auto" style="max-width: 800px;"> 
             
-            {{-- 1. ASIGNAR ID AL FORMULARIO --}}
             <form id="editUserForm" action="{{ route('administrador.items.update', $item->id_item) }}" method="POST"> 
                 @csrf
                 @method('PATCH')
                 
                 <div class="row align-items-start">
                     
-                    {{-- COLUMNA IZQUIERDA: CAMPOS DEL FORMULARIO --}}
+
                     <div class="col-md-7">
-                        {{-- Campo de Nombre --}}
                         <div class="mb-4 form-group-with-icon">
                             <label for="cantidad" class="form-label input-label">Cantidad:</label>
                             <input id="cantidad" class="form-control login-input transparent-input-bottom-border" type="text" 
-                                name="cantidad" value="{{ old('cantidad') }}" required />
+                                name="cantidad" value="{{ old('cantidad', $item->cantidad) }}" required />
                             @error('cantidad') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
-
-                        {{-- Campo de Rol (usa $roles) --}}
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="rol_id_rol" class="form-label input-label me-2 mb-0">Medida:</label>
-                            <select id="rol_id_rol" name="rol_id_rol" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="unidad_materia_prima_id_unidad_materia_prima" class="form-label input-label me-2 mb-0">Medida:</label>
+                            <select id="unidad_materia_prima_id_unidad_materia_prima" name="unidad_materia_prima_id_unidad_materia_prima" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                                @foreach ($medidas as $medida)
+                                    <option value="{{ $medida->id_unidad_materia_prima }}" 
+                                        @if (old('id_unidad_materia_prima', $item->unidad_materia_prima_id_unidad_materia_prima) == $medida->id_unidad_materia_prima) selected @endif>
+                                        {{ $medida-> unidad }}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('rol_id_rol') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                            @error('unidad_materia_prima_id_unidad_materia_prima') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="rol_id_rol" class="form-label input-label me-2 mb-0">Proveedor:</label>
-                            <select id="rol_id_rol" name="rol_id_rol" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
+                            <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                                @foreach ($proveedores as $proveedor)
+                                    <option value="{{ $proveedor->id_proveedor }}" 
+                                        @if (old('id_proveedor', $item->proveedor_id_proveedor) == $proveedor->id_proveedor) selected @endif>
+                                        {{ $proveedor -> nombre}}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('rol_id_rol') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                            @error('id_proveedor') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="rol_id_rol" class="form-label input-label me-2 mb-0">Tipo:</label>
-                            <select id="rol_id_rol" name="rol_id_rol" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="tipo_item_id_tipo_item" class="form-label input-label me-2 mb-0">Tipo:</label>
+                            <select id="tipo_item_id_tipo_item" name="tipo_item_id_tipo_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                                @foreach ($tipo_items as $tipo)
+                                    <option value="{{ $tipo->id_tipo_item }}" 
+                                        @if (old('id_tipo_producto', $item->tipo_item_id_tipo_item) == $tipo->id_tipo_item) selected @endif>
+                                        {{ $tipo -> tipo}}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('rol_id_rol') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                            @error('tipo_item_id_tipo_item') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="rol_id_rol" class="form-label input-label me-2 mb-0">Ubicación:</label>
-                            <select id="rol_id_rol" name="rol_id_rol" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="ubicacion_id_ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
+                            <select id="ubicacion_id_ubicacion" name="ubicacion_id_ubicacion" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                                @foreach ($ubicaciones as $ubicacion)
+                                    <option value="{{ $ubicacion->id_ubicacion }}" 
+                                        @if (old('id_tipo_producto', $item->ubicacion_id_ubicacion) == $ubicacion->id_ubicacion) selected @endif>
+                                        {{ $ubicacion -> ubicacion}}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('rol_id_rol') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                            @error('ubicacion_id_ubicacion') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
                         </div>
 
                     </div> {{-- Fin Columna Izquierda --}}
@@ -83,12 +103,7 @@
             </form>
         </div>
     </div>
-    
-    {{---}}
 
-    ## Modal de Confirmación
-
-    {{-- 3. AÑADIR EL MODAL DE CONFIRMACIÓN --}}
     <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content custom1-card-style">
@@ -109,7 +124,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Lógica de toggle de contraseña (se mantiene igual)
             function setupPasswordToggle(toggleBtnId, passwordInputId) {
                 const toggleBtn = document.getElementById(toggleBtnId);
                 const passwordInput = document.getElementById(passwordInputId);
@@ -125,7 +139,6 @@
             setupPasswordToggle('togglePassword', 'password');
             setupPasswordToggle('togglePasswordConfirmation', 'password_confirmation');
 
-            // 4. LÓGICA DEL MODAL DE EDICIÓN
             const openConfirmationModalBtn = document.getElementById('openConfirmationModal');
             const confirmEditUserBtn = document.getElementById('confirmEditUser'); // ID del botón dentro del modal
             const editUserForm = document.getElementById('editUserForm'); // ID del formulario principal

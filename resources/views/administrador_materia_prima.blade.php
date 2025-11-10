@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="d-grid gap-2 mt-auto"> 
-                        <a href="{{ route('administrador.items.create') }}" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.proveedores.create') }}" class="btn btn-modificar-perfil">
                             Registrar Nuevo Proveedor
                         </a>
                     </div>

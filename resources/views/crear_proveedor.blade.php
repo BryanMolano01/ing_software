@@ -10,7 +10,6 @@
     <x-app-navbar :links="$adminLinks" />
 
     <div class="container mt-4">
-        {{-- Mensaje de éxito si existe (después de la redirección) --}}
         @if (session('success'))
             <div class="alert alert-success text-center">
                 {{ session('success') }}
@@ -21,15 +20,11 @@
         
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
             
-            {{-- 1. ACCIÓN DEL FORMULARIO CONFIGURADA --}}
-            <form id="createUserForm" action="{{ route('administrador.proveedor.store') }}" method="POST">
+            <form id="createUserForm" action="{{ route('administrador.proveedores.store') }}" method="POST">
                 @csrf
                 
                 <div class="row">
-                    {{-- COLUMNA IZQUIERDA: CENTRADA VERTICALMENTE --}}
                     <div class="col-md-7 d-flex flex-column justify-content-center">
-                        
-                        {{-- Campo de Nombre (Coincide con 'nombre' del controlador) --}}
                         <div class="mb-4 form-group-with-icon">
                             <label for="nombre" class="form-label input-label">Nombre:</label>
                             <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="" required />
@@ -37,9 +32,13 @@
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-                        {{-- Aquí irían otros campos del formulario (ej. email, contraseña, etc.) --}}
-                        
+                        <div class="mb-4 form-group-with-icon">
+                            <label for="telefono" class="form-label input-label">Telefono:</label>
+                            <input id="telefono" class="form-control login-input transparent-input-bottom-border" type="number" name="telefono" value="{{ old('telefono') }}" placeholder="" required />
+                            @error('telefono')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     
                     {{-- COLUMNA DERECHA: Imagen de Perfil y Botón --}}

@@ -38,16 +38,15 @@
                             @enderror
                         </div>
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="medida" class="form-label input-label me-2 mb-0">Medida:</label>
-                            <select id="medida_id_medida" name="medida_id_medida" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="unidad_materia_prima_id_unidad_materia_prima" class="form-label input-label me-2 mb-0">Medida:</label>
+                            <select id="unidad_materia_prima_id_unidad_materia_prima" name="unidad_materia_prima_id_unidad_materia_prima" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione una medida</option> {{-- Placeholder --}}
-                                
                                 {{-- Bucle para cargar los roles reales --}}
-                                @isset($roles)
-                                    @foreach ($roles as $rol)
-                                        <option value="{{ $rol->id_rol }}" {{ old('rol_id_rol') == $rol->id_rol ? 'selected' : '' }}>
-                                            {{ $rol->rol }}
+                                @isset($medidas)
+                                    @foreach ($medidas as $medida)
+                                        <option value="{{$medida->id_unidad_materia_prima}}" {{ old('id_unidad_materia_prima') == $medida->id_unidad_materia_prima ? 'selected' : '' }}>
+                                            {{ $medida->unidad }}
                                         </option>
                                     @endforeach
                                 @endisset
@@ -59,16 +58,16 @@
                         {{-- En crear_usuario.blade.php, dentro de la columna izquierda --}}
                         {{-- Campo de Rol (Coincide con 'rol_id_rol' del controlador) --}}
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
+                            <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
                             <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione un proveedor</option> {{-- Placeholder --}}
                                 
                                 {{-- Bucle para cargar los roles reales --}}
-                                @isset($roles)
-                                    @foreach ($roles as $rol)
-                                        <option value="{{ $rol->id_rol }}" {{ old('rol_id_rol') == $rol->id_rol ? 'selected' : '' }}>
-                                            {{ $rol->rol }}
+                                @isset($proveedores)
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id_proveedor }}" {{ old('id_proveedor') == $proveedor->id_proveedor ? 'selected' : '' }}>
+                                            {{ $proveedor->nombre }}
                                         </option>
                                     @endforeach
                                 @endisset
@@ -79,16 +78,16 @@
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="tipo" class="form-label input-label me-2 mb-0">Tipo:</label>
-                            <select id="item_id_item" name="item_id_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
+                            <label for="tipo_item_id_tipo_item" class="form-label input-label me-2 mb-0">Tipo:</label>
+                            <select id="tipo_item_id_tipo_item" name="tipo_item_id_tipo_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione un tipo</option> {{-- Placeholder --}}
                                 
                                 {{-- Bucle para cargar los roles reales --}}
-                                @isset($roles)
-                                    @foreach ($roles as $rol)
-                                        <option value="{{ $rol->id_rol }}" {{ old('rol_id_rol') == $rol->id_rol ? 'selected' : '' }}>
-                                            {{ $rol->rol }}
+                                @isset($tipo_items)
+                                    @foreach ($tipo_items as $tipo)
+                                        <option value="{{ $tipo->id_tipo_item }}" {{ old('id_tipo_item') == $tipo->id_tipo_item ? 'selected' : '' }}>
+                                            {{ $tipo->tipo}}
                                         </option>
                                     @endforeach
                                 @endisset
@@ -99,16 +98,16 @@
                         </div>
 
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
-                            <label for="ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
+                            <label for="ubicacion_id_ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
                             <select id="ubicacion_id_ubicacion" name="ubicacion_id_ubicacion" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
                                 
                                 <option value="" disabled selected>Seleccione una ubicación</option> {{-- Placeholder --}}
                                 
                                 {{-- Bucle para cargar los roles reales --}}
-                                @isset($roles)
-                                    @foreach ($roles as $rol)
-                                        <option value="{{ $rol->id_rol }}" {{ old('rol_id_rol') == $rol->id_rol ? 'selected' : '' }}>
-                                            {{ $rol->rol }}
+                                @isset($ubicaciones)
+                                    @foreach ($ubicaciones as $ubicacion)
+                                        <option value="{{ $ubicacion->id_ubicacion }}" {{ old('id_ubicacion') == $ubicacion->id_ubicacion ? 'selected' : '' }}>
+                                            {{ $ubicacion->ubicacion }}
                                         </option>
                                     @endforeach
                                 @endisset
