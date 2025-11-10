@@ -173,7 +173,9 @@
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
                         @if(isset($proveedores) && count($proveedores) > 0)
                             @foreach ($proveedores as $proveedor)
-                                <div class="access-card mb-2 p-3">
+                                <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
+                                    style="cursor: pointer;" 
+                                    onclick="window.location='{{ route('administrador.proveedor.edit', $items->id_item) }}'"> 
                                     <strong class="log-username">
                                         Nombre: 
                                         {{ $proveedor->nombre?? 'N/A' }} 

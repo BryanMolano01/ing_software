@@ -20,6 +20,13 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
     min-height: 300px; /* Altura mínima para que se vean bien al inicio */
 }
+.custom-card-style-edit{
+    background-color: white !important; /* Fondo claro similar al login-card */
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    min-height: 200px;
+}
 
 .custom-card-style-create-insumo {
     background-color: white !important; /* Fondo claro similar al login-card */

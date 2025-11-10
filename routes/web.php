@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
 
-    //Route::view('/proveedor/crear', 'crear_proveedor')->name('proveedor.create');
+    Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
     // store proveedor
     //Route::post('/proveedor', [ProveedorController::class, 'store'])->name('proveedor.store');
 });
