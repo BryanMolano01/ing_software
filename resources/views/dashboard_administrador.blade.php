@@ -23,23 +23,17 @@
         
         {{-- FILA PRINCIPAL DE 3 COLUMNAS --}}
         <div class="row">
-
-            {{-- Columna 1: USUARIOS (col-md-4) --}}
-            {{-- En dashboard_administrador.blade.php (Columna 1: USUARIOS) --}}
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Usuarios</h5>
                     
-                    {{-- INICIO: CONTENEDOR DE LA LISTA DE USUARIOS CON SCROLL --}}
                     <div class="user-list-container flex-grow-1 overflow-auto mb-3">
-                        
-                        {{-- Inicia el Bucle para mostrar los usuarios usando la variable $usuarios --}}
                         @if(isset($usuarios) && count($usuarios) > 0)
                             @foreach ($usuarios as $usuario)
                             {{-- Tarjeta Individual del Usuario --}}
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
-                                onclick="window.location='{{ route('administrador.usuarios.editar', $usuario->id_usuario) }}'"> 
+                                onclick="window.location='{{ route('administrador.usuarios.create', $usuario->id_usuario) }}'"> 
                                 {{-- Información del Usuario --}}
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
@@ -191,7 +185,7 @@
 
                     {{-- 3. Botón Modificar Perfil --}}
                     <div class="d-grid mt-auto w-100">
-                        <a href="{{ route('administrador.usuarios.editar', Auth::user()->id_usuario) }}" class="btn btn-modificar-perfil">
+                        <a href="{{ route('administrador.usuarios.edit', Auth::user()->id_usuario) }}" class="btn btn-modificar-perfil">
                             Modificar Perfil
                         </a>
                     </div>
