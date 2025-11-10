@@ -143,8 +143,8 @@ body {
 /* Contenedor de la lista para permitir el scroll si hay muchos usuarios */
 .user-list-container {
     padding-right: 15px; /* Espacio para que la barra de scroll no se pegue */
-    overflow-y: auto;
-    max-height: 100%; /* Asegura que no se salga de la tarjeta */
+    overflow-y: scroll;
+    max-height: 500px; /* Asegura que no se salga de la tarjeta */
 }
 
 /* Tarjeta individual del usuario */
@@ -206,8 +206,8 @@ body {
 /* Contenedor de la lista para permitir el scroll */
 .access-list-container {
     padding-right: 15px; /* Espacio para que la barra de scroll no se pegue */
-    overflow-y: auto;
-    max-height: 100%;
+    overflow-y: scroll;
+    max-height: 500px; 
 }
 
 /* Tarjeta individual del registro de acceso */

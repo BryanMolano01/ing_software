@@ -178,6 +178,10 @@
                                         Nombre: 
                                         {{ $proveedor->nombre?? 'N/A' }} 
                                     </strong>
+                                    <strong class="log-username">
+                                        Telefono: 
+                                        {{ $proveedor->telefono?? 'N/A' }} 
+                                    </strong>
                                 </div>
                             @endforeach
                         @else
