@@ -32,7 +32,7 @@
                             @foreach ($usuarios as $usuario)
                             <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                 style="cursor: pointer;" 
-                                onclick="window.location='{{ route('administrador.usuarios.editar', $usuario->id_usuario) }}'"> 
+                                onclick="window.location='{{ route('administrador.usuarios.edit', $usuario->id_usuario) }}'"> 
                                 <div>
                                     <strong class="user-name">{{ $usuario -> nombre }}</strong> 
                                     <div class="user-role small">Rol: {{ $usuario -> rol -> rol}}</div>
@@ -101,11 +101,7 @@
                         @else
                             <p class="text-center text-muted mt-5">No hay usuarios registrados.</p>
                         @endif
-                        
                     </div>
-                    {{-- FIN: CONTENEDOR DE LA LISTA DE USUARIOS --}}
-                    
-                    {{-- Botón CREAR USUARIO --}}
                     <div class="d-grid gap-2 mt-auto"> 
                         <a href="{{ route('administrador.usuarios.create') }}" class="btn btn-modificar-perfil">
                             Crear Usuario

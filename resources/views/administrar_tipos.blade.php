@@ -28,20 +28,20 @@
             <div class="col-md-3 mb-4">
                 <div class="card p-4 custom-card-style-create d-flex flex-column align-items-center">
                     <h5 class="card-title w-100" style="color: #a0522d;">Creación de tipo</h5>
-                    <form id="createUserForm" action="{{ route('administrador.proveedores.store') }}" method="POST">
+                    <form id="createUserForm" action="{{ route('administrador.tipoItem.store') }}" method="POST">
                         @csrf
                         <div class="w-100 text-left mb-4">
                             <div class="mb-4 form-group-with-icon">
-                                <label for="nombre" class="form-label input-label">Tipo:</label>
-                                <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="" required />
-                                @error('nombre')
+                                <label for="tipo" class="form-label input-label">Tipo:</label>
+                                <input id="tipo" class="form-control login-input transparent-input-bottom-border" type="text" name="tipo" value="{{ old('tipo') }}" placeholder="" required />
+                                @error('tipo')
                                     <div class="text-danger small mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="d-grid gap-2 mt-auto"> 
-                                <a href="{{ route('administrador.proveedores.create') }}" class="btn btn-modificar-perfil">
+                                <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
                                     Crear
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -62,24 +62,15 @@
                             <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
                     </div>
-                    <?php 
-                        // 1. Define un array de datos de ejemplo con la estructura simplificada que necesitas mostrar
-                        $Items = [
-                            ['id' => 1, 'tipo' => 'Frutas'],
-                            ['id' => 2, 'tipo' => 'Verduras'],
-                            ['id' => 3, 'tipo' => 'Lácteos'],
-                            ['id' => 4, 'tipo' => 'Carnes'],
-                        ];
-                    ?>
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        @if(isset($Items) && count($Items) > 0)
+                        @if(isset($tipos) && count($tipos) > 0)
                             {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
-                            @foreach ($Items as $items)
+                            @foreach ($tipos as $tipo)
                                 {{-- Tarjeta Individual del Acceso --}}
                                 <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
                                     style="cursor: pointer;" 
-                                    onclick="window.location='{{ route('administrador.tipos.edit') }}'"> 
-                                    <strong class="log-username text-muted">Tipo: {{ $items['tipo'] }} (Ejemplo)</strong>
+                                    onclick="window.location='{{ route('administrador.tipoItem.edit', $tipo -> id_tipo_item) }}'"> 
+                                    <strong class="log-username text-muted">Tipo: {{ $tipo -> tipo }}</strong>
                                 </div>
                             @endforeach
                         @endif
@@ -93,5 +84,98 @@
         </div>
 
     </div>
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content custom1-card-style p-4">
+                <div class="modal-body text-center">
+                    <img src="{{ asset('images/Alerta Triangulo.png') }}" alt="Advertencia" class="mb-3" style="width: 60px;">
+                    <h5 class="mb-4" style="color: #622D16;">¿Está seguro que quiere registrar este tipo?</h5>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="btn btn-custom-action" id="confirmCreateUser">Registrar tipo</button>
+                        <button type="button" class="btn btn-custom-cancel" data-bs-dismiss="modal">Volver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function setupPasswordToggle(toggleBtnId, passwordInputId) {
+                const toggleBtn = document.getElementById(toggleBtnId);
+                const passwordInput = document.getElementById(passwordInputId);
+
+                if (toggleBtn && passwordInput) {
+                    toggleBtn.addEventListener('click', function(e) {
+                        e.preventDefault(); 
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+                    });
+                }
+            }
+
+            setupPasswordToggle('togglePassword', 'password');
+            setupPasswordToggle('togglePasswordConfirmation', 'password_confirmation');
+
+            // 🌟 NUEVO CÓDIGO JAVASCRIPT PARA EL MODAL 🌟
+            const openConfirmationModalBtn = document.getElementById('openConfirmationModal');
+            const confirmCreateUserBtn = document.getElementById('confirmCreateUser');
+            const createUserForm = document.getElementById('createUserForm');
+
+            if (openConfirmationModalBtn && confirmCreateUserBtn && createUserForm) {
+                openConfirmationModalBtn.addEventListener('click', function() {
+                    var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                    myModal.show();
+                });
+
+                confirmCreateUserBtn.addEventListener('click', function() {
+                    var myModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
+                    if (myModal) {
+                        myModal.hide();
+                    }
+                    createUserForm.submit();
+                });
+            }
+        });
+    </script>
+
+    <style>
+        .custom1-card-style {
+            background-color: #F8F4F0; /* Color de fondo claro */
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            border: none;
+
+            padding: 30px 20px !important;
+        }
+
+        .btn-custom-action {
+            background-color: #FB9F40; /* Naranja para crear usuario */
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 25px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom-action:hover {
+            background-color: #e58d35; /* Naranja más oscuro al pasar el mouse */
+            color: white;
+        }
+
+        .btn-custom-cancel {
+            background-color: #f0f0f0; /* Gris claro para volver */
+            color: #622D16;
+            border: 1px solid #d0d0d0;
+            border-radius: 20px;
+            padding: 10px 25px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom-cancel:hover {
+            background-color: #e0e0e0; /* Gris más oscuro al pasar el mouse */
+            color: #622D16;
+        }
+    </style>
 
 </x-app-layout>

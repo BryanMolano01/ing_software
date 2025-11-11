@@ -67,8 +67,6 @@
                                         </li>
                                     </ul>
                                 @endforeach
-                            @else
-                                <li><a class="dropdown-item" href="#">No hay tipos disponibles</a></li>
                             @endif
                         </div>
                         

@@ -16,26 +16,32 @@
             </div>
         @endif
 
-        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Ubicacion</h2> 
+        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Ubicación</h2> 
         
-        <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
+        <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 500px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
-            <form id="editProvForm"  method="POST">
+            <form id="editUserForm" action="{{ route('administrador.ubicacion.update', $ubicacion->id_ubicacion) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row justify-content-center">
                     <div class="col-md-7 d-flex flex-column justify-content-center">
                         <div class="mb-4 form-group-with-icon">
-                            <label for="nombre" class="form-label input-label">Ubicacion:</label>
-                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="" required />
-                            @error('nombre')
+                            <label for="ubicacion" class="form-label input-label">Ubicación: </label>
+                            <input id="ubicacion" class="form-control login-input transparent-input-bottom-border" type="text" 
+                                name="ubicacion" value="{{ old('ubicacion', $ubicacion->ubicacion) }}" required />
+                            @error('ubicacion')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="d-grid gap-2 mt-auto"> 
                             <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
-                                Editar
+                                Guardar Cambios
                             </button>
+                        </div>
+                        <div class="col-12 d-flex justify-content-start">
+                            <a href="{{ route('administrador.ubicacion.index') }}" class="btn btn-modificar-perfil-abajo">
+                                Volver
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +55,7 @@
             <div class="modal-body text-center p-4">
                 <img src="{{ asset('images/Alerta Triangulo.png') }}" alt="Advertencia" class="mb-2" style="width: 55px;">
                 <h5 class="mb-3 fw-semibold" style="color: #622D16;">
-                ¿Está seguro que quiere guardar los cambios de esta ubicacion?
+                ¿Está seguro que quiere guardar los cambios de esta ubicación?
                 </h5>
                 <div class="d-flex justify-content-center gap-3 mt-3 mb-2">
                 <button type="button" class="btn btn-custom-action" id="confirmEditUser">Guardar Cambios</button>

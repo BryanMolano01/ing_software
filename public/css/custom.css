@@ -17,15 +17,14 @@ body {
     background-color: white !important; /* Fondo claro similar al login-card */
     border: none;
     border-radius: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    min-height: 300px; /* Altura mínima para que se vean bien al inicio */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave 
+    min-height: 300px; /* Altura mínima para que se vean .custom-card-style-e*/
 }
-.custom-card-style-edit{
+.custom-card-style-edit {
     background-color: white !important; /* Fondo claro similar al login-card */
     border: none;
     border-radius: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    min-height: 200px;
 }
 
 .custom-card-style-create-insumo {
@@ -121,26 +120,39 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-modificar-perfil:hover {
-    background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
-    color: white !important;
-}
-
-.btn-manejar {
+.btn-modificar-perfil-abajo {
     /* Color de fondo: Naranja pálido del mockup */
     background-color: #ffe0b2 !important; 
     color: #622D16 !important; /* Color de texto café */
     border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
     border-radius: 0.5rem;
+    padding: 0.75rem 3;
     font-size: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 0.75rem 25%;
 }
 
-.btn-manejar:hover {
+.btn-modificar-perfil-create {
+    /* Color de fondo: Naranja pálido del mockup */
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important; /* Color de texto café */
+    border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
+    border-radius: 0.5rem;
+    margin-top: 15px;
+    padding: 0.75rem 4;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-modificar-perfil:hover {
     background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
     color: white !important;
 }
+
+.btn-modificar-perfil-abajo:hover {
+    background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
+    color: white !important;
+}
+
 /* --- Ajuste para el Perfil de Mi Usuario --- */
 
 /* Ajustamos el contenedor del perfil para que la línea del borde sea marrón como en el mockup. */
@@ -253,13 +265,23 @@ body {
     margin-bottom: 0.25rem;
 }
 
-.log-username-telefono {
-    color: #31170c; /* Color terracota para el nombre de usuario */
-    font-size: 1.1em;
-    display: block; /* Ocupa su propia línea */
-    margin-bottom: 0.25rem;
-}
 
 .log-details {
     color: #6c757d; /* Gris para la hora y fecha */
+}
+
+.btn-manejar {
+    /* Color de fondo: Naranja pálido del mockup */
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important; /* Color de texto café */
+    border: 1px solid #FFB266 !important; /* Borde naranja (opcional, pero se ve bien) */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 25%;
+}
+
+.btn-manejar:hover {
+    background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
+    color: white !important;
 }

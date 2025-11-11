@@ -4,17 +4,17 @@
         
         <div class="d-flex justify-content-center state-icons-container">
             <div class="state-item mx-4 text-center">
-                <a href="{{ route('administrador.tipos.admin') }}" class="btn btn-manejar">
+                <a href="{{ route('administrador.tipoItem.index') }}" class="btn btn-manejar">
                     Tipos
                 </a>
             </div>
             <div class="state-item mx-4 text-center">
-                <a href="{{ route('administrador.ubicaciones.admin') }}" class="btn btn-manejar">
+                <a href="{{ route('administrador.ubicacion.index') }}" class="btn btn-manejar">
                     Ubicaciones
                 </a>
             </div>
             <div class="state-item mx-5 text-center">
-                <a href="{{ route('administrador.medidas.admin') }}" class="btn btn-manejar">
+                <a href="{{ route('administrador.medida.index') }}" class="btn btn-manejar">
                     Medidas
                 </a>
             </div>

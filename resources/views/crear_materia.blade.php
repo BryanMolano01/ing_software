@@ -122,7 +122,7 @@
                         <div class="profile-picture-container mb-4">
                             <img src="{{ asset('images/Foto PerfilCU.png') }}" alt="Foto de Perfil" class="img-fluid profile-picture-placeholder">
                         </div>
-                        <button type="button" class="btn btn-login btn-create-user-form" id="openConfirmationModal">
+                        <button type="button" class="btn btn-modificar-perfil-create" id="openConfirmationModal">
                             Registrar insumo
                         </button>
                     </div> 

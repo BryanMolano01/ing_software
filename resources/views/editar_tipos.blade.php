@@ -18,26 +18,35 @@
 
         <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Tipos</h2> 
         
-        <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
+        <div class="card p-4 custom-card-style-edit mx-auto" style="max-width: 500px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
-            <form id="editProvForm"  method="POST">
+            <form id="editUserForm" action="{{ route('administrador.tipoItem.update', $tipoItem->id_tipo_item) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row justify-content-center">
                     <div class="col-md-7 d-flex flex-column justify-content-center">
                         <div class="mb-4 form-group-with-icon">
-                            <label for="nombre" class="form-label input-label">Tipo:</label>
-                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="" required />
-                            @error('nombre')
+                            <label for="tipo" class="form-label input-label">Tipo: </label>
+                            <input id="tipo" class="form-control login-input transparent-input-bottom-border" type="text" 
+                                name="tipo" value="{{ old('tipo', $tipoItem->tipo) }}" required />
+                            @error('tipo')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="d-grid gap-2 mt-auto"> 
                             <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
-                                Editar
+                                Guardar Cambios
                             </button>
                         </div>
+                        <div class="col-12 d-flex justify-content-start">
+                        <a href="{{ route('administrador.tipoItem.index') }}" class="btn btn-modificar-perfil-abajo">
+                            Volver
+                        </a>
                     </div>
+                        
+                    </div>
+                    
+            
                 </div>
             </form>
         </div>

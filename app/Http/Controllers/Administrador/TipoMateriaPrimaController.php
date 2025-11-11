@@ -54,12 +54,9 @@ class TipoMateriaPrimaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TipoItem $tipo)
+    public function edit(TipoItem $tipoItem)
     {
-        
-
-        return view('editar_tipos', compact('tipo'));
-
+        return view('editar_tipos', compact('tipoItem'));
     }
 
     /**
@@ -70,7 +67,6 @@ class TipoMateriaPrimaController extends Controller
         $validated=$request->validated();
         $tipoItem->update($validated);
         return redirect()->route('administrador.tipoItem.index')->with('success', 'Tipo actualizado correctamente');
-
     }
 
     /**

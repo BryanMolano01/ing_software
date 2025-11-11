@@ -41,11 +41,9 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     
     // usuarios
     Route::resource('usuarios', UsuarioController::class)->except(['show']);
+
     Route::patch('/usuarios/{usuario}/estado', [UsuarioController::class, 'cambiarEstado'])
         ->name('usuarios.cambiarEstado');
-    Route::get('/usuarios/editar/{usuario}', [UsuarioController::class, 'edit'])
-        ->name('usuarios.editar');
-    
     // materia prima (las rutas ahora usan "items")
     Route::resource('items', MateriaPrimaController::class)->except(['show']);
     // GET    /administrador/items              -> index   (administrador.items.index)
@@ -73,14 +71,6 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // RUTAS QUE HAY QUE MODIFICAR/ELIMINAR DESPUES
     Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
 
-    Route::view('/tipos/admin', 'administrar_tipos')->name('tipos.admin');
-    Route::view('/tipos/edit', 'editar_tipos')->name('tipos.edit');
-
-    Route::view('/ubicaciones/admin', 'administrar_ubicaciones')->name('ubicaciones.admin');
-    Route::view('/ubicaciones/edit', 'editar_ubicaciones')->name('ubicaciones.edit');
-
-    Route::view('/medidas/admin', 'administrar_medidas')->name('medidas.admin');
-    Route::view('/medidas/edit', 'editar_medidas')->name('medidas.edit');
 
     Route::view('/recetas/admin', 'administrar_recetas')->name('recetas.admin');
     Route::view('/recetas/edit', 'editar_recetas')->name('recetas.edit');

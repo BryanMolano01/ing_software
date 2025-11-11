@@ -51,21 +51,21 @@ class UnidadMedidaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Unidad_materia_prima $unidad)
+    public function edit(Unidad_materia_prima $medida)
     {
         
 
-        return view('editar_medidas', compact('unidad'));
+        return view('editar_medidas', compact('medida'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditUnidadMedidaRequest $request, Unidad_materia_prima $unidad)
+    public function update(EditUnidadMedidaRequest $request, Unidad_materia_prima $medida)
     {
         $validated=$request->validated();
-        $unidad->update($validated);
+        $medida->update($validated);
         return redirect()->route('administrador.medida.index')->with('success', 'unidad de medida actualizada correctamente');
 
     }

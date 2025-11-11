@@ -20,14 +20,14 @@
         
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
-            <form id="editProvForm"  method="POST">
+            <form id="editUserForm"  method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row">
                     <div class="col-md-7 d-flex flex-column justify-content-center">
                         <div class="mb-4 form-group-with-icon">
                             <label for="nombre" class="form-label input-label">Nombre:</label>
-                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre') }}" placeholder="" required />
+                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre', $usuario->nombre) }}" placeholder="" required />
                             @error('nombre')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
