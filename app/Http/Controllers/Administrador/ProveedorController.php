@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrador;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditProveedorRequest;
 use App\Http\Requests\StoreProveedorRequest;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
@@ -48,17 +49,21 @@ class ProveedorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Proveedor $proveedor)
     {
-        //
+        return view('editar_proveedor', compact('proveedor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditProveedorRequest $request, Proveedor $proveedor)
     {
-        //
+        $validated=$request->validated();
+
+        $proveedor = Proveedor::update($validated);
+        return redirect()->route('administrador.items.index')->with('success', 'proveedor actualizado correctamente');
+
     }
 
     /**

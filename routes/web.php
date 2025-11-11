@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrador\ProductoController;
 use App\Http\Controllers\Administrador\MateriaPrimaController;
 use App\Http\Controllers\Administrador\ProveedorController;
 use App\Http\Controllers\Administrador\TipoMateriaPrimaController;
@@ -66,7 +67,8 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     //medidas
     Route::resource('medida', UnidadMedidaController::class)->except(['show']);
 
-
+    //producto
+    Route::resource('producto', ProductoController::class)->except(['show']);
 
     // RUTAS QUE HAY QUE MODIFICAR/ELIMINAR DESPUES
     Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
