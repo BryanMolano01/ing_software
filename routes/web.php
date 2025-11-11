@@ -2,8 +2,14 @@
 
 use App\Http\Controllers\Administrador\MateriaPrimaController;
 use App\Http\Controllers\Administrador\ProveedorController;
+use App\Http\Controllers\Administrador\TipoMateriaPrimaController;
+use App\Http\Controllers\Administrador\UbicacionController;
+use App\Http\Controllers\Administrador\UnidadMedidaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\TipoItem;
+use App\Models\Ubicacion;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Administrador\UsuarioController;
 
@@ -55,6 +61,14 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
+    //tipo de materia prima
+    Route::resource('tipoItem', TipoMateriaPrimaController::class)->except(['show']);
+    //ubicacion
+    Route::resource('ubicacion', UbicacionController::class)->except(['show']);
+    //medidas
+    Route::resource('medida', UnidadMedidaController::class)->except(['show']);
+
+
 
     // RUTAS QUE HAY QUE MODIFICAR/ELIMINAR DESPUES
     Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
