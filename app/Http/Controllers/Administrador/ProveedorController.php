@@ -73,4 +73,23 @@ class ProveedorController extends Controller
     {
         //
     }
+    public function busquedaAjax(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+
+        if (empty($searchTerm)) {
+            $proveedores = collect([]); 
+        } else {
+            $proveedores = Proveedor::whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
+                ->orderBy('nombre', 'asc')
+                ->get();
+        }
+
+        $html = view('partials.proveedores_list', ['proveedores' => $proveedores])->render();
+
+        return response()->json([
+            'html' => $html,
+            'count' => $proveedores->count()
+        ]);
+    }
 }
