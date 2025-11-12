@@ -19,6 +19,7 @@ class Producto extends Model
         'tamano_producto_id_tamano_producto',
         'nombre',
         'precio',
+        'descripcion'
     ];
 
     public function estadoProducto()

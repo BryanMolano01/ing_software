@@ -76,4 +76,23 @@ class TipoMateriaPrimaController extends Controller
     {
         //
     }
+     public function busquedaAjax(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+
+        if (empty($searchTerm)) {
+            $tipos = collect([]); 
+        } else {
+            $tipos = TipoItem::whereRaw('LOWER(tipo) LIKE ?', [strtolower($searchTerm) . '%'])
+                ->orderBy('tipo', 'asc')
+                ->get();
+        }
+
+        $html = view('partials.//', ['proveedores' => $tipos])->render();
+
+        return response()->json([
+            'html' => $html,
+            'count' => $tipos->count()
+        ]);
+    }
 }

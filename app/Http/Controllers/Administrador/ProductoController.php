@@ -69,7 +69,7 @@ class ProductoController extends Controller
     public function update(EditProductoRequest $request, Producto $producto)
     {
         $validated=$request->validated();
-        $producto = Producto::update($validated);
+        $producto->update($validated);
         return redirect()->route('administrador.producto.index')->with('success', 'Producto actualizado correctamente');
     }
 
@@ -79,5 +79,25 @@ class ProductoController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function busquedaAjax(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+
+        if (empty($searchTerm)) {
+            $productos = collect([]);
+        } else {
+            $productos = Producto::with(['tipoProducto', 'tamanoProducto', 'estadoProducto'])
+                ->whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
+                ->orderBy('nombre', 'asc')
+                ->get();
+        }
+
+        $html = view('partials.//', ['productos' => $productos])->render();
+
+        return response()->json([
+            'html' => $html,
+            'count' => $productos->count()
+        ]);
     }
 }

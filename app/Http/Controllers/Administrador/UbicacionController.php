@@ -77,4 +77,24 @@ class UbicacionController extends Controller
     {
         //
     }
+
+     public function busquedaAjax(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+
+        if (empty($searchTerm)) {
+            $ubicaciones = collect([]); 
+        } else {
+            $ubicaciones = Ubicacion::whereRaw('LOWER(ubicacion) LIKE ?', [strtolower($searchTerm) . '%'])
+                ->orderBy('ubicacion', 'asc')
+                ->get();
+        }
+
+        $html = view('partials.//', ['proveedores' => $ubicaciones])->render();
+
+        return response()->json([
+            'html' => $html,
+            'count' => $ubicaciones->count()
+        ]);
+    }
 }

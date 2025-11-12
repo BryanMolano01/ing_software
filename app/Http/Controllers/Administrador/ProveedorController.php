@@ -61,7 +61,7 @@ class ProveedorController extends Controller
     {
         $validated=$request->validated();
 
-        $proveedor = Proveedor::update($validated);
+        $proveedor->update($validated);
         return redirect()->route('administrador.items.index')->with('success', 'proveedor actualizado correctamente');
 
     }
@@ -85,7 +85,7 @@ class ProveedorController extends Controller
                 ->get();
         }
 
-        $html = view('partials.proveedores_list', ['proveedores' => $proveedores])->render();
+        $html = view('partials.access_list_proveedor', ['proveedores' => $proveedores])->render();
 
         return response()->json([
             'html' => $html,

@@ -77,7 +77,17 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     Route::view('/recetas/admin', 'administrar_recetas')->name('recetas.admin');
     Route::view('/recetas/edit', 'editar_recetas')->name('recetas.edit');
 
-    
+    //ajax
+    Route::get('/producto/buscar', [ProductoController::class, 'busquedaAjax'])
+        ->name('producto.buscar');
+    Route::get('/ubicacion/buscar', [UbicacionController::class, 'busquedaAjax'])
+        ->name('ubicacion.buscar');
+    Route::get('/tipoItem/buscar', [TipoMateriaPrimaController::class, 'busquedaAjax'])
+        ->name('tipoItem.buscar');
+    Route::get('/proveedor/buscar', [ProveedorController::class, 'busquedaAjax'])
+        ->name('proveedor.buscar');
+    Route::get('/medida/buscar', [UnidadMedidaController::class, 'busquedaAjax'])
+        ->name('medida.buscar');
     // store proveedor
     //Route::post('/proveedor', [ProveedorController::class, 'store'])->name('proveedor.store');
 });

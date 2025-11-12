@@ -77,4 +77,23 @@ class UnidadMedidaController extends Controller
     {
         //
     }
+    public function busquedaAjax(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+
+        if (empty($searchTerm)) {
+            $unidades = collect([]); 
+        } else {
+            $unidades = Unidad_materia_prima::whereRaw('LOWER(unidad) LIKE ?', [strtolower($searchTerm) . '%'])
+                ->orderBy('tipo', 'asc')
+                ->get();
+        }
+
+        $html = view('partials.//', ['proveedores' => $unidades])->render();
+
+        return response()->json([
+            'html' => $html,
+            'count' => $unidades->count()
+        ]);
+    }
 }
