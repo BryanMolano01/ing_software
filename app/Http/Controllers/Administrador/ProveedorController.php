@@ -49,19 +49,19 @@ class ProveedorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Proveedor $proveedor)
+    public function edit(Proveedor $proveedore)
     {
-        return view('editar_proveedor', compact('proveedor'));
+        return view('editar_proveedor', compact('proveedore'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditProveedorRequest $request, Proveedor $proveedor)
+    public function update(EditProveedorRequest $request, Proveedor $proveedore)
     {
         $validated=$request->validated();
 
-        $proveedor->update($validated);
+        $proveedore->update($validated);
         return redirect()->route('administrador.items.index')->with('success', 'proveedor actualizado correctamente');
 
     }
@@ -85,7 +85,7 @@ class ProveedorController extends Controller
                 ->get();
         }
 
-        $html = view('partials.access_list_proveedor', ['proveedores' => $proveedores])->render();
+        $html = view('partials.proveedor_buscar', ['proveedores' => $proveedores])->render();
 
         return response()->json([
             'html' => $html,

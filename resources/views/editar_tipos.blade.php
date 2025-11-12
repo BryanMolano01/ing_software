@@ -39,11 +39,10 @@
                             </button>
                         </div>
                         <div class="col-12 d-flex justify-content-start">
-                        <a href="{{ route('administrador.tipoItem.index') }}" class="btn btn-modificar-perfil-abajo">
-                            Volver
-                        </a>
-                    </div>
-                        
+                            <a href="{{ route('administrador.tipoItem.index') }}" class="btn btn-modificar-perfil-abajo">
+                                Volver
+                            </a>
+                        </div>
                     </div>
                     
             

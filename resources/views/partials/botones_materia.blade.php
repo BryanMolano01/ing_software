@@ -19,7 +19,7 @@
                 </a>
             </div>
             <div class="state-item mx-2 text-center">
-                <a href="{{ route('administrador.recetas.admin') }}" class="btn btn-manejar">
+                <a href="{{ route('administrador.producto.index') }}" class="btn btn-manejar">
                     Recetas
                 </a>
             </div>

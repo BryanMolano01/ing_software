@@ -93,7 +93,7 @@ class ProductoController extends Controller
                 ->get();
         }
 
-        $html = view('partials.//', ['productos' => $productos])->render();
+        $html = view('partials.producto_buscar', ['productos' => $productos])->render();
 
         return response()->json([
             'html' => $html,

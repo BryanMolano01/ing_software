@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
     Route::patch('/usuarios/{usuario}/estado', [UsuarioController::class, 'cambiarEstado'])
         ->name('usuarios.cambiarEstado');
+
     // materia prima (las rutas ahora usan "items")
     Route::resource('items', MateriaPrimaController::class)->except(['show']);
     // GET    /administrador/items              -> index   (administrador.items.index)
@@ -55,8 +56,6 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // DELETE /administrador/items/{item}       -> destroy (administrador.items.destroy)
     
     // busqueda de logs
-    Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])
-        ->name('access.search');
     
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
@@ -66,30 +65,23 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     Route::resource('ubicacion', UbicacionController::class)->except(['show']);
     //medidas
     Route::resource('medida', UnidadMedidaController::class)->except(['show']);
-
     //producto
     Route::resource('producto', ProductoController::class)->except(['show']);
 
-    // RUTAS QUE HAY QUE MODIFICAR/ELIMINAR DESPUES
-    Route::view('/proveedor/crear', 'editar_proveedor')->name('proveedor.edit');
-
-
-    Route::view('/recetas/admin', 'administrar_recetas')->name('recetas.admin');
-    Route::view('/recetas/edit', 'editar_recetas')->name('recetas.edit');
-
     //ajax
+    Route::get('/access-search', [UsuarioController::class, 'searchAccessLogs'])
+        ->name('access.search');
+    Route::get('/proveedor/buscar', [ProveedorController::class, 'busquedaAjax'])
+        ->name('proveedor.buscar');
     Route::get('/producto/buscar', [ProductoController::class, 'busquedaAjax'])
         ->name('producto.buscar');
     Route::get('/ubicacion/buscar', [UbicacionController::class, 'busquedaAjax'])
         ->name('ubicacion.buscar');
     Route::get('/tipoItem/buscar', [TipoMateriaPrimaController::class, 'busquedaAjax'])
         ->name('tipoItem.buscar');
-    Route::get('/proveedor/buscar', [ProveedorController::class, 'busquedaAjax'])
-        ->name('proveedor.buscar');
     Route::get('/medida/buscar', [UnidadMedidaController::class, 'busquedaAjax'])
         ->name('medida.buscar');
     // store proveedor
-    //Route::post('/proveedor', [ProveedorController::class, 'store'])->name('proveedor.store');
 });
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){

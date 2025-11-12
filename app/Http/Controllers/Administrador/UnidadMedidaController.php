@@ -85,11 +85,11 @@ class UnidadMedidaController extends Controller
             $unidades = collect([]); 
         } else {
             $unidades = Unidad_materia_prima::whereRaw('LOWER(unidad) LIKE ?', [strtolower($searchTerm) . '%'])
-                ->orderBy('tipo', 'asc')
+                ->orderBy('unidad', 'asc')
                 ->get();
         }
 
-        $html = view('partials.//', ['proveedores' => $unidades])->render();
+        $html = view('partials.medida_buscar', ['unidades' => $unidades])->render();
 
         return response()->json([
             'html' => $html,

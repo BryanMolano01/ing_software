@@ -90,7 +90,7 @@ class UbicacionController extends Controller
                 ->get();
         }
 
-        $html = view('partials.//', ['proveedores' => $ubicaciones])->render();
+        $html = view('partials.ubicacion_buscar', ['ubicaciones' => $ubicaciones])->render();
 
         return response()->json([
             'html' => $html,

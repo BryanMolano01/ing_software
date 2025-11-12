@@ -25,7 +25,7 @@ class StoreProductoRequest extends FormRequest
             'nombre' => 'required|string|max:45',
             'descripcion' => 'nullable|string|max:255',
             'precio' => 'required|integer|min:0',
-            //'estado_producto_id_estado_producto' => 'required|integer|exists:estado_producto,id_estado_producto',
+            'estado_producto_id_estado_producto' => 'required|integer|exists:estado_producto,id_estado_producto',
             'tipo_producto_id_tipo_producto' => 'required|integer|exists:tipo_producto,id_tipo_producto',
             'tamano_producto_id_tamano_producto' => 'required|integer|exists:tamano_producto,id_tamano_producto',
         ];
@@ -33,7 +33,6 @@ class StoreProductoRequest extends FormRequest
 
     /**
      * Get custom validation messages.
-     *
      * @return array<string, string>
      */
     public function messages(): array

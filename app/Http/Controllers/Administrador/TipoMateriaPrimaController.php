@@ -88,7 +88,7 @@ class TipoMateriaPrimaController extends Controller
                 ->get();
         }
 
-        $html = view('partials.//', ['proveedores' => $tipos])->render();
+        $html = view('partials.tipoItem_buscar', ['tipos' => $tipos])->render();
 
         return response()->json([
             'html' => $html,

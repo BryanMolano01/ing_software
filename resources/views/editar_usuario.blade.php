@@ -99,6 +99,11 @@
                             Guardar Cambios
                         </button>
                     </div> 
+                    <div class="col-12 d-flex justify-content-start">
+                        <a href="{{ route('administrador.usuarios.index') }}" class="btn btn-modificar-perfil-abajo">
+                            Volver
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>

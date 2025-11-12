@@ -20,21 +20,21 @@
         
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
-            <form id="editUserForm"  method="POST">
+            <form id="editUserForm" action="{{ route('administrador.proveedores.update', $proveedore->id_proveedor) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row">
                     <div class="col-md-7 d-flex flex-column justify-content-center">
                         <div class="mb-4 form-group-with-icon">
                             <label for="nombre" class="form-label input-label">Nombre:</label>
-                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" type="text" name="nombre" value="{{ old('nombre', $usuario->nombre) }}" placeholder="" required />
+                            <input id="nombre" class="form-control login-input transparent-input-bottom-border" name="nombre" value="{{ old('nombre', $proveedore->nombre) }}" placeholder="" required />
                             @error('nombre')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4 form-group-with-icon">
                             <label for="telefono" class="form-label input-label">Telefono:</label>
-                            <input id="telefono" class="form-control login-input transparent-input-bottom-border" type="number" name="telefono" value="{{ old('telefono') }}" placeholder="" required />
+                            <input id="telefono" class="form-control login-input transparent-input-bottom-border" name="telefono" value="{{ old('telefono', $proveedore->telefono) }}" placeholder="" required />
                             @error('telefono')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
@@ -46,10 +46,15 @@
                         <div class="profile-picture-container mb-4">
                             <img src="{{ asset('images/Foto PerfilCU.png') }}" alt="Foto de Perfil" class="img-fluid profile-picture-placeholder">
                         </div>
-                        <button type="button" class="btn btn-login btn-create-user-form" id="openConfirmationModal">
+                        <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
                             Guardar Cambios
                         </button>
                     </div> 
+                    <div class="col-12 d-flex justify-content-start">
+                        <a href="{{ route('administrador.items.index') }}" class="btn btn-modificar-perfil-abajo">
+                            Volver
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>

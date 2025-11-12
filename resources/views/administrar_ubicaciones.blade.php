@@ -59,21 +59,11 @@
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 <i class="fas fa-search"></i>
                             </span>
-                            <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
+                            <input type="text" id="searchInputUbicacion" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
                     </div>
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        @if(isset($ubicaciones) && count($ubicaciones) > 0)
-                            {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
-                            @foreach ($ubicaciones as $ubicacion)
-                                {{-- Tarjeta Individual del Acceso --}}
-                                <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
-                                    style="cursor: pointer;" 
-                                    onclick="window.location='{{ route('administrador.ubicacion.edit', $ubicacion -> id_ubicacion) }}'"> 
-                                    <strong class="log-username text-muted">Ubicación: {{ $ubicacion -> ubicacion }}</strong>
-                                </div>
-                            @endforeach
-                        @endif
+                        @include('partials.ubicacion_buscar', ['ubicaciones' => $ubicaciones])
                     </div>
                 </div>
             </div>
@@ -179,3 +169,25 @@
     </style>
 
 </x-app-layout>
+<script>
+    $(document).ready(function() {
+        // Captura el evento 'keyup' en el input de búsqueda
+        $('#searchInputUbicacion').on('keyup', function() {
+            var searchTerm = $(this).val(); // Obtiene el texto actual
+            $.ajax({
+                url: '{{ route('administrador.ubicacion.buscar') }}', // **Usamos la ruta definida en web.php**
+                method: 'GET',
+                data: {
+                    search: searchTerm
+                }, // Envía el término de búsqueda
+                success: function(response) {
+                    // ¡CLAVE! Reemplaza el contenido del DIV con id="accessListContainer"
+                    $('#accessListContainer').html(response.html); 
+                },
+                error: function(error) {
+                    console.error("Error en la búsqueda:", error);
+                }
+            });
+        });
+    });
+</script>

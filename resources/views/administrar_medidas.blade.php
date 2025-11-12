@@ -59,21 +59,11 @@
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 <i class="fas fa-search"></i>
                             </span>
-                            <input type="text" id="searchInputHistorial" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
+                            <input type="text" id="searchInputMedida" class="form-control custom-search-input-historial" placeholder="Buscar" aria-label="Buscar" style="border-color: #ff9800; box-shadow: none;">
                         </div>
                     </div>
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        @if(isset($unidades) && count($unidades) > 0)
-                            {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
-                            @foreach ($unidades as $unidad)
-                                {{-- Tarjeta Individual del Acceso --}}
-                                <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
-                                    style="cursor: pointer;" 
-                                    onclick="window.location='{{ route('administrador.medida.edit',$unidad -> id_unidad_materia_prima ) }}'"> 
-                                    <strong class="log-username text-muted">Unidad: {{ $unidad -> unidad}}</strong>
-                                </div>
-                            @endforeach
-                        @endif
+                        @include('partials.medida_buscar', ['unidades' => $unidades])
                     </div>
                 </div>
             </div>
@@ -179,3 +169,25 @@
     </style>
 
 </x-app-layout>
+<script>
+    $(document).ready(function() {
+        // Captura el evento 'keyup' en el input de búsqueda
+        $('#searchInputMedida').on('keyup', function() {
+            var searchTerm = $(this).val(); // Obtiene el texto actual
+            $.ajax({
+                url: '{{ route('administrador.medida.buscar') }}', // **Usamos la ruta definida en web.php**
+                method: 'GET',
+                data: {
+                    search: searchTerm
+                }, // Envía el término de búsqueda
+                success: function(response) {
+                    // ¡CLAVE! Reemplaza el contenido del DIV con id="accessListContainer"
+                    $('#accessListContainer').html(response.html); 
+                },
+                error: function(error) {
+                    console.error("Error en la búsqueda:", error);
+                }
+            });
+        });
+    });
+</script>
