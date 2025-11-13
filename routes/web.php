@@ -82,6 +82,11 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     Route::get('/medida/buscar', [UnidadMedidaController::class, 'busquedaAjax'])
         ->name('medida.buscar');
     // store proveedor
+
+    //RUTA PARA BORRAR
+    Route::get('/insumos/reportes', function(){
+        return view('reportes_insumos');
+    })->name('insumos.reportes');
 });
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){
