@@ -35,11 +35,11 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
-Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){    
-    
+Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
+
     // navbar
     Route::get('/dashboard', [UsuarioController::class, 'index'])->name('dashboard');
-    
+
     // usuarios
     Route::resource('usuarios', UsuarioController::class)->except(['show']);
 
@@ -48,15 +48,16 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
     // materia prima (las rutas ahora usan "items")
     Route::resource('items', MateriaPrimaController::class)->except(['show']);
+
     // GET    /administrador/items              -> index   (administrador.items.index)
     // GET    /administrador/items/create       -> create  (administrador.items.create)
     // POST   /administrador/items              -> store   (administrador.items.store)
     // GET    /administrador/items/{item}/edit  -> edit    (administrador.items.edit)
     // PUT    /administrador/items/{item}       -> update  (administrador.items.update)
     // DELETE /administrador/items/{item}       -> destroy (administrador.items.destroy)
-    
+
     // busqueda de logs
-    
+
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
     //tipo de materia prima
@@ -84,9 +85,8 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // store proveedor
 
     //RUTA PARA BORRAR
-    Route::get('/insumos/reportes', function(){
-        return view('reportes_insumos');
-    })->name('insumos.reportes');
+    //Route::get('/insumos/reportes', function(){return view('reportes_insumos');})->name('insumos.reportes');
+    Route::post('/reportes/materia-prima', [MateriaPrimaController::class, 'generarPdf'])->name('reportes.generar');
 });
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){
