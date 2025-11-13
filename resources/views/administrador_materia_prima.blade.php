@@ -25,37 +25,33 @@
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Materia Prima</h5>
-
-                    {{-- 1. Seccion de Toggles (Seleccione Materia o Proveedor) --}}
+                    {{--  
                     <div class="d-flex align-items-center mb-3">
+                        
                         <label class="form-label mb-0 me-3" style="color: #622D16;">Seleccione</label>
-
-                        {{-- Toggle para Materia --}}
                         <div class="form-check form-switch me-4">
-                            {{-- Asegúrate de que el input tenga un ID y la etiqueta un 'for' --}}
                             <input class="form-check-input custom-toggle" type="checkbox" id="toggleMateria" checked style="background-color: #ffe0b2; border-color: #ff9800;">
                             <label class="form-check-label" for="toggleMateria" style="color: #622D16;">Materia</label>
                         </div>
 
-                        {{-- Toggle para Proveedor --}}
                         <div class="form-check form-switch">
                             <input class="form-check-input custom-toggle" type="checkbox" id="toggleProveedor" style="background-color: #ffe0b2; border-color: #ff9800;">
                             <label class="form-check-label" for="toggleProveedor" style="color: #622D16;">Proveedor</label>
                         </div>
+                        
                     </div>
+                    --}}
 
                     {{-- 2. Barra de Búsqueda y Dropdown --}}
                     <div class="d-flex mb-3">
 
-                        {{-- Dropdown de Tipo (Harinas, Lacteos, etc.) --}}
+                        {{-- 
                         <div class="dropdown me-2">
                             <button class="btn dropdown-toggle custom-dropdown-button" type="button" id="dropdownTipo" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 Tipo
                             </button>
                             @if(isset($Items) && count($Items) > 0)
-                                {{-- Itera sobre la colección de registros filtrados (la variable ahora es $registros) --}}
                                 @foreach ($Items as $items)
-                                    {{-- Tarjeta Individual del Acceso --}}
                                     <ul class="dropdown-menu" aria-labelledby="dropdownTipo"">
                                         <li class="log-details small">
                                             <a class="dropdown-item" href="#">{{ $items -> tipoItem -> tipo}}</a>
@@ -64,6 +60,8 @@
                                 @endforeach
                             @endif
                         </div>
+                        --}}
+
 
                         {{-- Input de Búsqueda con Icono --}}
                         <div class="input-group flex-grow-1 me-2">
