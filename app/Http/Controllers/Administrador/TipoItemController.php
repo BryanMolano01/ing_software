@@ -11,7 +11,7 @@ use App\Http\Requests\StoreProveedorRequest;
 use App\Models\Proveedor;
 use App\Models\TipoItem;
 
-class TipoMateriaPrimaController extends Controller
+class TipoItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,7 +41,7 @@ class TipoMateriaPrimaController extends Controller
         $tipo = TipoItem::create($validated);
         return redirect()->route('administrador.tipoItem.index')->with('success', 'Tipo creado correctamente');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -81,7 +81,7 @@ class TipoMateriaPrimaController extends Controller
         $searchTerm = trim($request->input('search'));
 
         if (empty($searchTerm)) {
-            $tipos = collect([]); 
+            $tipos = collect([]);
         } else {
             $tipos = TipoItem::whereRaw('LOWER(tipo) LIKE ?', [strtolower($searchTerm) . '%'])
                 ->orderBy('tipo', 'asc')

@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\Administrador\ProductoController;
-use App\Http\Controllers\Administrador\MateriaPrimaController;
+use App\Http\Controllers\Administrador\ItemController;
 use App\Http\Controllers\Administrador\ProveedorController;
-use App\Http\Controllers\Administrador\TipoMateriaPrimaController;
+use App\Http\Controllers\Administrador\TipoItemController;
 use App\Http\Controllers\Administrador\UbicacionController;
 use App\Http\Controllers\Administrador\UnidadMedidaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+
+
 use App\Models\TipoItem;
 use App\Models\Ubicacion;
 
@@ -47,7 +49,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
         ->name('usuarios.cambiarEstado');
 
     // materia prima (las rutas ahora usan "items")
-    Route::resource('items', MateriaPrimaController::class)->except(['show']);
+    Route::resource('items', ItemController::class)->except(['show']);
 
     // GET    /administrador/items              -> index   (administrador.items.index)
     // GET    /administrador/items/create       -> create  (administrador.items.create)
@@ -61,7 +63,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     // proveedores
     Route::resource('proveedores', ProveedorController::class)->except(['show']);
     //tipo de materia prima
-    Route::resource('tipoItem', TipoMateriaPrimaController::class)->except(['show']);
+    Route::resource('tipoItem', TipoItemController::class)->except(['show']);
     //ubicacion
     Route::resource('ubicacion', UbicacionController::class)->except(['show']);
     //medidas
@@ -78,7 +80,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
         ->name('producto.buscar');
     Route::get('/ubicacion/buscar', [UbicacionController::class, 'busquedaAjax'])
         ->name('ubicacion.buscar');
-    Route::get('/tipoItem/buscar', [TipoMateriaPrimaController::class, 'busquedaAjax'])
+    Route::get('/tipoItem/buscar', [TipoItemController::class, 'busquedaAjax'])
         ->name('tipoItem.buscar');
     Route::get('/medida/buscar', [UnidadMedidaController::class, 'busquedaAjax'])
         ->name('medida.buscar');
@@ -86,7 +88,7 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
 
     //RUTA PARA BORRAR
     //Route::get('/insumos/reportes', function(){return view('reportes_insumos');})->name('insumos.reportes');
-    Route::post('/reportes/materia-prima', [MateriaPrimaController::class, 'generarPdf'])->name('reportes.generar');
+    Route::post('/reportes/materia-prima', [ItemController::class, 'generarPdf'])->name('reportes.generar');
 });
 
 Route::middleware(['auth', 'role:panadero'])->group(function(){

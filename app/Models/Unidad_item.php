@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Unidad_materia_prima extends Model
+class Unidad_item extends Model
 {
      use HasFactory;
 
-    protected $table = 'unidad_materia_prima';
-    protected $primaryKey = 'id_unidad_materia_prima';
+    protected $table = 'unidad_item';
+    protected $primaryKey = 'id_unidad_item';
     public $timestamps = false;
 
     protected $fillable = [
@@ -20,6 +20,6 @@ class Unidad_materia_prima extends Model
 
     public function items()
     {
-        return $this->hasMany(Item::class, 'unidad_materia_prima_id_unidad_materia_prima');
+        return $this->hasMany(Item::class, 'unidad_item_id_unidad_item');
     }
 }

@@ -11,11 +11,11 @@ use App\Models\Proveedor;
 use App\Models\Registro_item;
 use App\Models\TipoItem;
 use App\Models\Ubicacion;
-use App\Models\Unidad_materia_prima;
+use App\Models\Unidad_item;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-class MateriaPrimaController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -69,7 +69,7 @@ class MateriaPrimaController extends Controller
      */
     public function create()
     {
-        $medidas = Unidad_materia_prima::all();
+        $medidas = Unidad_item::all();
         $proveedores = Proveedor::all();
         $tipo_items = TipoItem::all();
         $ubicaciones = Ubicacion::all();
@@ -101,7 +101,7 @@ class MateriaPrimaController extends Controller
      */
     public function edit(Item $item)
     {
-        $medidas = Unidad_materia_prima::all();
+        $medidas = Unidad_item::all();
         $proveedores = Proveedor::all();
         $tipo_items = TipoItem::all();
         $ubicaciones = Ubicacion::all();
