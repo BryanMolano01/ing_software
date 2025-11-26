@@ -22,7 +22,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $Items = Item::with(['tipoItem', 'unidad_materia_prima'])->get();
+        $Items = Item::with(['tipoItem', 'unidad_item'])->get();
         $primerosRegistros= Registro_item::with('Item')->latest('fecha_hora_registro')->take(10)->get();
         $proveedores = Proveedor::all();
 
@@ -33,7 +33,7 @@ class ItemController extends Controller
         $fechaInicio = $request->validated()['fecha_inicio'];
         $fechaFin = $request->validated()['fecha_fin'];
 
-        $registros = Registro_item::with(['item.tipoItem', 'item.unidad_materia_prima', 'item.proveedor'])
+        $registros = Registro_item::with(['item.tipoItem', 'item.unidad_item', 'item.proveedor'])
             ->whereBetween('fecha_hora_registro', [$fechaInicio . ' 00:00:00', $fechaFin . ' 23:59:59'])
             ->orderBy('fecha_hora_registro', 'desc')
             ->get();

@@ -1,6 +1,6 @@
-<x-app-layout> 
+<x-app-layout>
     <x-slot name="header"></x-slot>
-    
+
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
@@ -16,24 +16,24 @@
             </div>
         @endif
 
-        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Unidad de Medida</h2> 
-        
+        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Unidad de Medida</h2>
+
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 500px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
-            <form id="editUserForm" action="{{ route('administrador.medida.update', $medida->id_unidad_materia_prima) }}" method="POST">
+            <form id="editUserForm" action="{{ route('administrador.medida.update', $medida->id_unidad_item) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row justify-content-center">
                     <div class="col-md-7 d-flex flex-column justify-content-center">
                         <div class="mb-4 form-group-with-icon">
                             <label for="unidad" class="form-label input-label">Unidad: </label>
-                            <input id="unidad" class="form-control login-input transparent-input-bottom-border" type="text" 
+                            <input id="unidad" class="form-control login-input transparent-input-bottom-border" type="text"
                                 name="unidad" value="{{ old('unidad', $medida->unidad) }}" required />
                             @error('unidad')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="d-grid gap-2 mt-auto"> 
+                        <div class="d-grid gap-2 mt-auto">
                             <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
                                 Guardar Cambios
                             </button>
@@ -75,7 +75,7 @@
 
                 if (toggleBtn && passwordInput) {
                     toggleBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                         passwordInput.setAttribute('type', type);
                     });
@@ -109,7 +109,7 @@
             }
         });
     </script>
-    
+
     <style>
         .custom1-card-style {
         background-color: #FFF6EB; /* un tono más suave */

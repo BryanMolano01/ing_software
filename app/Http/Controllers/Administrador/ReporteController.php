@@ -22,7 +22,7 @@ class ReporteController extends Controller
         $fechaInicio = $request->validated()['fecha_inicio'];
         $fechaFin = $request->validated()['fecha_fin'];
 
-        $registros = Registro_item::with(['item.tipoItem', 'item.unidad_materia_prima', 'item.proveedor'])
+        $registros = Registro_item::with(['item.tipoItem', 'item.unidad_item', 'item.proveedor'])
             ->whereBetween('datetime_consumo', [$fechaInicio . ' 00:00:00', $fechaFin . ' 23:59:59'])
             ->orderBy('datetime_consumo', 'desc')
             ->get();

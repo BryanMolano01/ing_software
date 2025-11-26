@@ -1,6 +1,6 @@
-<x-app-layout> 
+<x-app-layout>
     <x-slot name="header"></x-slot>
-    
+
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
@@ -17,18 +17,18 @@
             </div>
         @endif
 
-        <h2 class="mb-4 text-center" style="color: #622D16;">Registro de nuevo insumo</h2> 
-        
+        <h2 class="mb-4 text-center" style="color: #622D16;">Registro de nuevo insumo</h2>
+
         <div class="card p-4 custom-card-style-create-insumo mx-auto" style="max-width: 800px;">
-            
+
             {{-- 1. ACCIÓN DEL FORMULARIO CONFIGURADA --}}
             <form id="createUserForm" action="{{ route('administrador.items.store') }}" method="POST">
                 @csrf
-                
+
                 <div class="row">
                     {{-- COLUMNA IZQUIERDA: CAMPOS DEL FORMULARIO --}}
                     <div class="col-md-7">
-                        
+
                         {{-- Campo de Nombre (Coincide con 'nombre' del controlador) --}}
                         <div class="mb-4 form-group-with-icon">
                             <label for="cantidad" class="form-label input-label">Cantidad:</label>
@@ -40,12 +40,12 @@
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
                             <label for="unidad_materia_prima_id_unidad_materia_prima" class="form-label input-label me-2 mb-0">Medida:</label>
                             <select id="unidad_materia_prima_id_unidad_materia_prima" name="unidad_materia_prima_id_unidad_materia_prima" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
-                                
+
                                 <option value="" disabled selected>Seleccione una medida</option> {{-- Placeholder --}}
                                 {{-- Bucle para cargar los roles reales --}}
                                 @isset($medidas)
                                     @foreach ($medidas as $medida)
-                                        <option value="{{$medida->id_unidad_materia_prima}}" {{ old('id_unidad_materia_prima') == $medida->id_unidad_materia_prima ? 'selected' : '' }}>
+                                        <option value="{{$medida->id_unidad_item}}" {{ old('id_unidad_materia_prima') == $medida->id_unidad_item ? 'selected' : '' }}>
                                             {{ $medida->unidad }}
                                         </option>
                                     @endforeach
@@ -60,9 +60,9 @@
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
                             <label for="proveedor_id_proveedor" class="form-label input-label me-2 mb-0">Proveedor:</label>
                             <select id="proveedor_id_proveedor" name="proveedor_id_proveedor" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
-                                
+
                                 <option value="" disabled selected>Seleccione un proveedor</option> {{-- Placeholder --}}
-                                
+
                                 {{-- Bucle para cargar los roles reales --}}
                                 @isset($proveedores)
                                     @foreach ($proveedores as $proveedor)
@@ -80,9 +80,9 @@
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
                             <label for="tipo_item_id_tipo_item" class="form-label input-label me-2 mb-0">Tipo:</label>
                             <select id="tipo_item_id_tipo_item" name="tipo_item_id_tipo_item" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
-                                
+
                                 <option value="" disabled selected>Seleccione un tipo</option> {{-- Placeholder --}}
-                                
+
                                 {{-- Bucle para cargar los roles reales --}}
                                 @isset($tipo_items)
                                     @foreach ($tipo_items as $tipo)
@@ -100,9 +100,9 @@
                         <div class="mb-4 form-group-with-icon d-flex align-items-center">
                             <label for="ubicacion_id_ubicacion" class="form-label input-label me-2 mb-0">Ubicación:</label>
                             <select id="ubicacion_id_ubicacion" name="ubicacion_id_ubicacion" class="form-select login-input transparent-input-bottom-border" style="flex-grow: 1;" required>
-                                
+
                                 <option value="" disabled selected>Seleccione una ubicación</option> {{-- Placeholder --}}
-                                
+
                                 {{-- Bucle para cargar los roles reales --}}
                                 @isset($ubicaciones)
                                     @foreach ($ubicaciones as $ubicacion)
@@ -125,7 +125,7 @@
                         <button type="button" class="btn btn-modificar-perfil-create" id="openConfirmationModal">
                             Registrar insumo
                         </button>
-                    </div> 
+                    </div>
                 </div>
             </form>
         </div>
@@ -153,7 +153,7 @@
 
                 if (toggleBtn && passwordInput) {
                     toggleBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                         passwordInput.setAttribute('type', type);
                     });

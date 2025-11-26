@@ -3,8 +3,8 @@
     @foreach ($unidades as $unidad)
         {{-- Tarjeta Individual del Acceso --}}
         <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
-            style="cursor: pointer;" 
-            onclick="window.location='{{ route('administrador.medida.edit',$unidad -> id_unidad_materia_prima ) }}'"> 
+            style="cursor: pointer;"
+            onclick="window.location='{{ route('administrador.medida.edit',$unidad -> id_unidad_item ) }}'">
             <strong class="log-username text-muted">Unidad: {{ $unidad -> unidad}}</strong>
         </div>
     @endforeach
