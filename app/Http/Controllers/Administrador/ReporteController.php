@@ -2,43 +2,32 @@
 
 namespace App\Http\Controllers\Administrador;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\EditMateriaPrimaRequest;
-use App\Http\Requests\ReporteRequest;
-use App\Http\Requests\StoreMateriaPrimaRequest;
-use App\Models\Item;
-use App\Models\Proveedor;
-use App\Models\Registro_item;
-use App\Models\TipoItem;
-use App\Models\Ubicacion;
-use App\Models\Unidad_materia_prima;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-class MateriaPrimaController extends Controller
+use App\Models\Registro_item;
+use App\Http\Requests\ReporteRequest;
+class ReporteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Items = Item::with(['tipoItem', 'unidad_materia_prima'])->get();
-        $primerosRegistros= Registro_item::with('Item')->latest('fecha_hora_registro')->take(10)->get();
-        $proveedores = Proveedor::all();
-
-        return view('administrador_materia_prima', compact('Items', 'primerosRegistros', 'proveedores'));
-
+        return view('rutanodefinida');
     }
+
     public function generarPdf(ReporteRequest $request){
         $fechaInicio = $request->validated()['fecha_inicio'];
         $fechaFin = $request->validated()['fecha_fin'];
 
         $registros = Registro_item::with(['item.tipoItem', 'item.unidad_materia_prima', 'item.proveedor'])
-            ->whereBetween('fecha_hora_registro', [$fechaInicio . ' 00:00:00', $fechaFin . ' 23:59:59'])
-            ->orderBy('fecha_hora_registro', 'desc')
+            ->whereBetween('datetime_consumo', [$fechaInicio . ' 00:00:00', $fechaFin . ' 23:59:59'])
+            ->orderBy('datetime_consumo', 'desc')
             ->get();
         $totalRegistros= $registros->count();
-        $cantidadTotalUsada = $registros->sum('cantidad_usada');
+        $cantidadTotalUsada = $registros->sum();
 
         $resumenPorTipo = $registros->groupBy(function($registro){
             return $registro->item->tipoItem->tipo;
@@ -69,23 +58,15 @@ class MateriaPrimaController extends Controller
      */
     public function create()
     {
-        $medidas = Unidad_materia_prima::all();
-        $proveedores = Proveedor::all();
-        $tipo_items = TipoItem::all();
-        $ubicaciones = Ubicacion::all();
-
-        return view('crear_materia', compact('medidas','proveedores', 'tipo_items', 'ubicaciones'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMateriaPrimaRequest $request)
+    public function store(Request $request)
     {
-        $validated=$request->validated();
-
-        $item = Item::create($validated);
-        return redirect()->route('administrador.items.index')->with('success', 'Item creado correctamente');
+        //
     }
 
     /**
@@ -99,26 +80,17 @@ class MateriaPrimaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Item $item)
+    public function edit(string $id)
     {
-        $medidas = Unidad_materia_prima::all();
-        $proveedores = Proveedor::all();
-        $tipo_items = TipoItem::all();
-        $ubicaciones = Ubicacion::all();
-
-        return view('editar_materia', compact('item','medidas', 'proveedores', 'tipo_items', 'ubicaciones'));
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditMateriaPrimaRequest $request, Item $item)
+    public function update(Request $request, string $id)
     {
-        $validated=$request->validated();
-        $item->update($validated);
-        return redirect()->route('administrador.items.index')->with('success', 'Item actualizado correctamente');
-
+        //
     }
 
     /**
