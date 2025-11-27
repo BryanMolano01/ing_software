@@ -34,7 +34,7 @@
                             @enderror
                         </div>
                         <div class="d-grid gap-2 mt-auto"> 
-                            <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
+                            <button type="submit" class="btn btn-modificar-perfil">
                                 Guardar Cambios
                             </button>
                         </div>

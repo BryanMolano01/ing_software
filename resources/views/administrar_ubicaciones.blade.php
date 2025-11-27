@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
                             <div class="d-grid gap-2 mt-auto"> 
-                                <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
+                                <button type="submit" class="btn btn-modificar-perfil">
                                     Crear
                                 </button>
                             </div>
@@ -74,61 +74,6 @@
         </div>
 
     </div>
-
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content custom1-card-style p-4">
-                <div class="modal-body text-center">
-                    <img src="{{ asset('images/Alerta Triangulo.png') }}" alt="Advertencia" class="mb-3" style="width: 60px;">
-                    <h5 class="mb-4" style="color: #622D16;">¿Está seguro que quiere registrar esta ubicación?</h5>
-                    <div class="d-flex justify-content-center gap-3">
-                        <button type="button" class="btn btn-custom-action" id="confirmCreateUser">Registrar ubicación</button>
-                        <button type="button" class="btn btn-custom-cancel" data-bs-dismiss="modal">Volver</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function setupPasswordToggle(toggleBtnId, passwordInputId) {
-                const toggleBtn = document.getElementById(toggleBtnId);
-                const passwordInput = document.getElementById(passwordInputId);
-
-                if (toggleBtn && passwordInput) {
-                    toggleBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); 
-                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                        passwordInput.setAttribute('type', type);
-                    });
-                }
-            }
-
-            setupPasswordToggle('togglePassword', 'password');
-            setupPasswordToggle('togglePasswordConfirmation', 'password_confirmation');
-
-            // 🌟 NUEVO CÓDIGO JAVASCRIPT PARA EL MODAL 🌟
-            const openConfirmationModalBtn = document.getElementById('openConfirmationModal');
-            const confirmCreateUserBtn = document.getElementById('confirmCreateUser');
-            const createUserForm = document.getElementById('createUserForm');
-
-            if (openConfirmationModalBtn && confirmCreateUserBtn && createUserForm) {
-                openConfirmationModalBtn.addEventListener('click', function() {
-                    var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-                    myModal.show();
-                });
-
-                confirmCreateUserBtn.addEventListener('click', function() {
-                    var myModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
-                    if (myModal) {
-                        myModal.hide();
-                    }
-                    createUserForm.submit();
-                });
-            }
-        });
-    </script>
-
     <style>
         .custom1-card-style {
             background-color: #F8F4F0; /* Color de fondo claro */

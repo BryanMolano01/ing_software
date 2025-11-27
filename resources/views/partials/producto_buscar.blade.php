@@ -5,7 +5,7 @@
         <div class="user-card d-flex justify-content-between align-items-center mb-2 p-3"
             style="cursor: pointer;" 
             onclick="window.location='{{ route('administrador.producto.edit', $producto -> id_producto) }}'"> 
-            <strong class="log-username text-muted">Receta: {{ $producto -> nombre }}</strong>
+            <strong class="log-username text-muted">Producto: {{ $producto -> nombre }}</strong>
             <strong class="log-username text-muted">Precio: {{ $producto -> precio }}</strong>
         </div>
     @endforeach

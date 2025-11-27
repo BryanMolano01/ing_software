@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Unidad de Medida</h2> 
+        <h2 class="mb-4 text-center" style="color: #622D16;">Edición de Producto</h2> 
         
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
             {{-- action="{{ route('administrador.proveedores.update') }}" --}}
@@ -89,7 +89,7 @@
                             @enderror
                         </div>
                         <div class="d-grid gap-2 mt-auto"> 
-                            <button type="button" class="btn btn-modificar-perfil" id="openConfirmationModal">
+                            <button type="submit" class="btn btn-modificar-perfil">
                                 Guardar Cambios
                             </button>
                         </div>
@@ -103,65 +103,6 @@
             </form>
         </div>
     </div>
-
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content custom1-card-style">
-            <div class="modal-body text-center p-4">
-                <img src="{{ asset('images/Alerta Triangulo.png') }}" alt="Advertencia" class="mb-2" style="width: 55px;">
-                <h5 class="mb-3 fw-semibold" style="color: #622D16;">
-                ¿Está seguro que quiere guardar los cambios de esta receta?
-                </h5>
-                <div class="d-flex justify-content-center gap-3 mt-3 mb-2">
-                <button type="button" class="btn btn-custom-action" id="confirmEditUser">Guardar Cambios</button>
-                <button type="button" class="btn btn-custom-cancel" data-bs-dismiss="modal">Volver</button>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            function setupPasswordToggle(toggleBtnId, passwordInputId) {
-                const toggleBtn = document.getElementById(toggleBtnId);
-                const passwordInput = document.getElementById(passwordInputId);
-
-                if (toggleBtn && passwordInput) {
-                    toggleBtn.addEventListener('click', function(e) {
-                        e.preventDefault(); 
-                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                        passwordInput.setAttribute('type', type);
-                    });
-                }
-            }
-            setupPasswordToggle('togglePassword', 'password');
-            setupPasswordToggle('togglePasswordConfirmation', 'password_confirmation');
-
-            const openConfirmationModalBtn = document.getElementById('openConfirmationModal');
-            const confirmEditUserBtn = document.getElementById('confirmEditUser'); // ID del botón dentro del modal
-            const editUserForm = document.getElementById('editUserForm'); // ID del formulario principal
-
-            if (openConfirmationModalBtn && confirmEditUserBtn && editUserForm) {
-                // Al hacer clic en el botón principal, se abre el modal
-                openConfirmationModalBtn.addEventListener('click', function() {
-                    // Solo abrir si los campos requeridos están llenos (opcional, el backend validará)
-                    var myModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-                    myModal.show();
-                });
-
-                // Al hacer clic en el botón de confirmación del modal
-                confirmEditUserBtn.addEventListener('click', function() {
-                    // Oculta el modal (opcional)
-                    var myModal = bootstrap.Modal.getInstance(document.getElementById('confirmationModal'));
-                    if (myModal) {
-                        myModal.hide();
-                    }
-                    // Envía el formulario principal
-                    editUserForm.submit();
-                });
-            }
-        });
-    </script>
     
     <style>
         .custom1-card-style {

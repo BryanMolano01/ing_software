@@ -95,7 +95,7 @@
                         </div>
                         
                         {{-- 2. CAMBIAR TIPO DE BOTÓN para que abra el modal --}}
-                        <button type="button" class="btn btn-modificar-perfil-create" id="openConfirmationModal">
+                        <button type="submit" class="btn btn-modificar-perfil-create">
                             Guardar Cambios
                         </button>
                     </div> 
