@@ -430,5 +430,22 @@ body {
 .btn-register-venta-lg:hover {
     background-color: #f5a85a !important;
 }
+/* public/css/custom.css */
 
+/* Estilo para los ítems individuales de pedido dentro del Offcanvas */
+.pedido-item {
+    background-color: white; 
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Sombra suave para destacar */
+}
+
+/* Estilo para los textos Abono y Total (para hacerlos más grandes/visibles si es necesario) */
+.pedido-item strong {
+    font-weight: 600;
+}
+
+/* El estilo que hace que el Offcanvas se vea como en tu mockup (más compacto) */
+#offcanvasPedidos {
+    width: 300px; /* Ancho específico como se ve en la imagen */
+}
 /* Nota: Asegúrate de eliminar o modificar el CSS de .btn-register-venta anterior */
