@@ -112,7 +112,8 @@ Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->g
     })->name('cajero.dashboard');
 */
     Route::get('/dashboard_cajero', [VentaController::class, 'index'])->name('dashboard');
-
+    Route::get('/venta/buscar', [VentaController::class, 'busquedaAjax'])
+        ->name('venta.buscar');
 
     Route::resource('venta', VentaController::class);
 });
