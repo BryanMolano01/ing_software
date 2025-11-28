@@ -104,7 +104,7 @@ class PedidoController extends Controller
                 ->get();
         }
 
-        $html = view('partials.producto_buscar', ['productos' => $productos])->render();
+        $html = view('partials.producto_pedido_list', ['productos' => $productos])->render();
 
         return response()->json([
             'html' => $html,

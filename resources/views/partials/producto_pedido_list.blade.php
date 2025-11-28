@@ -13,7 +13,6 @@
                 
                 <div class="product-info">
                     <p class="h6 text-muted">Producto: {{ $producto->nombre }}</p>
-                    <p class="h6 text-muted">Cantidad: {{ $producto->cantidad }}</p>
                     <p class="h6 text-muted">Precio: ${{ number_format($producto->precio, 0, ',', '.') }}</p>
                 </div>
                 

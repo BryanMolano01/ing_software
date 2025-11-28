@@ -449,3 +449,19 @@ body {
     width: 300px; /* Ancho específico como se ve en la imagen */
 }
 /* Nota: Asegúrate de eliminar o modificar el CSS de .btn-register-venta anterior */
+.btn-register-pedido-lg {
+    /* Mismo color que el anterior .btn-register-venta */
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important;
+    border: 2px solid #FFB266;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    /* Para que sea un botón largo, como se ve en el mockup, si está en su propia línea */
+    min-width: 180px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-register-pedido-lg:hover {
+    background-color: #f5a85a !important;
+}
