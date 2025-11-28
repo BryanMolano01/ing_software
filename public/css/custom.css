@@ -286,3 +286,149 @@ body {
     background-color: #f5a85a !important; /* Color más oscuro al pasar el ratón */
     color: white !important;
 }
+
+/* --- Estilos Específicos para la Vista de Venta (Imagen) --- */
+
+/* Contenedor de la cabecera (filtros/botones) */
+.header-venta {
+    /* Mantiene los elementos en una línea para pantallas grandes */
+    flex-wrap: nowrap; 
+}
+
+/* Estilo para los botones Dropdown y de Pedidos */
+.btn-select-venta, .btn-pedidos {
+    background-color: #ffe0b2 !important; /* Naranja pálido */
+    color: #622D16 !important; /* Color de texto café */
+    border: 1px solid #FFB266 !important; /* Borde naranja */
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-select-venta:hover, .btn-pedidos:hover {
+    background-color: #f5a85a !important; 
+    color: white !important;
+}
+
+/* Estilo para el botón principal "Registrar Venta" */
+.btn-register-venta {
+    background-color: #FFB266 !important; /* Naranja más fuerte */
+    color: white !important;
+    border: none !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-register-venta:hover {
+    background-color: #f5a85a !important;
+}
+
+/* Estilo para la barra de búsqueda */
+.input-group-venta {
+    border: 1px solid #FFB266;
+    border-radius: 0.5rem;
+    overflow: hidden; /* Para que el borde se aplique a todo */
+}
+
+.input-search-venta {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #ffe0b2!important;
+    padding: 0.5rem 0.75rem;
+}
+
+.search-icon {
+    background-color: #ffe0b2 !important; 
+    border: none !important;
+    color: #622D16; /* Color del icono */
+    padding-left: 0.75rem;
+}
+
+/* --- Estilo de la Tarjeta/Producto --- */
+
+.product-item {
+    padding: 1rem;
+    /* Opción: puedes añadir un borde suave o sombra si quieres separar más los productos */
+    /* border: 1px solid #eee; */
+    /* border-radius: 0.5rem; */
+}
+
+/* Contenedor de la Imagen Circular */
+.product-image-circle {
+    width: 200px; /* Ajusta este tamaño según tu gusto */
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #FFB266; /* Borde naranja alrededor de la imagen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Centrar la imagen dentro del círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image-circle img {
+    /* Esto asegura que la imagen cubra el círculo y esté centrada sin distorsión */
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo del texto del producto */
+.product-info p {
+    color: #622D16;
+    font-size: 0.95rem;
+}
+
+/* Estilo del Contador de Cantidad */
+.input-counter {
+    width: 100px; /* Ancho fijo para el contador */
+    border: 1px solid #FFB266;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.counter-input {
+    border: none;
+    padding: 0.25rem 0;
+    font-weight: bold;
+    color: #622D16;
+}
+
+.btn-counter-minus, .btn-counter-plus {
+    background-color: #ffe0b2 !important; /* Naranja pálido en los botones */
+    color: #622D16 !important;
+    border: none !important;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.btn-counter-minus:hover, .btn-counter-plus:hover {
+    background-color: #f5a85a !important;
+    color: white !important;
+}
+
+/* --- Estilo para el botón Registrar Venta (cuando está solo) --- */
+
+.btn-register-venta-lg {
+    /* Mismo color que el anterior .btn-register-venta */
+    background-color: #ffe0b2 !important; 
+    color: #622D16 !important;
+    border: 2px solid #FFB266;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    /* Para que sea un botón largo, como se ve en el mockup, si está en su propia línea */
+    min-width: 180px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-register-venta-lg:hover {
+    background-color: #f5a85a !important;
+}
+
+/* Nota: Asegúrate de eliminar o modificar el CSS de .btn-register-venta anterior */

@@ -106,4 +106,10 @@ Route::middleware(['auth', 'role:panadero'])->group(function(){
     })->name('panadero.dashboard');
 });
 
+Route::middleware(['auth', 'role:cajero'])->group(function(){
+    Route::get('/dashboard_cajero', function(){
+        return view('dashboard_cajero');
+    })->name('cajero.dashboard');
+});
+
 require __DIR__.'/auth.php';
