@@ -7,6 +7,8 @@ use App\Http\Controllers\Administrador\TipoItemController;
 use App\Http\Controllers\Administrador\UbicacionController;
 use App\Http\Controllers\Administrador\UnidadMedidaController;
 use App\Http\Controllers\Cajero\VentaController;
+use App\Http\Controllers\Cajero\PedidoController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -114,8 +116,12 @@ Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->g
     Route::get('/dashboard_cajero', [VentaController::class, 'index'])->name('dashboard');
     Route::get('/venta/buscar', [VentaController::class, 'busquedaAjax'])
         ->name('venta.buscar');
+    Route::get('/pedido/buscar', [PedidoController::class, 'busquedaAjax'])
+        ->name('pedido.buscar');
 
     Route::resource('venta', VentaController::class);
+    Route::resource('pedido', PedidoController::class);
+
 });
 
 require __DIR__.'/auth.php';

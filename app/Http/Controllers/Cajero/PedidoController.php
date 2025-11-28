@@ -6,24 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\TamanoProducto;
 use App\Models\TipoProducto;
-use App\Models\Unidad_item;
 use App\Models\Venta;
 use App\Models\VentaProducto;
 use Illuminate\Http\Request;
 
-class VentaController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $productos= Producto::where('cantidad', '>', 0)->get();
+        $productos= Producto::all();
         $tamanosProducto = TamanoProducto::all();
         $tiposProducto = TipoProducto::all();
         $pedidos = Venta::where('tipo_venta_id_tipo_venta',2)->get();
 
-        return view('dashboard_cajero', compact('productos', 'tamanosProducto', 'tiposProducto', 'pedidos'));
+        return view('pedidos_dashboard', compact('productos', 'tamanosProducto', 'tiposProducto', 'pedidos'));
 
     }
 
@@ -40,9 +39,8 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-
         $registros = $request->input('productos',[]);
-        $venta=Venta::create(['fecha_hora_venta'=>now(),'total'=>0, 'tipo_venta_id_tipo_venta'=>1, 'usuario_id_usuario'=>auth()->id()]);
+        $venta=Venta::create(['fecha_hora_venta'=>now(),'total'=>0, 'tipo_venta_id_tipo_venta'=>2, 'usuario_id_usuario'=>auth()->id()]);
         $subtotales = 0;
         foreach($registros as $registro){
             $idProducto = $registro['id'];
@@ -59,8 +57,7 @@ class VentaController extends Controller
         }
         $venta->total = $subtotales;
         $venta->save();
-        return redirect()->route('cajero.venta.index')->with('success', 'Venta creada');
-
+        return redirect()->route('cajero.pedido.index')->with('success', 'Venta creada');
 
     }
 
@@ -95,7 +92,6 @@ class VentaController extends Controller
     {
         //
     }
-
     public function busquedaAjax(Request $request)
     {
         $searchTerm = trim($request->input('search'));
@@ -103,7 +99,7 @@ class VentaController extends Controller
         if (empty($searchTerm)) {
             $productos = collect([]);
         } else {
-            $productos = Producto::where('cantidad', '>', 0)->whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
+            $productos = Producto::whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
                 ->orderBy('nombre', 'asc')
                 ->get();
         }
