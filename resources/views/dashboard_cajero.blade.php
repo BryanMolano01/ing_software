@@ -41,12 +41,30 @@
                         <span class="input-group-text search-icon" id="search-addon">
                             <i class="fas fa-search"></i> 
                         </span>
-                        <input type="search" class="form-control input-search-venta" placeholder="Buscar..." aria-label="Search" aria-describedby="search-addon" />
+                        <input type="search" id="searchInputProducto" class="form-control input-search-venta" placeholder="Buscar..." aria-label="Search" aria-describedby="search-addon" />
                     </div>
                     
-                    <button type="button" class="btn btn-pedidos ms-2">
+                    <button class="btn btn-pedidos ms-2" type="button" 
+                            data-bs-toggle="offcanvas" 
+                            data-bs-target="#offcanvasPedidos" 
+                            aria-controls="offcanvasPedidos">
                         Pedidos
                     </button>
+
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasPedidos" aria-labelledby="offcanvasPedidosLabel">
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" style="padding: 0.5rem 1rem; font-size: 0.9rem;"aria-label="Close"></button>
+                        <div class="offcanvas-header" style="background-color: #f7f7f7; justify-content: space-between;">
+                            <div class="text-center w-100">
+                                <button type="button" class="btn btn-register-venta-lg" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="alert('Funcionalidad para crear nuevo pedido.')">
+                                    Nuevo Pedido
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="offcanvas-body" id="pedidos-lista" style="background-color: #f7f7f7;">
+                            <p>Cargando pedidos...</p>
+                        </div>
+                    </div>
                     
                 </div>
                 
@@ -55,45 +73,124 @@
                         Registrar Venta
                     </button>
                 </div>
-                
             </div>
         </div>
         
-        <hr/>
-        
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4">
-            
-            @foreach ($productos as $producto)
-                <div class="col producto-item-col" 
-                    data-tamano-id="{{ $producto->tamano_producto_id_tamano_producto }}"
-                    data-tipo-id="{{ $producto->tipo_producto_id_tipo_producto }}">
-                    <div class="product-item text-center">
-                        <div class="product-image-circle mx-auto mb-2">
-                            <img src="{{ asset('img/productos/' . $producto->foto) }}" alt="{{ $producto->nombre }}" class="img-fluid" />
-                        </div>
-                        
-                        <div class="product-info">
-                            <p class="mb-0"><strong>Producto:</strong> {{ $producto->nombre }}</p>
-                            <p class="mb-2"><strong>Cantidad:</strong> {{ $producto->cantidad }}</p>
-        
-                            <div class="input-group input-counter mx-auto" 
-                                data-producto-id="{{ $producto->id_producto }}" 
-                                data-stock="{{ $producto->cantidad }}"> 
-                                
-                                <button class="btn btn-counter-minus" type="button">-</button>
-                                <input type="number" class="form-control text-center counter-input" value="0" min="0" readonly>
-                                <button class="btn btn-counter-plus" type="button">+</button>
-                            </div>
-                            <small class="text-muted">${{ number_format($producto->precio, 2) }}</small>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            
-        </div>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4" id="productListContainer">
+    @include('partials.producto_cajero_list', ['productos' => $productos])
+</div>
     </div>
     <script>
         $(document).ready(function() {
+            const searchRoute = '{{ route('cajero.venta.buscar') }}';
+
+            $('#searchInputProducto').on('keyup', function() {
+                var searchTerm = $(this).val(); 
+                
+                filtroTamanoActual = 'all';
+                filtroTipoActual = 'all';
+                $('#btn-tamano').text('Tamaño');
+                $('#btn-tipo').text('Tipo');
+
+                
+                $.ajax({
+                    url: searchRoute, 
+                    method: 'GET',
+                    data: {
+                        search: searchTerm
+                    },
+                    success: function(response) {
+                        $('#productListContainer').html(response.html); 
+                    },
+                    error: function(error) {
+                        console.error("Error en la búsqueda:", error);
+                    }
+                });
+            });
+
+            let pedidosActuales = {!! json_encode($pedidos) !!};
+
+            let pedidosMapeados = pedidosActuales.map(pedido => ({
+                id: pedido.id_venta,
+                cliente: 'Cliente Desconocido', 
+                total: pedido.total,
+                fechaEntrega: new Date(pedido.fecha_hora_entrega).toLocaleDateString('es-CO'),
+            }));
+
+            function renderizarPedido(pedido) {
+                const abonoCalculado = pedido.total / 2;
+                
+                const formatter = new Intl.NumberFormat('es-CO', {
+                    style: 'currency',
+                    currency: 'COP',
+                    minimumFractionDigits: 0
+                });
+
+                return `
+                    <div class="pedido-item" id="pedido-${pedido.id}" style="border-radius: 0.5rem; padding: 1rem; border: 1px solid #FFB266; margin-bottom: 1rem;">
+                        
+                        <h6 style="color: #622D16;">Pedido #${pedido.id}</h6>
+                        
+                        <p class="mb-1" style="color: #622D16;"><strong>Fecha de entrega:</strong> ${pedido.fechaEntrega}</p>
+                        <p class="mb-1" style="color: #622D16;"><strong>Abono:</strong> ${formatter.format(abonoCalculado)}</p>
+                        <p class="mb-3" style="color: #622D16;"><strong>Total:</strong> ${formatter.format(pedido.total)}</p>
+                        
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button class="btn btn-sm btn-completar-pedido" data-id="${pedido.id}" style="background-color: #ffe0b2; color: #622D16; border: 1px solid #FFB266;">
+                                Completado
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function cargarPedidos() {
+                const $lista = $('#pedidos-lista');
+                $lista.empty();
+
+                if (pedidosMapeados.length === 0) {
+                    $lista.html('<p class="text-center text-muted">No hay pedidos pendientes actualmente.</p>');
+                    return;
+                }
+
+                let htmlPedidos = '';
+                pedidosMapeados.forEach(pedido => {
+                    htmlPedidos += renderizarPedido(pedido);
+                });
+                
+                $lista.html(htmlPedidos);
+            }
+            
+            $('#offcanvasPedidos').on('show.bs.offcanvas', function () {
+                cargarPedidos();
+            });
+
+            $(document).on('click', '.btn-completar-pedido', function() {
+                const pedidoId = parseInt($(this).data('id'));
+
+                $.ajax({
+                    url: '/cajero/pedidos/completar/' + pedidoId,
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+
+                        pedidosMapeados = pedidosMapeados.filter(pedido => pedido.id !== pedidoId);
+
+                        $(`#pedido-${pedidoId}`).fadeOut(300, function() {
+                            cargarPedidos();
+                        });
+                        
+                        alert(response.mensaje || 'Pedido completado con éxito.');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error al completar el pedido. Revisa la consola para más detalles.');
+                        console.error("Error al completar el pedido:", xhr.responseText);
+                    }
+                });
+            });
+
 
             $(document).on('click', '.btn-counter-plus', function() {
                 const $inputGroup = $(this).closest('.input-group');
@@ -216,5 +313,5 @@
             aplicarFiltros();
 
         });
-        </script>
+    </script>
 </x-app-layout>

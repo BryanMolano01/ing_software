@@ -108,7 +108,7 @@ class VentaController extends Controller
                 ->get();
         }
 
-        $html = view('partials.producto_buscar', ['productos' => $productos])->render();
+        $html = view('partials.producto_cajero_list', ['productos' => $productos])->render();
 
         return response()->json([
             'html' => $html,
