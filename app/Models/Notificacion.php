@@ -12,10 +12,13 @@ class Notificacion extends Model
     protected $table = 'notificacion';
     protected $primaryKey = 'id_notificacion';
     public $timestamps = false;
-
+    protected $casts = [
+        'fecha_hora_notificacion' => 'datetime',
+    ];
     protected $fillable = [
         'notificacion',
         'producto_id_producto',
+        'venta_id_venta',
         'fecha_hora_notificacion',
     ];
 
@@ -23,4 +26,9 @@ class Notificacion extends Model
     {
         return $this->belongsTo(Producto::class, 'producto_id_producto');
     }
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class, 'venta_id_venta');
+    }
+
 }
