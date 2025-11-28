@@ -18,7 +18,7 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $productos = Producto::all();
+        $productos= Producto::where('cantidad', '>', 0)->get();
         $tamanosProducto = TamanoProducto::all();
         $tiposProducto = TipoProducto::all();
         $pedidos = Venta::where('tipo_venta_id_tipo_venta',2)->get();
