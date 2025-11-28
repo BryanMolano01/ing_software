@@ -12,23 +12,27 @@
                 <div class="d-flex align-items-center mb-3"> 
                     
                     <div class="dropdown me-2">
-                        <button class="btn btn-select-venta dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button id="btn-tamano" class="btn btn-select-venta dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Tamaño
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item filtro-tamano" href="#" data-id="all">Mostrar Todos</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             @foreach ($tamanosProducto as $tamano)
-                                <li><a class="dropdown-item" href="#">{{ $tamano->tamano }}</a></li>
+                                <li><a class="dropdown-item filtro-tamano" href="#" data-id="{{ $tamano->id_tamano_producto }}">{{ $tamano->tamano }}</a></li>
                             @endforeach
                         </ul>
                     </div>
-                    
+
                     <div class="dropdown me-2">
-                        <button class="btn btn-select-venta dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categoría
+                        <button id="btn-tipo" class="btn btn-select-venta dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tipo
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item filtro-tipo" href="#" data-id="all">Mostrar Todos</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             @foreach ($tiposProducto as $tipo)
-                                <li><a class="dropdown-item" href="#">{{ $tipo->tipo }}</a></li>
+                                <li><a class="dropdown-item filtro-tipo" href="#" data-id="{{ $tipo->id_tipo_producto }}">{{ $tipo->tipo }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -60,7 +64,9 @@
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4">
             
             @foreach ($productos as $producto)
-                <div class="col">
+                <div class="col producto-item-col" 
+                    data-tamano-id="{{ $producto->tamano_producto_id_tamano_producto }}"
+                    data-tipo-id="{{ $producto->tipo_producto_id_tipo_producto }}">
                     <div class="product-item text-center">
                         <div class="product-image-circle mx-auto mb-2">
                             <img src="{{ asset('img/productos/' . $producto->foto) }}" alt="{{ $producto->nombre }}" class="img-fluid" />
@@ -146,7 +152,7 @@
                 console.log('Datos listos para enviar:', itemsVenta);
 
                 $.ajax({
-                    url: '/venta.store', // aqui pones la url de donde lo vayas a mandar
+                    url: '{{ route('cajero.venta.store') }}',
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -161,6 +167,53 @@
                     }
                 });
             });
+
+            let filtroTamanoActual = 'all';
+            let filtroTipoActual = 'all';
+
+            function aplicarFiltros() {
+                
+                $('.producto-item-col').hide();
+                
+                $('.producto-item-col').each(function() {
+                    const $producto = $(this);
+                    const productoTamanoId = $producto.data('tamano-id').toString();
+                    const productoTipoId = $producto.data('tipo-id').toString();
+                    
+                    let coincideTamano = (filtroTamanoActual === 'all' || filtroTamanoActual === productoTamanoId);
+                    let coincideTipo = (filtroTipoActual === 'all' || filtroTipoActual === productoTipoId);
+                    
+                    if (coincideTamano && coincideTipo) {
+                        $producto.show();
+                    }
+                });
+            }
+
+            $(document).on('click', '.filtro-tamano', function(e) {
+                e.preventDefault();
+                const idSeleccionado = $(this).data('id').toString();
+                const textoSeleccionado = $(this).text();
+                
+                filtroTamanoActual = idSeleccionado;
+                
+                $('#btn-tamano').text('Tamaño: ' + textoSeleccionado);
+                
+                aplicarFiltros();
+            });
+
+            $(document).on('click', '.filtro-tipo', function(e) {
+                e.preventDefault();
+                const idSeleccionado = $(this).data('id').toString();
+                const textoSeleccionado = $(this).text();
+                
+                filtroTipoActual = idSeleccionado;
+
+                $('#btn-tipo').text('Tipo: ' + textoSeleccionado);
+
+                aplicarFiltros();
+            });
+
+            aplicarFiltros();
 
         });
         </script>
