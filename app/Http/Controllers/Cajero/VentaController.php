@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Cajero;
 
 use App\Http\Controllers\Controller;
+use App\Models\Producto;
+use App\Models\TamanoProducto;
+use App\Models\TipoProducto;
 use Illuminate\Http\Request;
 
 class VentaController extends Controller
@@ -12,7 +15,12 @@ class VentaController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        $tamanosProducto = TamanoProducto::all();
+        $tiposProducto = TipoProducto::all();
+
+        return view('dashboard_cajero', compact('productos', 'tamanosProducto', 'tiposProducto'));
+
     }
 
     /**

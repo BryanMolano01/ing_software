@@ -41,10 +41,10 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 });
 
-Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function () {
+/*Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function () {
     Route::resource('venta', VentaController::class);
 
-});
+});*/
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
 
@@ -106,10 +106,15 @@ Route::middleware(['auth', 'role:panadero'])->group(function(){
     })->name('panadero.dashboard');
 });
 
-Route::middleware(['auth', 'role:cajero'])->group(function(){
-    Route::get('/dashboard_cajero', function(){
+Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function (){
+    /*Route::get('/dashboard_cajero', function(){
         return view('dashboard_cajero');
     })->name('cajero.dashboard');
+*/
+    Route::get('/dashboard_cajero', [VentaController::class, 'index'])->name('dashboard');
+
+
+    Route::resource('venta', VentaController::class);
 });
 
 require __DIR__.'/auth.php';
