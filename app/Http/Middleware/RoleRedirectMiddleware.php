@@ -19,12 +19,14 @@ class RoleRedirectMiddleware
             return $next($request);
         }
         $rol = auth()->user()->rol->rol;
-        
+
 
         if($rol==='administrador'){
             return redirect()->route('administrador.dashboard');
         }elseif($rol==='panadero'){
             return redirect()->route('panadero.dashboard');
+        }elseif($rol==='cajero'){
+            return redirect()->route('cajero.dashboard');
         }
 
         return $next($request);

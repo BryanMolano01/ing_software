@@ -6,6 +6,7 @@ use App\Http\Controllers\Administrador\ProveedorController;
 use App\Http\Controllers\Administrador\TipoItemController;
 use App\Http\Controllers\Administrador\UbicacionController;
 use App\Http\Controllers\Administrador\UnidadMedidaController;
+use App\Http\Controllers\Cajero\VentaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -33,8 +34,16 @@ Route::middleware('auth')->group(function () {
         if ($rol === 'panadero') {
             return redirect()->route('panadero.dashboard');
         }
+        if ($rol === 'cajero') {
+            return redirect()->route('cajero.dashboard');
+        }
         return redirect('/');
     })->name('dashboard');
+});
+
+Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function () {
+    Route::resource('venta', VentaController::class);
+
 });
 
 Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name('administrador.')->group(function(){
