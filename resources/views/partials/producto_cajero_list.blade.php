@@ -17,12 +17,14 @@
                     <p class="h6 text-muted">Precio: ${{ number_format($producto->precio, 0, ',', '.') }}</p>
                 </div>
                 
-                <div class="input-group input-counter mx-auto mt-2" data-stock="{{ $producto->cantidad }}">
+                <div 
+                    class="input-group input-counter mx-auto mt-2" 
+                    data-stock="{{ $producto->cantidad }}"
+                    data-producto-id="{{ $producto->id_producto }}"> 
                     <button class="btn btn-counter-minus" type="button" data-id="{{ $producto->id_producto }}">-</button>
                     <input type="number" class="form-control text-center counter-input" value="0" min="0" data-price="{{ $producto->precio }}" data-id="{{ $producto->id_producto }}">
                     <button class="btn btn-counter-plus" type="button" data-id="{{ $producto->id_producto }}">+</button>
                 </div>
-                
             </div>
         </div>
     @endforeach
