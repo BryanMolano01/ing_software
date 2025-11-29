@@ -9,6 +9,7 @@ use App\Http\Controllers\Administrador\UnidadMedidaController;
 use App\Http\Controllers\Cajero\VentaController;
 use App\Http\Controllers\Cajero\PedidoController;
 
+use App\Http\Controllers\Panadero\ItemPanaderoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -102,10 +103,13 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     Route::post('/reportes/materia-prima', [ItemController::class, 'generarPdf'])->name('reportes.generar');
 });
 
-Route::middleware(['auth', 'role:panadero'])->group(function(){
-    Route::get('/dashboard_panadero', function(){
+Route::middleware(['auth', 'role:panadero'])->prefix('panadero')->name('panadero.')->group(function(){
+    /*Route::get('/dashboard_panadero', function(){
         return view('dashboard_panadero');
-    })->name('panadero.dashboard');
+    })->name('panadero.dashboard');*/
+    Route::get('/dashboard_panadero', [VentaController::class, 'index'])->name('dashboard');
+    Route::resource('itemPanadero', ItemPanaderoController::class);
+
 });
 
 Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function (){
