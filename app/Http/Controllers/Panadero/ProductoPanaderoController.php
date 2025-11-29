@@ -94,12 +94,12 @@ class ProductoPanaderoController extends Controller
         if (empty($searchTerm)) {
             $productos = collect([]);
         } else {
-            $productos = Producto::where('cantidad', '>', 0)->whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
+            $productos = Producto::whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
                 ->orderBy('nombre', 'asc')
                 ->get();
         }
 
-        $html = view('partials.producto_cajero_list', ['productos' => $productos])->render();
+        $html = view('partials.producto_pedido_list', ['productos' => $productos])->render();
 
         return response()->json([
             'html' => $html,

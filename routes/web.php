@@ -119,6 +119,8 @@ Route::middleware(['auth', 'role:panadero'])->prefix('panadero')->name('panadero
         ->name('productoPanadero.buscar');
 
     Route::resource('notificacion', NotificacionPanaderoController::class);
+    Route::get('/notificacionPanadero/buscar', [NotificacionPanaderoController::class, 'busquedaAjax'])
+        ->name('notificacionPanadero.buscar');
 });
 
 Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function (){

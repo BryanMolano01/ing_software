@@ -16,8 +16,6 @@ class NotificacionPanaderoController extends Controller
     {
         $notificaciones = Notificacion::with('producto', 'venta')->get();
         return view('notificacion_panadero', compact('notificaciones'));
-
-
     }
 
     /**
