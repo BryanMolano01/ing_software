@@ -55,11 +55,11 @@ class ItemPanaderoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditItemPanaderoRequest $request, Item $item)
+    public function update(EditItemPanaderoRequest $request, Item $itemPanadero)
     {
         $validated=$request->validated();
 
-        $item->update($validated);
+        $itemPanadero->update($validated);
         return redirect()->route('panadero.itemPanadero.index')->with('success', 'Item actualizado correctamente');
 
     }
@@ -86,7 +86,7 @@ class ItemPanaderoController extends Controller
                 ->get();
         }
 
-        $html = view('partials.item_buscar', ['items' => $items])->render();
+        $html = view('partials.panadero_materia_list', ['items' => $items])->render();
 
         return response()->json([
             'html'  => $html,
