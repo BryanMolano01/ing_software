@@ -40,8 +40,12 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info('Request completo', $request->all());
 
         $registros = $request->input('productos',[]);
+
+        \Log::info('Productos recibidos', ['productos' => $registros]);
+
         $venta=Venta::create(['fecha_hora_venta'=>now(),'total'=>0, 'tipo_venta_id_tipo_venta'=>1, 'usuario_id_usuario'=>auth()->id()]);
         $subtotales = 0;
         foreach($registros as $registro){
@@ -59,8 +63,10 @@ class VentaController extends Controller
         }
         $venta->total = $subtotales;
         $venta->save();
-        return redirect()->route('cajero.venta.index')->with('success', 'Venta creada');
-
+        return response()->json([
+            'mensaje'   => 'Venta creada',
+            'productos' => $registros,
+        ]);
 
     }
 
@@ -75,7 +81,7 @@ class VentaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pedido $pedido)
     {
         //
     }
