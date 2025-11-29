@@ -107,8 +107,10 @@ Route::middleware(['auth', 'role:panadero'])->prefix('panadero')->name('panadero
     /*Route::get('/dashboard_panadero', function(){
         return view('dashboard_panadero');
     })->name('panadero.dashboard');*/
-    Route::get('/dashboard_panadero', [VentaController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard_panadero', [ItemPanaderoController::class, 'index'])->name('dashboard');
     Route::resource('itemPanadero', ItemPanaderoController::class);
+    Route::get('/item/buscar', [ItemPanaderoController::class, 'busquedaAjax'])
+        ->name('item.buscar');
 
 });
 
