@@ -10,6 +10,8 @@ use App\Http\Controllers\Cajero\VentaController;
 use App\Http\Controllers\Cajero\PedidoController;
 
 use App\Http\Controllers\Panadero\ItemPanaderoController;
+use App\Http\Controllers\Panadero\NotificacionPanaderoController;
+use App\Http\Controllers\Panadero\ProductoPanaderoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -110,6 +112,11 @@ Route::middleware(['auth', 'role:panadero'])->prefix('panadero')->name('panadero
     Route::get('/dashboard_panadero', [VentaController::class, 'index'])->name('dashboard');
     Route::resource('itemPanadero', ItemPanaderoController::class);
 
+    Route::resource('productoPanadero', ProductoPanaderoController::class);
+    Route::get('/productoPanadero/buscar', [ProductoPanaderoController::class, 'busquedaAjax'])
+        ->name('productoPanadero.buscar');
+
+    Route::resource('notificacion', NotificacionPanaderoController::class);
 });
 
 Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->group(function (){

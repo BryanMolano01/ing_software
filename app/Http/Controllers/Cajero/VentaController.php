@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cajero;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notificacion;
 use App\Models\Producto;
 use App\Models\TamanoProducto;
 use App\Models\TipoProducto;
@@ -96,7 +97,15 @@ class VentaController extends Controller
         $venta->fecha_hora_entrega = now();
         $venta->tipo_venta_id_tipo_venta = 3;
         $venta->save();
-        
+
+        Notificacion::create([
+            'notificacion' => 'El pedido de la venta #'.$venta->id_venta.' se ha completado',
+            'fecha_hora_notificacion' => now(),
+            'venta_id_venta' => $venta->id_venta,
+
+
+        ]);
+
     }
 
     /**

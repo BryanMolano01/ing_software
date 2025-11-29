@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Cajero;
+namespace App\Http\Controllers\Panadero;
 
 use App\Http\Controllers\Controller;
-use App\Models\Notificacion;
 use App\Models\Producto;
 use App\Models\TamanoProducto;
 use App\Models\TipoProducto;
@@ -11,7 +10,7 @@ use App\Models\Venta;
 use App\Models\VentaProducto;
 use Illuminate\Http\Request;
 
-class PedidoController extends Controller
+class ProductoPanaderoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,10 +20,8 @@ class PedidoController extends Controller
         $productos= Producto::all();
         $tamanosProducto = TamanoProducto::all();
         $tiposProducto = TipoProducto::all();
-        $pedidos = Venta::where('tipo_venta_id_tipo_venta',2)->get();
 
-        return view('pedidos_dashboard', compact('productos', 'tamanosProducto', 'tiposProducto', 'pedidos'));
-
+        return view('producto_panadero', compact('productos', 'tamanosProducto', 'tiposProducto'));
     }
 
     /**
@@ -40,49 +37,23 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info('Request completo', $request->all());
+
         $registros = $request->input('productos',[]);
-        $venta=Venta::create(['fecha_hora_venta'=>now(),'total'=>0, 'tipo_venta_id_tipo_venta'=>2, 'usuario_id_usuario'=>auth()->id()]);
-        $subtotales = 0;
+
+        \Log::info('Productos recibidos', ['productos' => $registros]);
+
         foreach($registros as $registro){
             $idProducto = $registro['id'];
             $cantidad = $registro['cantidad'];
             $producto =Producto::find($idProducto);
-            $precioUnitario = $producto->precio;
-            $ventaProducto = VentaProducto::create(['cantidad'=>$cantidad,
-                'precio_unitario'=>$precioUnitario,
-                'subtotal'=>$precioUnitario*$cantidad,
-                'producto_id_producto'=>$idProducto,
-                'venta_id_venta'=>$venta->id_venta]);
-            $producto->cantidad = $producto->cantidad - $cantidad;
+            $producto->cantidad = $producto->cantidad + $cantidad;
             $producto->save();
-
-            if($producto->cantidad <= 5){
-                Notificacion::create([
-                    'notificacion' => 'El producto de nombre'.$producto->nombre.'se está agotando, actualmente quedan'.$producto->cantidad,
-                    'fecha_hora_notificacion' => now(),
-                    'producto_id_producto'=>$idProducto,
-
-
-                ]);
-            }
-            $subtotales += $precioUnitario*$cantidad;
-
-
         }
-        $venta->total = $subtotales;
-        $venta->save();
-
-        Notificacion::create([
-            'notificacion' => 'Un cliente hizo un pedido correspondientea la venta #'.$venta->id_venta,
-            'fecha_hora_notificacion' => now(),
-            'venta_id_venta' => $venta->id_venta,
-
-
+        return response()->json([
+            'mensaje'   => 'productos a la venta registrados',
+            'productos' => $registros,
         ]);
-
-        return redirect()->route('cajero.pedido.index')->with('success', 'Venta creada');
-
-
     }
 
     /**
@@ -123,12 +94,12 @@ class PedidoController extends Controller
         if (empty($searchTerm)) {
             $productos = collect([]);
         } else {
-            $productos = Producto::whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
+            $productos = Producto::where('cantidad', '>', 0)->whereRaw('LOWER(nombre) LIKE ?', [strtolower($searchTerm) . '%'])
                 ->orderBy('nombre', 'asc')
                 ->get();
         }
 
-        $html = view('partials.producto_pedido_list', ['productos' => $productos])->render();
+        $html = view('partials.producto_cajero_list', ['productos' => $productos])->render();
 
         return response()->json([
             'html' => $html,
