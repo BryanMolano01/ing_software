@@ -139,7 +139,7 @@
                 const itemsVenta = obtenerProductosSeleccionados();
 
                 if (itemsVenta.length === 0) {
-                    alert('Por favor, selecciona al menos un producto para registrar la venta.');
+                    alert('Por favor, selecciona al menos un producto para registrar el pedido.');
                     return;
                 }
 
@@ -153,11 +153,11 @@
                         productos: itemsVenta
                     },
                     success: function(response) {
-                        alert('Venta registrada con éxito: ' + response.mensaje);
+                        alert('Pedido registrado con éxito');
                     },
                     error: function(xhr, status, error) {
-                        alert('Error al registrar la venta. Revisa la consola para más detalles.');
-                        console.error("Error al enviar la venta:", xhr.responseText);
+                        alert('Error al registrar el pedido. Revisa la consola para más detalles.');
+                        console.error("Error al enviar el pedido:", xhr.responseText);
                     }
                 });
             });

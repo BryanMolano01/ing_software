@@ -281,7 +281,7 @@
                         productos: itemsVenta
                     },
                     success: function(response) {
-                        alert('Venta registrada con éxito: ' + response.mensaje);
+                        alert('Venta registrada con éxito');
                     },
                     error: function(xhr, status, error) {
                         alert('Error al registrar la venta. Revisa la consola para más detalles.');
