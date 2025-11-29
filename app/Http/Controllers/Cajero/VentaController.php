@@ -58,7 +58,8 @@ class VentaController extends Controller
                 'subtotal'=>$precioUnitario*$cantidad,
                 'producto_id_producto'=>$idProducto,
                 'venta_id_venta'=>$venta->id_venta]);
-
+            $producto->cantidad = $producto->cantidad - $cantidad;
+            $producto->save();
             $subtotales += $precioUnitario*$cantidad;
         }
         $venta->total = $subtotales;
@@ -81,7 +82,7 @@ class VentaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pedido $pedido)
+    public function edit(Venta $venta)
     {
         //
     }
@@ -89,9 +90,12 @@ class VentaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $venta = Venta::findOrFail($id);
+        $venta->fecha_hora_entrega = now();
+        $venta->tipo_venta_id_tipo_venta = 2;
+        $venta->save();
     }
 
     /**

@@ -122,6 +122,7 @@ Route::middleware(['auth', 'role:cajero'])->prefix('cajero')->name('cajero.')->g
     Route::resource('venta', VentaController::class);
     Route::resource('pedido', PedidoController::class);
 
+
 });
 
 require __DIR__.'/auth.php';
