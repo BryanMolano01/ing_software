@@ -52,9 +52,7 @@
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Tipos existentes</h5>
                     
-                    {{-- 2. Barra de Búsqueda y Botón --}}
                     <div class="d-flex mb-3">
-                        {{-- Input de Búsqueda (Caja ancha con icono) --}}
                         <div class="input-group flex-grow-1 me-2">
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">
                                 <i class="fas fa-search"></i>

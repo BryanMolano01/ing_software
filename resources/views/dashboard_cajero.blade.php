@@ -171,26 +171,28 @@
 
             $(document).on('click', '.btn-completar-pedido', function() {
                 const pedidoId = parseInt($(this).data('id'));
-
+                if (isNaN(pedidoId) || pedidoId <= 0) {
+                    alert("Error: ID de pedido no válido. No se puede completar.");
+                    return; 
+                }
+                const updateRouteBase = '{{ route('cajero.venta.update', ['ventum' => 'PLACEHIT']) }}'; 
+                const finalUrl = updateRouteBase.replace('PLACEHIT', pedidoId);
                 $.ajax({
-                    url: '/cajero/pedidos/completar/' + pedidoId,
-                    method: 'POST',
+                    url: finalUrl,
+                    method: 'POST', 
                     data: {
-                        _token: '{{ csrf_token() }}'
+                        _token: '{{ csrf_token() }}',
+                        _method: 'PUT',
                     },
                     success: function(response) {
-
                         pedidosMapeados = pedidosMapeados.filter(pedido => pedido.id !== pedidoId);
 
                         $(`#pedido-${pedidoId}`).fadeOut(300, function() {
                             cargarPedidos();
                         });
-                        
-                        alert(response.mensaje || 'Pedido completado con éxito.');
                     },
                     error: function(xhr, status, error) {
-                        alert('Error al completar el pedido. Revisa la consola para más detalles.');
-                        console.error("Error al completar el pedido:", xhr.responseText);
+                        alert('Error al completar el pedido');
                     }
                 });
             });

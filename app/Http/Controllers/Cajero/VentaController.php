@@ -94,8 +94,9 @@ class VentaController extends Controller
     {
         $venta = Venta::findOrFail($id);
         $venta->fecha_hora_entrega = now();
-        $venta->tipo_venta_id_tipo_venta = 2;
+        $venta->tipo_venta_id_tipo_venta = 3;
         $venta->save();
+        
     }
 
     /**
