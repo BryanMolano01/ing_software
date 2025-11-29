@@ -58,7 +58,7 @@ class PedidoController extends Controller
 
             if($producto->cantidad <= 5){
                 Notificacion::create([
-                    'notificacion' => 'El producto de nombre'.$producto->nombre.'se está agotando, actualmente quedan'.$producto->cantidad,
+                    'notificacion' => 'El producto de nombre '.$producto->nombre.'se está agotando, actualmente quedan '.$producto->cantidad,
                     'fecha_hora_notificacion' => now(),
                     'producto_id_producto'=>$idProducto,
 

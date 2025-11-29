@@ -72,7 +72,7 @@ class NotificacionPanaderoController extends Controller
         if (empty($searchTerm)) {
             $notificaciones = collect([]);
         } else {
-            $notificaciones = Producto::where('cantidad', '>', 0)->whereRaw('LOWER(notificacion) LIKE ?', [strtolower($searchTerm) . '%'])
+            $notificaciones = Producto::whereRaw('LOWER(notificacion) LIKE ?', [strtolower($searchTerm) . '%'])
                 ->orderBy('nombre', 'asc')
                 ->get();
         }
