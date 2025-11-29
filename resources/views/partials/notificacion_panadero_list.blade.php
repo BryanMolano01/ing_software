@@ -23,7 +23,18 @@
                         </strong> 
                         (Stock Actual: {{ $notificacion->producto->cantidad }})
                     </p>
+                    
+                    <p class="mb-0 small" style="color: #008080;">
+                        Detalles: 
+                        <strong>
+                            {{ $notificacion->producto->tipoProducto?->tipo ?? 'N/A' }} 
+                            - 
+                            {{ $notificacion->producto->tamanoProducto?->tamano ?? 'N/A' }}
+                        </strong>
+                    </p>
+                    
                 @endif
+                
                 @if ($notificacion->venta)
                     <p class="mb-0 small" style="color: #622D16;">
                         Pedido Relacionado: 
