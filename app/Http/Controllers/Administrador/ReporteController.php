@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Administrador;
 
+use App\Models\Venta;
+use App\Models\VentaProducto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -52,6 +54,60 @@ class ReporteController extends Controller
         $pdf->setPaper('a4', 'portrait');
         return $pdf->download('reporte_insumos_'.$fechaInicio.'_'.$fechaFin.'.pdf');
     }
+    public function generarPdfVenta(ReporteRequest $request)
+    {
+        $fechaInicio = $request->validated()['fecha_inicio'];
+        $fechaFin    = $request->validated()['fecha_fin'];
+
+        $ventas = Venta::with(['tipoVenta', 'usuario'])
+            ->whereBetween('fecha_hora_venta', [
+                $fechaInicio . ' 00:00:00',
+                $fechaFin    . ' 23:59:59',
+            ])
+            ->orderBy('fecha_hora_venta', 'desc')
+            ->get();
+
+        $totalVentas = $ventas->count();
+
+        $resumenPorTipo = $ventas->groupBy(function (Venta $venta) {
+            return $venta->tipoVenta->tipo;
+        })->map(function ($grupo) {
+            return [
+                'cantidad_ventas' => $grupo->count(),
+                'dinero_total'    => $grupo->sum('total'),
+            ];
+        });
+        $ventasProducto = VentaProducto::with([
+            'producto.estadoProducto',
+            'producto.tipoProducto',
+            'producto.tamanoProducto',
+            'venta.tipoVenta',
+        ])
+            ->whereHas('venta', function ($q) use ($fechaInicio, $fechaFin) {
+                $q->whereBetween('fecha_hora_venta', [
+                    $fechaInicio . ' 00:00:00',
+                    $fechaFin    . ' 23:59:59',
+                ]);
+            })
+            ->orderBy('venta_id_venta')
+            ->get();
+        $data = [
+            'fecha_inicio'   => $fechaInicio,
+            'fecha_fin'      => $fechaFin,
+            'ventas'         => $ventas,
+            'total_ventas'   => $totalVentas,
+            'resumen_por_tipo' => $resumenPorTipo,
+            'ventas_producto'=> $ventasProducto,
+            'fecha_generacion' => now()->format('d/m/y H:i:s'),
+        ];
+
+        $pdf = Pdf::loadView('reportes_ventas', $data);
+
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->download('reporte_ventas_' . $fechaInicio . '_' . $fechaFin . '.pdf');
+    }
+
 
     /**
      * Show the form for creating a new resource.
