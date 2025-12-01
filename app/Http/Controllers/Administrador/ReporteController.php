@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administrador;
 
+use App\Models\Registro;
 use App\Models\Venta;
 use App\Models\VentaProducto;
 use Illuminate\Http\Request;
@@ -17,7 +18,9 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        return view('rutanodefinida');
+        $primerasVentas = Venta::with('productos', 'tipoVenta','usuario')->latest('fecha_hora_venta')->take(10)->get();
+
+        return view('ventas_admin', compact('primerasVentas'));
     }
 
     public function generarPdf(ReporteRequest $request){

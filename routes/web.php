@@ -3,6 +3,7 @@
 use App\Http\Controllers\Administrador\ProductoController;
 use App\Http\Controllers\Administrador\ItemController;
 use App\Http\Controllers\Administrador\ProveedorController;
+use App\Http\Controllers\Administrador\ReporteController;
 use App\Http\Controllers\Administrador\TipoItemController;
 use App\Http\Controllers\Administrador\UbicacionController;
 use App\Http\Controllers\Administrador\UnidadMedidaController;
@@ -103,6 +104,10 @@ Route::middleware(['auth', 'role:administrador'])->prefix('administrador')->name
     //RUTA PARA BORRAR
     //Route::get('/insumos/reportes', function(){return view('reportes_insumos');})->name('insumos.reportes');
     Route::post('/reportes/materia-prima', [ItemController::class, 'generarPdf'])->name('reportes.generar');
+    Route::post('/reportes/ventas', [ReporteController::class, 'generarPdfVenta'])->name('reportesVenta.generar');
+    Route::post('/reportes/item', [ReporteController::class, 'generarPdf'])->name('reportesItem.generar');
+
+    Route::resource('ventasAdmin',ReporteController::class);
 });
 
 Route::middleware(['auth', 'role:panadero'])->prefix('panadero')->name('panadero.')->group(function(){
