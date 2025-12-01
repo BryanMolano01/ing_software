@@ -5,6 +5,7 @@
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'dashboard'],
             ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
+            ['title' => 'Ventas', 'route' => 'administrador.ventasAdmin.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />

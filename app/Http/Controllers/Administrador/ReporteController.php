@@ -104,9 +104,9 @@ class ReporteController extends Controller
             'fecha_generacion' => now()->format('d/m/y H:i:s'),
         ];
 
-        $pdf = Pdf::loadView('reportes_ventas', $data);
+        $pdf = Pdf::loadView('reporte_ventas_admin', $data);
 
-        $pdf->setPaper('a4', 'portrait');
+        $pdf->setPaper('a4', 'landscape');
 
         return $pdf->download('reporte_ventas_' . $fechaInicio . '_' . $fechaFin . '.pdf');
     }

@@ -47,9 +47,7 @@
     </style>
     <script>
         $(document).ready(function() {
-
             $('#searchInput').on('keyup', function() {
-                alert("si se espicho una tecla")
                 var searchTerm = $(this).val(); 
                 $.ajax({
                     url: '{{ route('panadero.notificacionPanadero.buscar') }}', 

@@ -8,20 +8,16 @@
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
             ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
+            ['title' => 'Ventas', 'route' => 'administrador.ventasAdmin.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
 
-    {{-- Contenedor principal de la vista --}}
     <div class="container mt-4">
 
-        {{-- Título principal de la página --}}
         <h2 class="mb-4" style="color: #622D16;">Administración de Materia Prima</h2>
 
-        {{-- FILA PRINCIPAL DE 3 COLUMNAS --}}
         <div class="row">
-            {{-- Columna 1: USUARIOS (col-md-4) --}}
-            {{-- En dashboard_administrador.blade.php (Columna 1: USUARIOS) --}}
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
                     <h5 class="card-title" style="color: #a0522d;">Materia Prima</h5>
@@ -116,7 +112,6 @@
                     </div>
 
                     <div class="access-list-container flex-grow-1 overflow-auto" id="accessListContainer">
-                        {{-- ... Contenido de la lista de registros (sin cambios) ... --}}
                         @if(isset($primerosRegistros) && count($primerosRegistros) > 0)
                             @foreach ($primerosRegistros as $registro)
                                 <div class="access-card mb-2 p-3">

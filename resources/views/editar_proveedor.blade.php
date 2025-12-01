@@ -5,6 +5,7 @@
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
             ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
+            ['title' => 'Ventas', 'route' => 'administrador.ventasAdmin.index'],
         ];
     ?>
     <x-app-navbar :links="$adminLinks" />
@@ -19,7 +20,6 @@
         <h2 class="mb-4 text-center" style="color: #622D16;">Edición de proveedor</h2> 
         
         <div class="card p-4 custom-card-style-create mx-auto" style="max-width: 800px;">
-            {{-- action="{{ route('administrador.proveedores.update') }}" --}}
             <form id="editUserForm" action="{{ route('administrador.proveedores.update', $proveedore->id_proveedor) }}" method="POST">
                 @csrf
                 @method('PATCH')
@@ -41,7 +41,6 @@
                         </div>
                     </div>
                     
-                    {{-- COLUMNA DERECHA: Imagen de Perfil y Botón --}}
                     <div class="col-md-5 d-flex flex-column align-items-center justify-content-center">
                         <div class="profile-picture-container mb-4">
                             <img src="{{ asset('images/Foto PerfilCU.png') }}" alt="Foto de Perfil" class="img-fluid profile-picture-placeholder">
