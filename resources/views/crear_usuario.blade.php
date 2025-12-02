@@ -4,7 +4,7 @@
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
+            ['title' => 'Insumos', 'route' => 'administrador.items.index'],
             ['title' => 'Ventas', 'route' => 'administrador.ventasAdmin.index'],
         ];
     ?>

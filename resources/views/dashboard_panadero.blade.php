@@ -15,13 +15,13 @@
     <x-app-navbar :links="$bakerLinks" />
 
     <div class="container mt-4">
-        <h2 class="mb-4" style="color: #622D16;">Registro de Uso de Materia Prima</h2> 
+        <h2 class="mb-4" style="color: #622D16;">Registro de Uso de Insumos</h2> 
         
         <div class="row justify-content-center">
             
             <div class="col-md-5 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
-                    <h5 class="card-title" style="color: #a0522d;">Materia Prima Disponible</h5>
+                    <h5 class="card-title" style="color: #a0522d;">Insumos Disponible</h5>
                     <div class="d-flex mb-3">
                         <div class="input-group flex-grow-1 me-2">
                             <span class="input-group-text custom-search-icon-historial" style="background-color: #ff9800; border-color: #ff9800; color: #622D16;">

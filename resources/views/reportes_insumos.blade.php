@@ -235,7 +235,7 @@
     <!-- Header Principal -->
     <div class="header">
         <h1>Reporte de Insumos Consumidos</h1>
-        <p>Sistema de Gestión de Materia Prima</p>
+        <p>Sistema de Gestión de Insumos</p>
     </div>
 
     <!-- Información del Reporte -->

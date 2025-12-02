@@ -7,7 +7,7 @@
     <?php
         $adminLinks = [
             ['title' => 'Usuarios', 'route' => 'administrador.dashboard'],
-            ['title' => 'Materia Prima', 'route' => 'administrador.items.index'],
+            ['title' => 'Insumos', 'route' => 'administrador.items.index'],
             ['title' => 'Ventas', 'route' => 'administrador.ventasAdmin.index'],
         ];
     ?>
@@ -15,12 +15,12 @@
 
     <div class="container mt-4">
 
-        <h2 class="mb-4" style="color: #622D16;">Administración de Materia Prima</h2>
+        <h2 class="mb-4" style="color: #622D16;">Administración de Insumo</h2>
 
         <div class="row">
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
-                    <h5 class="card-title" style="color: #a0522d;">Materia Prima</h5>
+                    <h5 class="card-title" style="color: #a0522d;">Insumos</h5>
                     {{--  
                     <div class="d-flex align-items-center mb-3">
                         
@@ -98,7 +98,7 @@
             {{-- Columna 2: REGISTRO DE ACCESOS (col-md-5) --}}
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card p-4 custom-card-style flex-grow-1 d-flex flex-column">
-                    <h5 class="card-title" style="color: #a0522d;">Historial de materia prima</h5>
+                    <h5 class="card-title" style="color: #a0522d;">Historial de insumos</h5>
 
                     {{-- 2. Barra de Búsqueda y Botón --}}
                     <div class="d-flex mb-3">
