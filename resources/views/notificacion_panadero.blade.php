@@ -9,7 +9,7 @@
         $bakerLinks = [
             ['title' => 'Productos', 'route' => 'panadero.productoPanadero.index'],
             ['title' => 'Notificaciones', 'route' => 'panadero.notificacion.index'],
-            ['title' => 'Venta y pedidos', 'route' => 'panadero.itemPanadero.index'],
+            ['title' => 'Registrar Uso Insumos', 'route' => 'panadero.itemPanadero.index'],
         ];
     ?>
     <x-app-navbar :links="$bakerLinks" />

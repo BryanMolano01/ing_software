@@ -8,7 +8,7 @@
                 
                 {{-- Contenido del Producto --}}
                 <div class="product-image-circle mx-auto mb-3">
-                    <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="img-fluid">
+                    <img src="{{ asset("storage/{$producto->foto}") }}" alt="{{ $producto->foto }}" class="img-fluid">
                 </div>
                 
                 <div class="product-info">
